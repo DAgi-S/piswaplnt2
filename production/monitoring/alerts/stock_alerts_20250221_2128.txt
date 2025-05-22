@@ -1,0 +1,10 @@
+material_code	name	current_stock	reserved_quantity	available_stock	min_stock_level	stock_status	availability_status
+Check	Raw	0.00	0.00	0.00	1.00	CRITICAL	NO_STOCK
+CC	DAS	0.00	0.00	0.00	34.00	CRITICAL	NO_STOCK
+ss	asdasdasd	0.00	0.00	0.00	12.00	CRITICAL	NO_STOCK
+fd	ff	0.00	0.00	0.00	43.00	CRITICAL	NO_STOCK
+gfa	dfs	0.00	0.00	0.00	123.00	CRITICAL	NO_STOCK
+dafaf	fasd	0.00	0.00	0.00	12.00	CRITICAL	NO_STOCK
+chemical	GPS	0.00	0.00	0.00	11.00	CRITICAL	NO_STOCK
+fa	sdf	0.00	0.00	0.00	4.00	CRITICAL	NO_STOCK
+da	ads	0.00	0.00	0.00	31.00	CRITICAL	NO_STOCK

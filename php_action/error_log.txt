@@ -1,0 +1,176 @@
+[2024-12-22 16:37:58] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-22
+    [fsNumber] => 1111
+    [clientName] => check
+    [subTotal] => 7722.00
+    [vat] => 1158.30
+    [totalAmount] => 8880.3
+)
+
+[2024-12-22 16:38:40] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-03
+    [fsNumber] => 2222
+    [clientName] => dee
+    [subTotal] => 447996.00
+    [vat] => 67199.40
+    [totalAmount] => 515195.4
+)
+
+[2024-12-22 16:40:30] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-22
+    [fsNumber] => 77
+    [clientName] => gg
+    [subTotal] => 5222.00
+    [vat] => 783.30
+    [totalAmount] => 6005.3
+)
+
+[2024-12-22 17:24:46] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-22
+    [fsNumber] => check
+    [clientName] => eeeeee
+    [subTotal] => 12222.00
+    [vat] => 1833.30
+    [totalAmount] => 14055.3
+)
+
+[2024-12-22 17:53:42] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-22
+    [fsNumber] => 1111
+    [clientName] => 1111111
+    [subTotal] => 8722.00
+    [vat] => 1308.30
+    [totalAmount] => 10030.3
+)
+
+[2024-12-24 00:24:49] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-24
+    [fsNumber] => 1111111
+    [clientName] => Check
+    [subTotal] => 4000.00
+    [vat] => 600.00
+    [totalAmount] => 4600
+)
+
+[2024-12-24 00:38:10] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-23
+    [fsNumber] => 12313
+    [clientName] => sadfadsdf
+    [subTotal] => 2500.00
+    [vat] => 375.00
+    [totalAmount] => 2875
+)
+
+[2024-12-24 00:38:30] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-22
+    [fsNumber] => 777777
+    [clientName] => check
+    [subTotal] => 500.00
+    [vat] => 75.00
+    [totalAmount] => 575
+)
+
+[2024-12-24 00:14:46] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-24
+    [fsNumber] => 01
+    [clientName] => Check
+    [subTotal] => 10000.00
+    [vat] => 1500.00
+    [totalAmount] => 11500
+)
+
+[2024-12-27 07:05:35] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-27
+    [fsNumber] => 00000000
+    [clientName] => ሃ
+    [subTotal] => 7500.00
+    [vat] => 1125.00
+    [totalAmount] => 8625
+)
+
+[2024-12-27 07:05:44] Order Data:
+Data: Array
+(
+    [orderDate] => 2024-12-27
+    [fsNumber] => 00000000
+    [clientName] => ሃ
+    [subTotal] => 7500.00
+    [vat] => 1125.00
+    [totalAmount] => 8625
+)
+
+[2025-01-09 11:19:41] Order Data:
+Data: Array
+(
+    [orderDate] => 2025-01-09
+    [fsNumber] => 8888
+    [clientName] => ggg
+    [subTotal] => 8000.00
+    [vat] => 1200.00
+    [totalAmount] => 9200
+)
+
+[2025-01-10 21:53:40] Order Data:
+Data: Array
+(
+    [orderDate] => 2025-01-10
+    [fsNumber] => 1111111
+    [clientName] => check
+    [subTotal] => 7000.00
+    [vat] => 1050.00
+    [totalAmount] => 8050
+)
+
+[2025-01-10 21:54:26] Order Data:
+Data: Array
+(
+    [orderDate] => 2025-01-10
+    [fsNumber] => 1111111
+    [clientName] => Check
+    [subTotal] => 7.00
+    [vat] => 1.05
+    [totalAmount] => 8.05
+)
+
+[2025-01-10 22:41:23] Order Data:
+Data: Array
+(
+    [orderDate] => 2025-01-11
+    [fsNumber] => check
+    [clientName] => check
+    [subTotal] => 1000.00
+    [vat] => 150.00
+    [totalAmount] => 1150
+)
+
+[2025-01-18 01:35:24] Order Data:
+Data: Array
+(
+    [orderDate] => 2025-01-18
+    [fsNumber] => ss
+    [clientName] => ss
+    [subTotal] => 870.00
+    [vat] => 130.50
+    [totalAmount] => 1000.5
+)
+

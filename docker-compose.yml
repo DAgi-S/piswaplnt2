@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: pistocklnt_redis
+    command: redis-server --requirepass P@ssw0rd123!@#$RedisSecure --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - pistocklnt_network
+    environment:
+      - TZ=UTC
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  redis_data:
+    name: pistocklnt_redis_data
+
+networks:
+  pistocklnt_network:
+    name: pistocklnt_network
+    driver: bridge 

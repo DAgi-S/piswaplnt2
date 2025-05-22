@@ -1,0 +1,117 @@
+/* Dashboard Styles */
+.stat-card {
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.stat-card .icon {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.stat-card .stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.stat-card .stat-label {
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-card .balance-info {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Card variations */
+.products-card {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.orders-card {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.purchases-card {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+/* Panel Styles */
+.panel {
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.panel-heading {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+}
+
+.panel-heading i {
+    margin-right: 5px;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+/* Table Styles */
+.table-responsive {
+    border: none;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table > thead > tr > th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+/* Status Colors */
+.profit-positive {
+    color: #2ecc71;
+}
+
+.profit-negative {
+    color: #e74c3c;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 15px;
+    }
+    
+    .stat-card .stat-value {
+        font-size: 1.5em;
+    }
+    
+    .panel {
+        margin-bottom: 15px;
+    }
+} 

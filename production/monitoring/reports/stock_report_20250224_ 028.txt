@@ -1,0 +1,5 @@
+material_code	name	current_stock	reserved_quantity	available_stock	min_stock_level	stock_status	availability_status
+das	Kebede Hiwi	1307.00	0.00	1307.00	11.00	OK	SUFFICIENT
+RM001	Steel Sheets	4938.00	0.00	4938.00	200.00	OK	SUFFICIENT
+RM002	Paint	7944.79	0.00	7944.79	100.00	OK	SUFFICIENT
+RM003	Screws	318181.80	113.20	318068.60	1000.00	OK	SUFFICIENT

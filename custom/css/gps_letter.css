@@ -1,0 +1,179 @@
+.vehicle-table {
+    margin-bottom: 20px;
+}
+
+.vehicle-table th {
+    background-color: #f5f5f5;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h4 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-add-vehicle {
+    margin-bottom: 20px;
+}
+
+.removeRow {
+    margin-top: 5px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.preview-letter {
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.letter-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.company-logo {
+    margin-bottom: 20px;
+}
+
+.company-logo img {
+    height: 100px;
+    max-width: 250px;
+    object-fit: contain;
+}
+
+.company-info h2 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.company-info p {
+    margin: 8px 0;
+    color: #444;
+    font-size: 16px;
+}
+
+.letter-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.client-info {
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.to-section {
+    margin-bottom: 10px;
+}
+
+.letter-subject h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.letter-content {
+    margin: 30px 0;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.vehicle-details {
+    margin: 40px 0;
+}
+
+.vehicle-details h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.vehicle-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.vehicle-details th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 12px;
+}
+
+.vehicle-details td {
+    padding: 12px;
+    font-size: 15px;
+}
+
+.letter-footer {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.footer-image img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .preview-letter,
+    .preview-letter * {
+        visibility: visible;
+    }
+    
+    .preview-letter {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    .modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .modal-header,
+    .modal-footer,
+    .close {
+        display: none;
+    }
+} 

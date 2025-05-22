@@ -1,0 +1,1638 @@
+{
+    "accounts": {
+        "c": [
+            "id*",
+            "account_owner:s",
+            "account_platform:s100",
+            "Currency:s20?",
+            "number_of_transactions:i?=0",
+            "created_at:ts",
+            "updated_at:ts",
+            "satstus:i=1"
+        ]
+    },
+    "audit_log": {
+        "c": [
+            "id*",
+            "user_id>users.user_id?",
+            "activity_type:s50",
+            "description:t",
+            "old_value:t?",
+            "new_value:t?",
+            "ip_address:s45",
+            "reference_id:s100?",
+            "timestamp:dt"
+        ]
+    },
+    "bill_of_materials": {
+        "c": [
+            "id*",
+            "product_id>production_products.id",
+            "raw_material_id>raw_materials.id",
+            "quantity:d10,2=0.00",
+            "wastage:d5,2=0.00",
+            "status:e=active",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "brands": {
+        "c": [
+            "brand_id*",
+            "name:s",
+            "description:t?",
+            "status:ti?=1",
+            "deleted:ti?=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "categories": {
+        "c": [
+            "category_id*",
+            "name:s",
+            "type:s50=product",
+            "description:t?",
+            "status:ti?=1",
+            "deleted:ti?=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "clients": {
+        "c": [
+            "id*",
+            "company_name:s",
+            "tin_number:s50?",
+            "address:t?",
+            "phone:s50?",
+            "email:s100?",
+            "status:ti?=1",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "company_settings": {
+        "c": [
+            "id*",
+            "setting_key:s",
+            "setting_value:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "currency_settings": {
+        "c": [
+            "id*",
+            "currency_code:s10",
+            "currency_symbol:s10",
+            "currency_position:e?=left",
+            "thousand_separator:s1?=,",
+            "decimal_separator:s1?=.",
+            "decimals:i?=2",
+            "status:ti?=1",
+            "is_default:ti?=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "dashboard_available_components": {
+        "c": [
+            "id*",
+            "section_type:e",
+            "component_key:s50",
+            "component_name:s100",
+            "component_icon:s50",
+            "is_default:ti=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "digital_categories": {
+        "c": [
+            "category_id*",
+            "category_name:s50",
+            "description:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "digital_transaction_categories": {
+        "c": [
+            "id*",
+            "transaction_id:i",
+            "category_id>digital_categories.category_id",
+            "created_at:ts"
+        ]
+    },
+    "digitalswap": {
+        "c": [
+            "id*",
+            "account_id>accounts.id?",
+            "transaction_date:da?",
+            "type:e",
+            "type_id>transaction_types.id?",
+            "name:s",
+            "platform:s100",
+            "platform_id>platforms.id?",
+            "amount:d10,2",
+            "image:s?",
+            "comment:t?",
+            "status:ti=1",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "generated_letters": {
+        "c": [
+            "id*",
+            "template_id>letter_templates.id",
+            "reference_no:s50",
+            "client_name:s",
+            "phone:s20?",
+            "address:t?",
+            "tin_number:s50?",
+            "fs_number:s50?",
+            "status:ti?=1",
+            "created_at:ts"
+        ]
+    },
+    "gps_balance_accounts": {
+        "c": [
+            "id*",
+            "account_type:e",
+            "reference_id>gps_investors.id",
+            "transaction_type:e",
+            "transaction_id:i",
+            "currency:e=ETB",
+            "rate:d10,2=1.00",
+            "amount:d15,2",
+            "balance:d15,2",
+            "description:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_business_cycle_orders": {
+        "c": [
+            "id*",
+            "business_cycle_id>gps_business_cycles.id",
+            "order_id>gps_orders.id",
+            "created_at:ts"
+        ]
+    },
+    "gps_business_cycle_sales": {
+        "c": [
+            "id*",
+            "business_cycle_id>gps_business_cycles.id",
+            "sale_id>gps_sales.id",
+            "created_at:ts"
+        ]
+    },
+    "gps_business_cycles": {
+        "c": [
+            "id*",
+            "cycle_number:s50",
+            "start_date:da",
+            "end_date:da?",
+            "status:e=active",
+            "total_purchase_etb:d15,2=0.00",
+            "total_purchase_usd:d15,2=0.00",
+            "total_sales_etb:d15,2=0.00",
+            "total_sales_usd:d15,2=0.00",
+            "total_expenses_etb:d15,2=0.00",
+            "total_credit_amount:d15,2=0.00",
+            "gross_profit_etb:d15,2=0.00",
+            "net_profit_etb:d15,2=0.00",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_business_expense_history": {
+        "c": [
+            "id*",
+            "expense_id>gps_business_expenses.id",
+            "action:s50",
+            "old_value:t?",
+            "new_value:t?",
+            "notes:t?",
+            "created_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "gps_business_expenses": {
+        "c": [
+            "id*",
+            "business_cycle_id>gps_business_cycles.id",
+            "expense_date:da",
+            "description:s",
+            "amount_etb:d15,2",
+            "expense_type:e",
+            "payment_method:e",
+            "reference_number:s100?",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "gps_credit_tracking": {
+        "c": [
+            "id*",
+            "order_id>gps_orders.id",
+            "business_cycle_id>gps_business_cycles.id",
+            "credit_amount_etb:d15,2=0.00",
+            "remaining_balance_etb:d15,2=0.00",
+            "expected_payment_date:da",
+            "status:e=pending",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_currency_rates": {
+        "c": [
+            "id*",
+            "date:da",
+            "usd_to_etb_rate:d10,2",
+            "etb_to_usd_rate:d10,6",
+            "source:e",
+            "bank_name:s100?",
+            "notes:t?",
+            "created_at:ts"
+        ]
+    },
+    "gps_customers": {
+        "c": [
+            "id*",
+            "name:s",
+            "email:s?",
+            "phone:s50?",
+            "address:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_expense_categories": {
+        "c": [
+            "id*",
+            "name:s100",
+            "expense_type:s50",
+            "description:t?",
+            "unit_price:d10,2",
+            "created_at:ts"
+        ]
+    },
+    "gps_expenses": {
+        "c": [
+            "id*",
+            "name:s100",
+            "expense_type:s50",
+            "date:da",
+            "unit_price:d10,2",
+            "quantity:i",
+            "total:d10,2",
+            "created_at:ts"
+        ]
+    },
+    "gps_investors": {
+        "c": [
+            "id*",
+            "name:s100",
+            "share_percentage:d5,2",
+            "investment:d10,2",
+            "initial_investment_date:da",
+            "initial_investment_amount_etb:d15,2=0.00",
+            "initial_investment_amount_usd:d15,2=0.00",
+            "reinvested_profits_etb:d15,2=0.00",
+            "current_share_value_etb:d15,2=0.00",
+            "total_withdrawals_etb:d15,2=0.00",
+            "account_type:e",
+            "balance:d10,2=0.00",
+            "credit_amount:d10,2=0.00",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_orders": {
+        "c": [
+            "id*",
+            "order_number:s50",
+            "order_date:da",
+            "ordered_amount:d10,2",
+            "unit_price:d10,2",
+            "quantity:i",
+            "total_price:d10,2",
+            "currency:e=ETB",
+            "rate:d10,2?",
+            "has_credit:ti?=0",
+            "credit_amount:d10,2?=0.00",
+            "order_status:e=pending",
+            "created_at:ts"
+        ]
+    },
+    "gps_payment_followup": {
+        "c": [
+            "id*",
+            "payment_date:da",
+            "paid_by:s100",
+            "currency:e=ETB",
+            "amount:d10,2",
+            "rate:d10,2?",
+            "transfer_to:s100?",
+            "bank_platform_name:s100?",
+            "comment:t?",
+            "payment_image:s?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_payments": {
+        "c": [
+            "id*",
+            "payment_number:s50",
+            "gps_order_id>gps_orders.id",
+            "payment_date:da",
+            "payment_type:s50",
+            "paid_by:s100",
+            "paid_amount:d10,2",
+            "currency:e",
+            "rate:d10,2?",
+            "bank:s100?",
+            "deposited_to:s100?",
+            "image_location:s?",
+            "created_at:ts"
+        ]
+    },
+    "gps_profit": {
+        "c": [
+            "id*",
+            "date:da",
+            "total_purchase:d10,2=0.00",
+            "total_sales:d10,2=0.00",
+            "total_credit:d10,2=0.00",
+            "total_expenses:d10,2=0.00",
+            "total_profit:d10,2=0.00",
+            "comment:t?",
+            "created_at:ts"
+        ]
+    },
+    "gps_profit_distributions": {
+        "c": [
+            "id*",
+            "business_cycle_id>gps_business_cycles.id",
+            "investor_id>gps_investors.id",
+            "distribution_date:da",
+            "amount_etb:d15,2=0.00",
+            "distribution_type:e",
+            "status:e=pending",
+            "reinvested:ti=0",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "gps_sales": {
+        "c": [
+            "id*",
+            "buyer_name:s100=Walking Customer",
+            "contact:s100=0901000251",
+            "sales_type:e",
+            "quantity:i",
+            "unit_price:d10,2",
+            "total:d10,2",
+            "currency:e=ETB",
+            "rate:d10,2?",
+            "sale_date:da",
+            "created_at:ts"
+        ]
+    },
+    "guest_account_links": {
+        "c": [
+            "id*",
+            "guest_id>guest_users.id?",
+            "account_id>accounts.id?",
+            "created_at:ts"
+        ]
+    },
+    "guest_users": {
+        "c": [
+            "id*",
+            "username:s",
+            "password:s",
+            "guest_id:s50",
+            "full_name:s",
+            "account_name:s",
+            "currency:s10=USD",
+            "balance:d15,2=0.00",
+            "linked_account_id:i?",
+            "access_level:t?",
+            "status:ti=1",
+            "created_at:ts",
+            "last_login:ts?",
+            "expiry_date:da?"
+        ]
+    },
+    "inventory_adjustments": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "adjustment_type:s50?",
+            "quantity:d10,2?",
+            "reason:t?",
+            "adjusted_by:i?",
+            "created_at:ts"
+        ]
+    },
+    "inventory_count_sessions": {
+        "c": [
+            "id*",
+            "session_date:da?",
+            "status:s50?",
+            "counted_by:i?",
+            "verified_by:i?",
+            "notes:t?",
+            "created_at:ts"
+        ]
+    },
+    "inventory_locations": {
+        "c": [
+            "id*",
+            "location_code:s50?",
+            "location_name:s?",
+            "warehouse_id:i?",
+            "active:ti?",
+            "created_at:ts"
+        ]
+    },
+    "inventory_movement_log": {
+        "c": [
+            "id*",
+            "item_type:e",
+            "item_id:i",
+            "source_type:e",
+            "source_id:i?",
+            "destination_type:e",
+            "destination_id:i?",
+            "quantity:d10,2",
+            "movement_type:e",
+            "reference_type:s50",
+            "reference_id:i",
+            "batch_number:s50?",
+            "notes:t?",
+            "status:e?=completed",
+            "created_at:ts",
+            "created_by>users.user_id?",
+            "updated_at:ts",
+            "completed_at:ts?"
+        ]
+    },
+    "inventory_transfer_logs": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "from_location_id>inventory_locations.id?",
+            "to_location_id>inventory_locations.id?",
+            "quantity:d10,2?",
+            "transferred_by:i?",
+            "created_at:ts"
+        ]
+    },
+    "letter_templates": {
+        "c": [
+            "id*",
+            "letter_code:s50",
+            "letter_for:s",
+            "location:s",
+            "letter_subject:s",
+            "letter_content:t",
+            "status:ti?=1",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "letter_vehicles": {
+        "c": [
+            "id*",
+            "letter_id>generated_letters.id",
+            "plate_number:s50",
+            "trailer_plate:s50?",
+            "chassis_number:s50?",
+            "motor_number:s50?",
+            "imei_number:s50?",
+            "created_at:ts"
+        ]
+    },
+    "material_consumption": {
+        "c": [
+            "id*",
+            "production_order_id>production_orders.id",
+            "material_id>raw_materials.id",
+            "quantity:d10,2",
+            "notes:t?",
+            "created_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "ml_models": {
+        "c": [
+            "id*",
+            "model_type:s50",
+            "model_file:s",
+            "version:i",
+            "accuracy:d5,2?",
+            "training_date:dt",
+            "last_used:dt?",
+            "is_active:ti?=1",
+            "created_at:dt?",
+            "updated_at:dt?"
+        ]
+    },
+    "notification_channels": {
+        "c": [
+            "channel_id*",
+            "name:s50",
+            "type:e",
+            "config:longtext?",
+            "is_active:ti?=1",
+            "created_at:ts"
+        ]
+    },
+    "notification_queue": {
+        "c": [
+            "queue_id*",
+            "notification_id>notifications.notification_id?",
+            "user_id>users.user_id?",
+            "channel:s50?",
+            "status:e?=pending",
+            "attempts:i?=0",
+            "last_attempt:ts?",
+            "error_message:t?",
+            "created_at:ts"
+        ]
+    },
+    "notification_templates": {
+        "c": [
+            "template_id*",
+            "name:s100",
+            "type:s50",
+            "subject:s?",
+            "content:t",
+            "variables:longtext?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "notifications": {
+        "c": [
+            "notification_id*",
+            "type:s50",
+            "title:s",
+            "message:t",
+            "priority:e?=medium",
+            "icon:s50?",
+            "link:s?",
+            "created_at:ts",
+            "scheduled_at:ts?",
+            "expires_at:ts?"
+        ]
+    },
+    "operation_workstations": {
+        "c": [
+            "id*",
+            "operation_id>operations.id",
+            "workstation_id>workstations.id",
+            "is_primary:ti?=0",
+            "efficiency_factor:d5,2?=1.00",
+            "created_at:ts"
+        ]
+    },
+    "operations": {
+        "c": [
+            "id*",
+            "name:s100",
+            "code:s20",
+            "description:t?",
+            "standard_time:d10,2?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "order_items": {
+        "c": [
+            "order_item_id*",
+            "order_id:i?",
+            "product_id:i?",
+            "quantity:i?",
+            "rate:d10,2?",
+            "total:d10,2?",
+            "order_item_status:i?=1"
+        ]
+    },
+    "orders": {
+        "c": [
+            "order_id*",
+            "order_date:da?",
+            "client_name:s?",
+            "client_contact:s?",
+            "sub_total:d10,2?",
+            "vat:d10,2?",
+            "total_amount:d10,2?",
+            "grand_total:d10,2?",
+            "payment_type:s50?",
+            "order_status:i?=1",
+            "user_id:i?",
+            "gstn:s100?",
+            "fsnum:s100?",
+            "payment_status:i?=0",
+            "partial_amount:d10,2?=0.00",
+            "payment_place:s50?",
+            "created_at:ts",
+            "withholding_tax_enabled:ti?=0",
+            "withholding_tax_amount:d25,2?=0.00"
+        ]
+    },
+    "permissions": {
+        "c": [
+            "permission_id*",
+            "permission_name:s",
+            "description:t?",
+            "module:s50?"
+        ]
+    },
+    "platforms": {
+        "c": [
+            "id*",
+            "name:s100",
+            "description:t?",
+            "status:ti?=1",
+            "created_at:dt?",
+            "updated_at:dt?"
+        ]
+    },
+    "prediction_metrics": {
+        "c": [
+            "id*",
+            "model_id>ml_models.id",
+            "metric_type:e",
+            "metric_value:d5,2",
+            "calculation_date:dt",
+            "created_at:dt?"
+        ]
+    },
+    "product_bom": {
+        "c": [
+            "id*",
+            "product_id:i",
+            "material_id:i",
+            "quantity_required:d10,2",
+            "wastage_percent:d5,2?=0.00",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "product_routing": {
+        "c": [
+            "id*",
+            "product_id:i",
+            "operation_id:i",
+            "sequence_number:i",
+            "setup_time:d10,2?=0.00",
+            "run_time:d10,2",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "product_settings": {
+        "c": [
+            "id*",
+            "product_id:i",
+            "lead_time_days:i?=7",
+            "safety_factor:d4,2?=1.50",
+            "min_order_quantity:d10,2?=0.00",
+            "created_at:dt?",
+            "updated_at:dt?"
+        ]
+    },
+    "production_brands": {
+        "c": [
+            "id*",
+            "name:s100",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "production_categories": {
+        "c": [
+            "id*",
+            "name:s100",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "production_machine_maintenance": {
+        "c": [
+            "id*",
+            "machine_id:i?",
+            "maintenance_type:s100?",
+            "scheduled_date:da?",
+            "completed_date:da?",
+            "status:s50?",
+            "notes:t?",
+            "created_at:ts"
+        ]
+    },
+    "production_order_materials": {
+        "c": [
+            "id*",
+            "production_order_id:i",
+            "material_id:i",
+            "required_quantity:d10,2",
+            "reserved_quantity:d10,2?=0.00",
+            "consumed_quantity:d10,2?=0.00",
+            "reservation_status:e?=pending",
+            "status:e?=pending",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "production_orders": {
+        "c": [
+            "id*",
+            "order_number:s50",
+            "product_id:i",
+            "target_quantity:d10,2",
+            "completed_quantity:d10,2?=0.00",
+            "start_date:da",
+            "expected_completion_date:da",
+            "actual_completion_date:da?",
+            "status:e?=draft",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?",
+            "warehouse_id>warehouses.id?"
+        ]
+    },
+    "production_predictions": {
+        "c": [
+            "id*",
+            "order_id:i",
+            "predicted_time:d10,2?",
+            "confidence_lower:d10,2?",
+            "confidence_upper:d10,2?",
+            "actual_time:d10,2?",
+            "accuracy:d5,2?",
+            "prediction_date:dt",
+            "created_at:dt?"
+        ]
+    },
+    "production_products": {
+        "c": [
+            "id*",
+            "product_code:s50",
+            "name:s100",
+            "category_id:i?",
+            "brand_id:i?",
+            "unit:s20",
+            "current_stock:d10,2?=0.00",
+            "min_stock_level:d10,2?=0.00",
+            "production_cost:d10,2?=0.00",
+            "selling_price:d10,2?=0.00",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "production_progress": {
+        "c": [
+            "id*",
+            "production_order_id:i",
+            "quantity:d10,2",
+            "notes:t?",
+            "created_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "production_quality_checks": {
+        "c": [
+            "id*",
+            "production_id:i?",
+            "check_point:s?",
+            "status:s50?",
+            "checked_by:i?",
+            "notes:t?",
+            "created_at:ts"
+        ]
+    },
+    "production_shift_schedules": {
+        "c": [
+            "id*",
+            "shift_name:s100?",
+            "start_time:time?",
+            "end_time:time?",
+            "active:ti?",
+            "created_at:ts"
+        ]
+    },
+    "production_waste_logs": {
+        "c": [
+            "id*",
+            "production_id:i?",
+            "material_id>raw_materials.id?",
+            "quantity:d10,2?",
+            "waste_type:s100?",
+            "reason:t?",
+            "logged_by:i?",
+            "created_at:ts"
+        ]
+    },
+    "products": {
+        "c": [
+            "product_id*",
+            "product_code:s",
+            "name:s",
+            "description:t?",
+            "cost:i20?",
+            "selling_price:d10,2",
+            "brand_id:i?",
+            "unit:s50",
+            "current_stock:d10,2?=0.00",
+            "min_stock_level:d10,2?=0.00",
+            "production_cost:d10,2",
+            "category_id:i?",
+            "status:e=active",
+            "created_at:ts",
+            "created_by:i?",
+            "product_image:s?",
+            "production_product_id:i?"
+        ]
+    },
+    "purchase_approvals": {
+        "c": [
+            "id*",
+            "purchase_id>purchases.id?",
+            "approver_id:i?",
+            "approval_level:i?",
+            "status:s50?",
+            "comments:t?",
+            "approved_at:ts",
+            "created_at:ts"
+        ]
+    },
+    "purchase_documents": {
+        "c": [
+            "id*",
+            "purchase_id>purchases.id?",
+            "document_type:s100?",
+            "document_path:s?",
+            "uploaded_by:i?",
+            "created_at:ts"
+        ]
+    },
+    "purchase_items": {
+        "c": [
+            "id*",
+            "purchase_id:i",
+            "product_id:i",
+            "raw_material_id>raw_materials.id?",
+            "warehouse_id>warehouses.id?",
+            "location_id>storage_locations.id?",
+            "quantity:i",
+            "rate:d25,2",
+            "total:d25,2",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "purchase_payment_terms": {
+        "c": [
+            "id*",
+            "term_name:s100?",
+            "days_due:i?",
+            "description:t?",
+            "active:ti?",
+            "created_at:ts"
+        ]
+    },
+    "purchase_payments": {
+        "c": [
+            "id*",
+            "purchase_id>purchases.id",
+            "payment_date:da",
+            "amount:d25,2",
+            "payment_method:s50",
+            "reference_number:s100?",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "purchase_requisitions": {
+        "c": [
+            "id*",
+            "requisition_number:s50?",
+            "requested_by:i?",
+            "department:s100?",
+            "status:s50?",
+            "required_date:da?",
+            "created_at:ts"
+        ]
+    },
+    "purchases": {
+        "c": [
+            "id*",
+            "purchase_number:s50",
+            "supplier_id:i",
+            "purchase_date:da",
+            "sub_total:d25,2",
+            "vat:d25,2",
+            "vat_amount:d25,2=0.00",
+            "grand_total:d25,2",
+            "note:t?",
+            "payment_status:s20?=Unpaid",
+            "payment_date:da?",
+            "last_payment_date:da?",
+            "paid_amount:d25,2?=0.00",
+            "status:i?=0",
+            "active:i?=1",
+            "created_by:i",
+            "created_at:ts",
+            "updated_at:ts",
+            "withholding_tax_enabled:ti?=0",
+            "withholding_tax_amount:d25,2?=0.00"
+        ]
+    },
+    "quality_control": {
+        "c": [
+            "id*",
+            "production_order_id:i",
+            "inspection_date:da",
+            "quantity_checked:d10,2",
+            "quantity_passed:d10,2",
+            "quantity_failed:d10,2",
+            "defect_type:s100?",
+            "notes:t?",
+            "status:e",
+            "created_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "quality_control_parameters": {
+        "c": [
+            "id*",
+            "parameter_name:s?",
+            "parameter_type:s50?",
+            "unit_of_measure:s50?",
+            "acceptable_range:s100?",
+            "created_at:ts"
+        ]
+    },
+    "quality_control_results": {
+        "c": [
+            "id*",
+            "control_date:dt?",
+            "parameter_id>quality_control_parameters.id?",
+            "measured_value:s100?",
+            "result_status:s50?",
+            "inspector_id:i?",
+            "created_at:ts"
+        ]
+    },
+    "quality_defect_types": {
+        "c": [
+            "id*",
+            "defect_name:s?",
+            "description:t?",
+            "severity_level:s50?",
+            "created_at:ts"
+        ]
+    },
+    "quality_inspection_points": {
+        "c": [
+            "id*",
+            "inspection_name:s?",
+            "description:t?",
+            "frequency:s50?",
+            "active:ti?",
+            "created_at:ts"
+        ]
+    },
+    "quotation_items": {
+        "c": [
+            "id*",
+            "quotation_id:i?",
+            "product_id:i?",
+            "description:t?",
+            "quantity:i?=0",
+            "unit_price:d10,2?=0.00",
+            "total_price:d10,2?=0.00"
+        ]
+    },
+    "quotations": {
+        "c": [
+            "id*",
+            "quotation_number:s50",
+            "client_id:i?",
+            "sub_total:d10,2?=0.00",
+            "vat_amount:d10,2?=0.00",
+            "withholding_amount:d10,2?=0.00",
+            "grand_total:d10,2?=0.00",
+            "note:t?",
+            "status:ti?=1",
+            "created_by:i?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "raw_material_categories": {
+        "c": [
+            "id*",
+            "name:s100",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "raw_material_movements": {
+        "c": [
+            "id*",
+            "material_id:i",
+            "movement_type:e",
+            "quantity:d10,2",
+            "reference_type:e",
+            "reference_id:i",
+            "notes:t?",
+            "warehouse_id>warehouses.id?",
+            "source_location_id>storage_locations.id?",
+            "destination_location_id>storage_locations.id?",
+            "created_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "raw_material_price_history": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "supplier_id>suppliers.id?",
+            "price:d25,2?",
+            "effective_date:da?",
+            "created_at:ts"
+        ]
+    },
+    "raw_material_quality_checks": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "check_date:dt?",
+            "checked_by:i?",
+            "quality_status:s50?",
+            "remarks:t?",
+            "created_at:ts"
+        ]
+    },
+    "raw_material_specifications": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "specification_name:s?",
+            "specification_value:t?",
+            "created_at:ts"
+        ]
+    },
+    "raw_material_suppliers": {
+        "c": [
+            "id*",
+            "material_id>raw_materials.id?",
+            "supplier_id>suppliers.id?",
+            "is_preferred:ti?",
+            "lead_time:i?",
+            "minimum_order_quantity:d10,2?",
+            "price_per_unit:d25,2?",
+            "created_at:ts"
+        ]
+    },
+    "raw_materials": {
+        "c": [
+            "id*",
+            "material_code:s50",
+            "name:s100",
+            "category_id:i?",
+            "unit:s20",
+            "current_stock:d10,2?=0.00",
+            "reserved_quantity:d10,2?=0.00",
+            "min_stock_level:d10,2?=0.00",
+            "cost_per_unit:d10,2?=0.00",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "report_generation_logs": {
+        "c": [
+            "id*",
+            "status:e",
+            "message:t?",
+            "created_at:dt?"
+        ]
+    },
+    "report_schedules": {
+        "c": [
+            "id*",
+            "report_type:s50",
+            "frequency:e",
+            "filters:t?",
+            "format:e",
+            "email_recipients:t",
+            "last_run:dt?",
+            "next_run:dt",
+            "status:e?=active",
+            "error_message:t?",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "report_users": {
+        "c": [
+            "id*",
+            "report_id:i",
+            "email:s",
+            "name:s100?",
+            "is_active:ti?=1",
+            "created_at:dt?"
+        ]
+    },
+    "resource_predictions": {
+        "c": [
+            "id*",
+            "workstation_id:i",
+            "predicted_utilization:d5,2?",
+            "actual_utilization:d5,2?",
+            "prediction_start:dt",
+            "prediction_end:dt",
+            "peak_periods:longtext?",
+            "bottleneck_probability:d5,2?",
+            "accuracy:d5,2?",
+            "created_at:dt?"
+        ]
+    },
+    "role_permissions": {
+        "c": [
+            "role_id*",
+            "permission_id*"
+        ]
+    },
+    "sales_order_items": {
+        "c": [
+            "id*",
+            "sales_order_id>sales_orders.id",
+            "product_id:i",
+            "quantity:d10,2",
+            "unit_price:d10,2",
+            "tax_rate:d5,2?=0.00",
+            "tax_amount:d10,2?=0.00",
+            "withholding_tax:d5,2?=0.00",
+            "withholding_amount:d10,2?=0.00",
+            "discount_percent:d5,2?=0.00",
+            "discount_amount:d10,2?=0.00",
+            "subtotal:d10,2",
+            "total:d10,2",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "sales_order_items_new": {
+        "c": [
+            "id*",
+            "sales_order_id:i",
+            "product_id:i",
+            "quantity:d10,2",
+            "unit_price:d10,2",
+            "tax_rate:d5,2?=0.00",
+            "tax_amount:d10,2?=0.00",
+            "withholding_tax:d5,2?=0.00",
+            "withholding_amount:d10,2?=0.00",
+            "discount_percent:d5,2?=0.00",
+            "discount_amount:d10,2?=0.00",
+            "subtotal:d10,2",
+            "total:d10,2",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "sales_orders": {
+        "c": [
+            "id*",
+            "order_number:s50",
+            "transaction_id:s50?",
+            "client_id>clients.id",
+            "warehouse_id:i",
+            "order_date:dt",
+            "delivery_date:dt?",
+            "subtotal:d10,2=0.00",
+            "tax_amount:d10,2=0.00",
+            "discount_amount:d10,2=0.00",
+            "withholding_amount:d10,2?=0.00",
+            "total_amount:d10,2=0.00",
+            "paid_amount:d10,2=0.00",
+            "balance:d10,2=0.00",
+            "payment_status:e=unpaid",
+            "order_status:e=pending",
+            "notes:t?",
+            "created_by>users.user_id",
+            "created_at:dt",
+            "updated_at:dt?"
+        ]
+    },
+    "sales_payments": {
+        "c": [
+            "id*",
+            "sales_order_id>sales_orders.id",
+            "payment_date:dt",
+            "amount:d10,2",
+            "payment_method:e",
+            "reference_number:s100?",
+            "notes:t?",
+            "created_by>users.user_id",
+            "created_at:dt",
+            "updated_at:dt?"
+        ]
+    },
+    "sales_status_history": {
+        "c": [
+            "id*",
+            "sales_order_id>sales_orders.id",
+            "status:e",
+            "notes:t?",
+            "created_by>accounts.id",
+            "created_at:dt"
+        ]
+    },
+    "schedule_predictions": {
+        "c": [
+            "id*",
+            "schedule_id:s36",
+            "optimization_data:longtext?",
+            "efficiency_gain:longtext?",
+            "risk_factors:longtext?",
+            "is_applied:ti?=0",
+            "created_at:dt?",
+            "applied_at:dt?"
+        ]
+    },
+    "scheduled_reports": {
+        "c": [
+            "id*",
+            "name:s100",
+            "description:t?",
+            "frequency:e",
+            "schedule_day:i?",
+            "schedule_time:time",
+            "include_csv:ti?=1",
+            "include_pdf:ti?=0",
+            "is_active:ti?=1",
+            "last_run:dt?",
+            "created_at:dt?",
+            "updated_at:dt?",
+            "created_by:i?"
+        ]
+    },
+    "settings": {
+        "c": [
+            "id*",
+            "setting_type:s50",
+            "setting_key:s100",
+            "setting_value:t?",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "stock_movements": {
+        "c": [
+            "movement_id*",
+            "product_id:i",
+            "reference_type:e",
+            "reference_id:i",
+            "quantity:d10,2",
+            "movement_type:e",
+            "notes:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "storage_locations": {
+        "c": [
+            "id*",
+            "zone_id>warehouse_zones.id",
+            "location_code:s20",
+            "rack_number:s20?",
+            "shelf_number:s20?",
+            "bin_number:s20?",
+            "capacity:d10,2?",
+            "current_utilization:d10,2?=0.00",
+            "status:e?=empty",
+            "item_type:e?=mixed",
+            "qr_code:s100?",
+            "notes:t?",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "suppliers": {
+        "c": [
+            "id*",
+            "company_name:s",
+            "contact_person:s?",
+            "email:s?",
+            "phone:s50?",
+            "address:t?",
+            "active:i?=1",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "system_audit_trails": {
+        "c": [
+            "id*",
+            "user_id:i?",
+            "action_type:s100?",
+            "table_name:s100?",
+            "record_id:i?",
+            "old_values:t?",
+            "new_values:t?",
+            "ip_address:s45?",
+            "created_at:ts"
+        ]
+    },
+    "system_backup_logs": {
+        "c": [
+            "id*",
+            "backup_date:dt?",
+            "backup_type:s50?",
+            "file_path:s?",
+            "status:s50?",
+            "size_in_bytes:bi20?",
+            "created_at:ts"
+        ]
+    },
+    "system_configuration_history": {
+        "c": [
+            "id*",
+            "config_key:s?",
+            "old_value:t?",
+            "new_value:t?",
+            "changed_by:i?",
+            "created_at:ts"
+        ]
+    },
+    "system_integration_logs": {
+        "c": [
+            "id*",
+            "integration_type:s100?",
+            "status:s50?",
+            "request_data:t?",
+            "response_data:t?",
+            "error_message:t?",
+            "created_at:ts"
+        ]
+    },
+    "tax_rates": {
+        "c": [
+            "id*",
+            "name:s",
+            "rate:d10,2",
+            "type:s50",
+            "status:ti?=1",
+            "deleted:ti?=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "transaction_types": {
+        "c": [
+            "id*",
+            "name:s50",
+            "description:t?",
+            "status:ti?=1",
+            "created_at:dt?",
+            "updated_at:dt?"
+        ]
+    },
+    "units": {
+        "c": [
+            "id*",
+            "name:s",
+            "abbreviation:s10",
+            "description:t?",
+            "status:ti?=1",
+            "deleted:ti?=0",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "user_dashboard_preferences": {
+        "c": [
+            "id*",
+            "user_id:i",
+            "section_type:e",
+            "component_key:s50",
+            "position:i=0",
+            "is_active:ti=1",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "user_notification_preferences": {
+        "c": [
+            "preference_id*",
+            "user_id:i?",
+            "notification_type:s50?",
+            "channel_id:i?",
+            "is_enabled:ti?=1",
+            "created_at:ts"
+        ]
+    },
+    "user_notifications": {
+        "c": [
+            "id*",
+            "notification_id:i?",
+            "user_id:i?",
+            "is_read:ti?=0",
+            "read_at:ts?",
+            "delivery_status:e?=pending"
+        ]
+    },
+    "user_roles": {
+        "c": [
+            "role_id*",
+            "role_name:s",
+            "description:t?",
+            "created_at:ts"
+        ]
+    },
+    "users": {
+        "c": [
+            "user_id*",
+            "username:s",
+            "email:s",
+            "full_name:s100?",
+            "phone:s20?",
+            "profile_image:s?",
+            "language:s10?=en",
+            "timezone:s100?=UTC",
+            "notify_updates:ti?=0",
+            "notify_alerts:ti?=0",
+            "notify_reports:ti?=0",
+            "last_login:dt?",
+            "password:s",
+            "role_id:i?",
+            "status:ti?=1",
+            "created_at:ts",
+            "updated_at:ts",
+            "dashboard_preferences:t?"
+        ]
+    },
+    "vw_reservation_status": {
+        "c": [
+            "order_id:i=0",
+            "order_number:s50",
+            "order_status:e?=draft",
+            "material_id:i",
+            "material_code:s50",
+            "required_quantity:d10,2",
+            "reserved_quantity:d10,2?=0.00",
+            "reservation_status:e?=pending",
+            "current_stock:d10,2?=0.00",
+            "total_material_reserved:d10,2?=0.00"
+        ]
+    },
+    "vw_stock_status": {
+        "c": [
+            "id:i=0",
+            "material_code:s50",
+            "name:s100",
+            "current_stock:d10,2?=0.00",
+            "reserved_quantity:d10,2?",
+            "available_stock:d11,2?",
+            "min_stock_level:d10,2?=0.00",
+            "stock_status:s8?",
+            "availability_status:s10?"
+        ]
+    },
+    "warehouse_settings": {
+        "c": [
+            "id*",
+            "setting_key:s50",
+            "setting_value:i",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "warehouse_stock": {
+        "c": [
+            "id*",
+            "warehouse_id:i",
+            "item_type:e",
+            "item_id:i",
+            "quantity:d10,2?=0.00",
+            "created_at:ts",
+            "updated_at:ts"
+        ]
+    },
+    "warehouse_stock_movements": {
+        "c": [
+            "id*",
+            "warehouse_id:i",
+            "item_type:e",
+            "item_id:i",
+            "movement_type:e",
+            "quantity:d10,2",
+            "reference_type:s50",
+            "reference_id:i",
+            "notes:t?",
+            "created_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "warehouse_zones": {
+        "c": [
+            "id*",
+            "warehouse_id>warehouses.id",
+            "zone_code:s20",
+            "name:s100",
+            "description:t?",
+            "capacity:d10,2?",
+            "temperature_min:d5,2?",
+            "temperature_max:d5,2?",
+            "humidity_min:d5,2?",
+            "humidity_max:d5,2?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by>users.user_id?"
+        ]
+    },
+    "warehouses": {
+        "c": [
+            "id*",
+            "name:s100",
+            "code:s20",
+            "type:e",
+            "location:s?",
+            "description:t?",
+            "status:e?=active",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    },
+    "workstation_assignments": {
+        "c": [
+            "id*",
+            "workstation_id:i",
+            "order_id:i",
+            "start_time:dt",
+            "end_time:dt?",
+            "status:e?=pending",
+            "created_at:dt?"
+        ]
+    },
+    "workstations": {
+        "c": [
+            "id*",
+            "name:s100",
+            "code:s20",
+            "description:t?",
+            "capacity_per_hour:d10,2?",
+            "status:e?=active",
+            "location:s?",
+            "created_at:ts",
+            "updated_at:ts",
+            "created_by:i?"
+        ]
+    }
+}

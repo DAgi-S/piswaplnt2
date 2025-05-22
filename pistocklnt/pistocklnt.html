@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiStock Inventory Management System Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .subsystem {
+            margin: 10px 0;
+            padding: 15px;
+            background: #fff;
+            border-left: 4px solid #3498db;
+        }
+        code {
+            background: #f1f1f1;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>PiStock Inventory Management System Documentation</h1>
+    
+    <div class="section">
+        <h2>1. System Overview</h2>
+        <p>PiStock is a comprehensive inventory management system designed to handle various aspects of business operations including:</p>
+        <ul>
+            <li>Inventory Management</li>
+            <li>Order Processing</li>
+            <li>Purchase Management</li>
+            <li>Quotation System</li>
+            <li>Financial Accounting</li>
+            <li>GPS Business Management</li>
+            <li>Digital Transaction Management</li>
+            <li>User Access Control</li>
+            <li>Reporting and Analytics</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. Core Subsystems</h2>
+
+        <div class="subsystem">
+            <h3>2.1 Inventory Management</h3>
+            <p>Handles product management with features including:</p>
+            <ul>
+                <li>Product CRUD operations</li>
+                <li>Stock tracking</li>
+                <li>Product categorization</li>
+                <li>Brand management</li>
+                <li>Stock alerts for minimum levels</li>
+                <li>Product image management</li>
+                <li>Stock movement history</li>
+            </ul>
+        </div>
+
+        <div class="subsystem">
+            <h3>2.2 Order Management</h3>
+            <p>Comprehensive order processing system with:</p>
+            <ul>
+                <li>Order creation and tracking</li>
+                <li>Multiple payment methods</li>
+                <li>Order status management</li>
+                <li>Order history</li>
+                <li>Invoice generation</li>
+                <li>Payment tracking</li>
+            </ul>
+        </div>
+
+        <div class="subsystem">
+            <h3>2.3 Purchase Management</h3>
+            <p>Handles supplier interactions and purchases:</p>
+            <ul>
+                <li>Supplier management</li>
+                <li>Purchase order creation</li>
+                <li>Purchase tracking</li>
+                <li>Purchase history</li>
+                <li>Supplier payment management</li>
+                <li>Purchase reports</li>
+            </ul>
+        </div>
+
+        <div class="subsystem">
+            <h3>2.4 Financial Management</h3>
+            <p>Comprehensive financial tracking system:</p>
+            <ul>
+                <li>Account management</li>
+                <li>Transaction categorization</li>
+                <li>Financial reporting</li>
+                <li>Audit trails</li>
+                <li>Digital transaction tracking</li>
+                <li>Category-based reporting</li>
+            </ul>
+        </div>
+
+        <div class="subsystem">
+            <h3>2.5 GPS Business Management</h3>
+            <p>Specialized module for GPS-related business:</p>
+            <ul>
+                <li>GPS business cycles</li>
+                <li>Profit distribution</li>
+                <li>Business reports</li>
+                <li>Letter generation</li>
+                <li>GPS payment tracking</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Technical Architecture</h2>
+        
+        <h3>3.1 Frontend Technologies</h3>
+        <ul>
+            <li>HTML5, CSS3, JavaScript</li>
+            <li>Bootstrap for responsive design</li>
+            <li>jQuery for DOM manipulation</li>
+            <li>DataTables for data presentation</li>
+            <li>Select2 for enhanced dropdowns</li>
+            <li>SweetAlert2 for notifications</li>
+        </ul>
+
+        <h3>3.2 Backend Technologies</h3>
+        <ul>
+            <li>PHP for server-side processing</li>
+            <li>MySQL database</li>
+            <li>RESTful API architecture</li>
+            <li>Session-based authentication</li>
+            <li>Role-based access control</li>
+        </ul>
+
+        <h3>3.3 Database Structure</h3>
+        <p>Key database tables include:</p>
+        <table>
+            <tr>
+                <th>Table Category</th>
+                <th>Tables</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>Product Management</td>
+                <td>products, categories, brands</td>
+                <td>Store product information and classifications</td>
+            </tr>
+            <tr>
+                <td>Order Management</td>
+                <td>orders, order_items, sales_orders</td>
+                <td>Handle order processing and tracking</td>
+            </tr>
+            <tr>
+                <td>Purchase Management</td>
+                <td>purchases, purchase_items, suppliers</td>
+                <td>Manage purchase orders and supplier information</td>
+            </tr>
+            <tr>
+                <td>Financial Management</td>
+                <td>accounts, transactions, categories</td>
+                <td>Track financial transactions and categorization</td>
+            </tr>
+            <tr>
+                <td>User Management</td>
+                <td>users, roles, permissions</td>
+                <td>Handle user access and permissions</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>4. Security Features</h2>
+        <ul>
+            <li>Role-based access control (RBAC)</li>
+            <li>Session management and authentication</li>
+            <li>Password hashing</li>
+            <li>SQL injection prevention</li>
+            <li>XSS protection</li>
+            <li>CSRF protection</li>
+            <li>Input validation and sanitization</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Key Features</h2>
+
+        <h3>5.1 Inventory Features</h3>
+        <ul>
+            <li>Real-time stock tracking</li>
+            <li>Automatic stock updates</li>
+            <li>Low stock alerts</li>
+            <li>Product categorization</li>
+            <li>Stock movement history</li>
+            <li>Product image management</li>
+        </ul>
+
+        <h3>5.2 Order Processing Features</h3>
+        <ul>
+            <li>Quick order creation</li>
+            <li>Multiple payment methods</li>
+            <li>Order status tracking</li>
+            <li>Invoice generation</li>
+            <li>Order history</li>
+            <li>Customer management</li>
+        </ul>
+
+        <h3>5.3 Financial Features</h3>
+        <ul>
+            <li>Transaction categorization</li>
+            <li>Financial reporting</li>
+            <li>Profit/Loss tracking</li>
+            <li>Digital transaction management</li>
+            <li>Audit trails</li>
+            <li>Category-based analysis</li>
+        </ul>
+
+        <h3>5.4 Reporting Features</h3>
+        <ul>
+            <li>Sales reports</li>
+            <li>Purchase reports</li>
+            <li>Inventory reports</li>
+            <li>Financial reports</li>
+            <li>Audit reports</li>
+            <li>Custom report generation</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Integration Points</h2>
+        <ul>
+            <li>Email system for notifications</li>
+            <li>PDF generation for reports and invoices</li>
+            <li>WebSocket server for real-time updates</li>
+            <li>External payment gateway integration capability</li>
+            <li>API endpoints for external system integration</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>7. Development Guidelines</h2>
+        <ul>
+            <li>Follow MVC architecture patterns</li>
+            <li>Use prepared statements for database queries</li>
+            <li>Implement proper error handling</li>
+            <li>Maintain audit logs for critical operations</li>
+            <li>Follow coding standards and documentation practices</li>
+            <li>Regular testing and validation</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Deployment Requirements</h2>
+        <ul>
+            <li>Web Server: Apache/Nginx</li>
+            <li>PHP Version: 7.4 or higher</li>
+            <li>MySQL Version: 5.7 or higher</li>
+            <li>Required PHP Extensions:
+                <ul>
+                    <li>mysqli</li>
+                    <li>pdo</li>
+                    <li>gd</li>
+                    <li>curl</li>
+                    <li>json</li>
+                </ul>
+            </li>
+            <li>Minimum Server Requirements:
+                <ul>
+                    <li>2GB RAM</li>
+                    <li>10GB Storage</li>
+                    <li>Modern CPU with 2+ cores</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Future Enhancements</h2>
+        <ul>
+            <li>Mobile application integration</li>
+            <li>Advanced analytics and reporting</li>
+            <li>Machine learning for inventory prediction</li>
+            <li>Barcode/QR code integration</li>
+            <li>Enhanced supplier portal</li>
+            <li>Advanced warehouse management</li>
+        </ul>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid #ddd;">
+        <p>© 2024 PiStock Inventory Management System</p>
+        <p>Powered by Lebawi Net Trading plc</p>
+    </footer>
+</body>
+</html> 

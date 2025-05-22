@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header div replacement -->
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <div class="documentation-wrapper">
+                <!-- Sidebar Navigation -->
+                <div class="documentation-sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#overview">Overview</a>
+                        <a class="nav-link" href="#user-management">User Management</a>
+                        <a class="nav-link" href="#roles-permissions">Roles & Permissions</a>
+                        <a class="nav-link" href="#brand-management">Brand Management</a>
+                        <a class="nav-link" href="#category-management">Category Management</a>
+                        <a class="nav-link" href="#account-settings">Account Settings</a>
+                        <a class="nav-link" href="#database">Database Structure</a>
+                        <a class="nav-link" href="#api">API Reference</a>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="documentation-content">
+                    <h1>System Settings Documentation</h1>
+                    
+                    <section id="overview">
+                        <h2>Overview</h2>
+                        <p>The System Settings module provides comprehensive management tools for system configuration, user management, and data organization. It includes:</p>
+                        <ul>
+                            <li>User Management - Create and manage system users</li>
+                            <li>Roles & Permissions - Control access levels</li>
+                            <li>Brand Management - Organize product brands</li>
+                            <li>Category Management - Manage product categories</li>
+                            <li>Account Settings - Configure system accounts</li>
+                        </ul>
+                    </section>
+
+                    <section id="user-management">
+                        <h2>User Management</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>Create new users</li>
+                            <li>Assign user roles</li>
+                            <li>Manage user permissions</li>
+                            <li>Reset passwords</li>
+                            <li>Activate/deactivate users</li>
+                        </ul>
+
+                        <h4>User Fields</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>Text</td>
+                                    <td>Unique user identifier</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>Email</td>
+                                    <td>User's email address</td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td>Password</td>
+                                    <td>Securely hashed password</td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>Select</td>
+                                    <td>User's system role</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="roles-permissions">
+                        <h2>Roles & Permissions</h2>
+                        <h4>Available Roles</h4>
+                        <ul>
+                            <li>Administrator (Role ID: 2)</li>
+                            <li>Standard User</li>
+                            <li>Limited User</li>
+                        </ul>
+
+                        <h4>Permission Types</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Permission</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>view_user</td>
+                                    <td>Access to view user list</td>
+                                </tr>
+                                <tr>
+                                    <td>create_user</td>
+                                    <td>Ability to create new users</td>
+                                </tr>
+                                <tr>
+                                    <td>edit_user</td>
+                                    <td>Permission to edit users</td>
+                                </tr>
+                                <tr>
+                                    <td>delete_user</td>
+                                    <td>Authority to delete users</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="brand-management">
+                        <h2>Brand Management</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>Create new brands</li>
+                            <li>Edit brand information</li>
+                            <li>Set brand status</li>
+                            <li>Delete brands</li>
+                        </ul>
+
+                        <h4>Brand Fields</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Brand Name</td>
+                                    <td>Text</td>
+                                    <td>Name of the brand</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>Select</td>
+                                    <td>Available/Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="category-management">
+                        <h2>Category Management</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>Create categories</li>
+                            <li>Edit category details</li>
+                            <li>Manage category status</li>
+                            <li>Delete categories</li>
+                        </ul>
+
+                        <h4>Category Fields</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Category Name</td>
+                                    <td>Text</td>
+                                    <td>Name of the category</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>Select</td>
+                                    <td>Available/Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="account-settings">
+                        <h2>Account Settings</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>Profile management</li>
+                            <li>Password changes</li>
+                            <li>Security settings</li>
+                            <li>Account preferences</li>
+                        </ul>
+
+                        <h4>Security Features</h4>
+                        <ul>
+                            <li>Password hashing</li>
+                            <li>Session management</li>
+                            <li>Access control</li>
+                            <li>Activity logging</li>
+                        </ul>
+                    </section>
+
+                    <section id="database">
+                        <h2>Database Structure</h2>
+                        
+                        <h4>Users Table</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user_id</td>
+                                    <td>INT</td>
+                                    <td>Primary key</td>
+                                </tr>
+                                <tr>
+                                    <td>username</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>User's login name</td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>User's email</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Hashed password</td>
+                                </tr>
+                                <tr>
+                                    <td>role_id</td>
+                                    <td>INT</td>
+                                    <td>Foreign key to roles</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Brands Table</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>brand_id</td>
+                                    <td>INT</td>
+                                    <td>Primary key</td>
+                                </tr>
+                                <tr>
+                                    <td>brand_name</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Brand name</td>
+                                </tr>
+                                <tr>
+                                    <td>brand_status</td>
+                                    <td>INT</td>
+                                    <td>1=Available, 2=Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Categories Table</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>categories_id</td>
+                                    <td>INT</td>
+                                    <td>Primary key</td>
+                                </tr>
+                                <tr>
+                                    <td>categories_name</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Category name</td>
+                                </tr>
+                                <tr>
+                                    <td>categories_status</td>
+                                    <td>INT</td>
+                                    <td>1=Available, 2=Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="api">
+                        <h2>API Reference</h2>
+                        <h4>User Management Endpoints</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/php_action/createUser.php</td>
+                                    <td>POST</td>
+                                    <td>Create new user</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchUsers.php</td>
+                                    <td>GET</td>
+                                    <td>Get all users</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/updateUser.php</td>
+                                    <td>POST</td>
+                                    <td>Update user details</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/removeUser.php</td>
+                                    <td>POST</td>
+                                    <td>Delete user</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Brand Management Endpoints</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/php_action/createBrand.php</td>
+                                    <td>POST</td>
+                                    <td>Create new brand</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchBrand.php</td>
+                                    <td>GET</td>
+                                    <td>Get all brands</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/updateBrand.php</td>
+                                    <td>POST</td>
+                                    <td>Update brand</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/removeBrand.php</td>
+                                    <td>POST</td>
+                                    <td>Delete brand</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Category Management Endpoints</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/php_action/createCategories.php</td>
+                                    <td>POST</td>
+                                    <td>Create new category</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchCategories.php</td>
+                                    <td>GET</td>
+                                    <td>Get all categories</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/updateCategories.php</td>
+                                    <td>POST</td>
+                                    <td>Update category</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/removeCategories.php</td>
+                                    <td>POST</td>
+                                    <td>Delete category</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

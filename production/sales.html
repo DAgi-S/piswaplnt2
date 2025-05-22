@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management - PiStockInt</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
+        }
+        .summary-card {
+            border-left: 4px solid;
+        }
+        .summary-card.primary { border-left-color: #0d6efd; }
+        .summary-card.success { border-left-color: #198754; }
+        .summary-card.warning { border-left-color: #ffc107; }
+        .summary-card.info { border-left-color: #0dcaf0; }
+        .table-responsive {
+            margin: 1rem 0;
+        }
+        .status-badge {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .btn-icon {
+            padding: 0.25rem 0.5rem;
+            margin: 0 0.125rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-graph-up-arrow text-primary"></i> Sales Management</h2>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSaleModal">
+            <i class="bi bi-plus-circle"></i> New Sales Order
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card primary">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Revenue (This Month)</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">$85,750</h3>
+                        <span class="ms-2 text-success"><i class="bi bi-arrow-up"></i> 15.2%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card success">
+                <div class="card-body">
+                    <h6 class="text-muted">Pending Orders</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">34</h3>
+                        <span class="ms-2 text-warning"><i class="bi bi-clock"></i> Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card warning">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Clients</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">243</h3>
+                        <span class="ms-2 text-primary"><i class="bi bi-people"></i> Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card info">
+                <div class="card-body">
+                    <h6 class="text-muted">Average Order Value</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">$2,520</h3>
+                        <span class="ms-2 text-success"><i class="bi bi-graph-up"></i> +5.3%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Status Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-info-circle"></i> System Status & Analysis</h5>
+            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#systemStatusContent">
+                <i class="bi bi-chevron-down"></i>
+            </button>
+        </div>
+        <div class="collapse show" id="systemStatusContent">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Database Structure -->
+                    <div class="col-md-6 mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-database"></i> Database Structure Analysis</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>clients</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Client management with contact info</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sales_orders</td>
+                                        <td><span class="badge bg-danger">Missing</span></td>
+                                        <td>Main sales orders tracking</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sales_items</td>
+                                        <td><span class="badge bg-danger">Missing</span></td>
+                                        <td>Sales order line items</td>
+                                    </tr>
+                                    <tr>
+                                        <td>production_products</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Connected to sales system</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Functionality Status -->
+                    <div class="col-md-6 mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-gear"></i> Functionality Status</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Client Management
+                                <span class="badge bg-success rounded-pill">Implemented</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Sales Order Processing
+                                <span class="badge bg-danger rounded-pill">Not Implemented</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Product Stock Integration
+                                <span class="badge bg-warning rounded-pill">Partial</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Payment Processing
+                                <span class="badge bg-danger rounded-pill">Not Implemented</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Required Actions -->
+                    <div class="col-md-12">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-check2-square"></i> Database Schema Status</h6>
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading">Existing Table Structure:</h6>
+                            <pre class="mb-0"><code>
+-- Existing clients table
+CREATE TABLE clients (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    company_name VARCHAR(255),
+    tin_number VARCHAR(50),
+    address TEXT,
+    phone VARCHAR(50),
+    email VARCHAR(100),
+    status TINYINT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+                            </code></pre>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <h6 class="alert-heading">Required Table Structures:</h6>
+                            <pre class="mb-0"><code>
+-- Required sales_orders table
+CREATE TABLE sales_orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_number VARCHAR(50),
+    client_id INT,
+    order_date DATE,
+    delivery_date DATE,
+    sub_total DECIMAL(25,2),
+    vat DECIMAL(25,2),
+    grand_total DECIMAL(25,2),
+    payment_status VARCHAR(20),
+    paid_amount DECIMAL(25,2),
+    status INT,
+    active INT,
+    created_by INT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+
+-- Required sales_items table
+CREATE TABLE sales_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sales_order_id INT,
+    product_id INT,
+    quantity INT,
+    rate DECIMAL(25,2),
+    total DECIMAL(25,2),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    FOREIGN KEY (sales_order_id) REFERENCES sales_orders(id),
+    FOREIGN KEY (product_id) REFERENCES production_products(id)
+);
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Analytics -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Monthly Sales Trend</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="salesTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Top Selling Products</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="topProductsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Tabs -->
+    <ul class="nav nav-tabs mb-4" id="salesTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab">
+                <i class="bi bi-list-check"></i> Sales Orders
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="clients-tab" data-bs-toggle="tab" href="#clients" role="tab">
+                <i class="bi bi-people"></i> Clients
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">
+                <i class="bi bi-box-seam"></i> Products
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="salesTabContent">
+        <!-- Sales Orders Tab -->
+        <div class="tab-pane fade show active" id="orders" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="salesOrdersTable">
+                            <thead>
+                                <tr>
+                                    <th>Order Number</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SO-2024-001</td>
+                                    <td>ABC Company</td>
+                                    <td>2024-02-15</td>
+                                    <td>$5,250.00</td>
+                                    <td><span class="badge bg-warning status-badge">Processing</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-icon btn-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-success"><i class="bi bi-check2"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-danger"><i class="bi bi-x"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clients Tab -->
+        <div class="tab-pane fade" id="clients" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addClientModal">
+                        <i class="bi bi-plus-circle"></i> Add New Client
+                    </button>
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="clientsTable">
+                            <thead>
+                                <tr>
+                                    <th>Client ID</th>
+                                    <th>Company Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CL-001</td>
+                                    <td>ABC Company</td>
+                                    <td>John Smith</td>
+                                    <td>john@abccompany.com</td>
+                                    <td><span class="badge bg-success status-badge">Active</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-icon btn-primary"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-danger"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div class="tab-pane fade" id="products" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="productsTable">
+                            <thead>
+                                <tr>
+                                    <th>Product Code</th>
+                                    <th>Name</th>
+                                    <th>Current Stock</th>
+                                    <th>Price</th>
+                                    <th>Sales Count</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PRD-001</td>
+                                    <td>Product A</td>
+                                    <td>250 units</td>
+                                    <td>$199.99</td>
+                                    <td>1,234</td>
+                                    <td><span class="badge bg-success status-badge">In Stock</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Sale Modal -->
+<div class="modal fade" id="addSaleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Sales Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="salesOrderForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Client</label>
+                            <select class="form-select" required>
+                                <option value="">Select Client</option>
+                                <option value="1">ABC Company</option>
+                                <option value="2">XYZ Corporation</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Order Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6>Order Items</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="orderItemsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-select">
+                                                <option value="">Select Product</option>
+                                                <option value="1">Product A</option>
+                                                <option value="2">Product B</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" class="form-control" min="1"></td>
+                                        <td><input type="number" class="form-control" step="0.01" min="0"></td>
+                                        <td>$0.00</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-secondary" id="addItemRow">
+                            <i class="bi bi-plus-circle"></i> Add Item
+                        </button>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Payment Terms</label>
+                            <select class="form-select">
+                                <option value="immediate">Immediate</option>
+                                <option value="net30">Net 30</option>
+                                <option value="net60">Net 60</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Delivery Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create Sales Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Client Modal -->
+<div class="modal fade" id="addClientModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="clientForm">
+                    <div class="mb-3">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contact Person</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Payment Terms</label>
+                            <select class="form-select">
+                                <option value="immediate">Immediate Payment</option>
+                                <option value="net30">Net 30</option>
+                                <option value="net60">Net 60</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Credit Limit</label>
+                            <input type="number" class="form-control" step="0.01" min="0">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add Client</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Required JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Initialize DataTables
+    $('#salesOrdersTable').DataTable({
+        order: [[2, 'desc']], // Sort by date by default
+        pageLength: 10
+    });
+    
+    $('#clientsTable').DataTable({
+        pageLength: 10
+    });
+    
+    $('#productsTable').DataTable({
+        pageLength: 10
+    });
+
+    // Add new item row in sales order
+    $('#addItemRow').click(function() {
+        const newRow = $('#orderItemsTable tbody tr:first').clone();
+        newRow.find('input').val('');
+        newRow.find('select').val('');
+        $('#orderItemsTable tbody').append(newRow);
+    });
+
+    // Calculate totals when quantity or price changes
+    $(document).on('change', '#orderItemsTable input', function() {
+        const row = $(this).closest('tr');
+        const quantity = parseFloat(row.find('input[type="number"]:first').val()) || 0;
+        const price = parseFloat(row.find('input[type="number"]:last').val()) || 0;
+        const total = quantity * price;
+        row.find('td:nth-last-child(2)').text('$' + total.toFixed(2));
+    });
+
+    // Remove item row
+    $(document).on('click', '#orderItemsTable .btn-danger', function() {
+        if ($('#orderItemsTable tbody tr').length > 1) {
+            $(this).closest('tr').remove();
+        }
+    });
+
+    // Initialize Charts
+    const salesTrendCtx = document.getElementById('salesTrendChart').getContext('2d');
+    new Chart(salesTrendCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Sales Revenue',
+                data: [65000, 72000, 68000, 85000, 75000, 85750],
+                borderColor: '#0d6efd',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    const topProductsCtx = document.getElementById('topProductsChart').getContext('2d');
+    new Chart(topProductsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C', 'Others'],
+            datasets: [{
+                data: [35, 25, 20, 20],
+                backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#6c757d']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+});
+</script>
+
+</body>
+</html> 

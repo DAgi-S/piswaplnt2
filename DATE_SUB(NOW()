@@ -1,0 +1,1 @@
+SELECT * FROM system_logs WHERE created_at , INTERVAL 1 HOUR) ORDER BY created_at DESC LIMIT 5; 

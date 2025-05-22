@@ -1,0 +1,151 @@
+Database Tables and Structure for Dashboard
+
+1. guest_users
+   - id
+   - username
+   - password
+   - guest_id
+   - full_name
+   - account_name
+   - currency
+   - balance
+   - linked_account_id
+   - access_level
+   - status
+   - created_at
+   - last_login
+   - expiry_date
+
+2. guest_account_links
+   - id
+   - guest_id (links to guest_users.id)
+   - account_id (links to accounts.id)
+   - created_at
+
+3. accounts
+   - id
+   - account_owner
+   - account_platform
+   - Currency
+   - number_of_transactions
+   - status
+
+4. digitalswap (Transaction Table)
+   - id
+   - account_id (links to accounts.id)
+   - transaction_date
+   - type (deposit/withdraw)
+   - type_id
+   - name
+   - platform
+   - platform_id
+   - amount
+   - image
+   - comment
+   - status
+   - created_at
+   - updated_at
+
+Table Relationships:
+- guest_users -> guest_account_links (one-to-many)
+- accounts -> guest_account_links (one-to-many)
+- accounts -> digitalswap (one-to-many)
+
+Key SQL Queries Used:
+
+1. Get Guest User's Active Account:
+```sql
+SELECT gu.*, a.account_owner, a.account_platform, a.Currency 
+FROM guest_users gu 
+JOIN guest_account_links gal ON gu.id = gal.guest_id
+JOIN accounts a ON gal.account_id = a.id 
+WHERE gu.guest_id = ? AND gal.account_id = ?
+```
+
+2. Get Recent Activity Summary:
+```sql
+SELECT 
+    SUM(CASE WHEN type = 'deposit' THEN amount ELSE 0 END) as recent_deposits,
+    SUM(CASE WHEN type = 'withdraw' THEN amount ELSE 0 END) as recent_withdrawals,
+    COUNT(*) as total_transactions
+FROM digitalswap 
+WHERE account_id = ? 
+AND transaction_date BETWEEN ? AND ?
+```
+
+3. Get Current Balance:
+```sql
+SELECT 
+    SUM(CASE WHEN type = 'deposit' THEN amount ELSE -amount END) as current_balance
+FROM digitalswap 
+WHERE account_id = ?
+```
+
+4. Get Account Balances:
+```sql
+SELECT 
+    a.id,
+    a.account_owner,
+    a.account_platform,
+    a.Currency,
+    COALESCE(SUM(CASE WHEN d.type = 'deposit' THEN d.amount ELSE -d.amount END), 0) as balance
+FROM accounts a
+LEFT JOIN guest_account_links gal ON a.id = gal.account_id
+LEFT JOIN digitalswap d ON a.id = d.account_id
+WHERE gal.guest_id = (
+    SELECT id FROM guest_users WHERE guest_id = ?
+)
+GROUP BY a.id, a.account_owner, a.account_platform, a.Currency
+```
+
+5. Get Recent Transactions:
+```sql
+SELECT 
+    DATE_FORMAT(transaction_date, '%Y-%m-%d') as date,
+    type,
+    amount,
+    name,
+    platform,
+    comment
+FROM digitalswap 
+WHERE account_id = ?
+ORDER BY transaction_date DESC
+LIMIT 5
+```
+
+Dashboard Display Sections:
+1. Welcome Section
+   - Guest Name
+   - Guest ID
+   - Account Platform
+   - Currency
+   - Last Login
+
+2. Stats Cards
+   - Current Balance
+   - Recent Deposits (30 days)
+   - Recent Withdrawals (30 days)
+   - Total Transactions
+
+3. Account Balances Table
+   - Account Owner
+   - Platform
+   - Currency
+   - Balance
+
+4. Transaction History Chart
+   - Monthly deposits
+   - Monthly withdrawals
+   - Net changes
+
+5. Recent Activity Table
+   - Date
+   - Type
+   - Amount
+   - Name
+   - Platform
+   - Comment
+
+
+our database name is pistocklntmarch
+

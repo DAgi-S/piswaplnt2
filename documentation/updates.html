@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Updates Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .update-entry {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .update-id {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .files {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+        .files code {
+            color: #d32f2f;
+        }
+        .changes {
+            margin: 10px 0;
+        }
+        .changes ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .review {
+            background: var(--secondary-color);
+            padding: 10px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the header navigation -->
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <h1 class="page-title">System Updates Log</h1>
+
+        <!-- Latest Update - Transaction History Image Preview Fix -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-010</span>
+            <div class="date">Date: January 20, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>guest/transaction_history.php</code>, <code>guest/php_action/fetchTransactions.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Fixed image preview functionality in transaction history</li>
+                    <li>Corrected image path handling for receipt images</li>
+                    <li>Added debug logging for image loading process</li>
+                    <li>Improved error handling for image display</li>
+                    <li>Enhanced image preview modal functionality</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The transaction history image preview system has been fixed with the following improvements:
+                <ul>
+                    <li>Correct image path construction for receipt images</li>
+                    <li>Proper handling of image loading errors with user feedback</li>
+                    <li>Enhanced debugging capabilities for troubleshooting</li>
+                    <li>Improved modal switching behavior between transaction details and image preview</li>
+                    <li>Better user experience with loading indicators and error messages</li>
+                    <li>Consistent image display across different transaction types</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update - Dashboard Analytics Enhancement -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-009</span>
+            <div class="date">Date: January 20, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>guest/dashboard.php</code>, <code>guest/php_action/fetchDashboardAnalytics.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Enhanced transaction history visualization with interactive chart</li>
+                    <li>Added time frame selection functionality (6 months, 12 months, 2 years, etc.)</li>
+                    <li>Implemented custom date range selector</li>
+                    <li>Created separate analytics fetcher for optimized dashboard data</li>
+                    <li>Added monthly transaction analysis with deposits and withdrawals</li>
+                    <li>Improved data visualization with Chart.js integration</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The dashboard analytics system has been significantly enhanced with the following features:
+                <ul>
+                    <li>Interactive bar graph showing deposits and withdrawals by month</li>
+                    <li>Net change line overlay for better trend visualization</li>
+                    <li>Flexible time frame selection options:
+                        <ul>
+                            <li>Last 6 months (default)</li>
+                            <li>Last 12 months</li>
+                            <li>Last 2 years</li>
+                            <li>This Year</li>
+                            <li>Last Year</li>
+                            <li>Custom date range</li>
+                        </ul>
+                    </li>
+                    <li>Optimized database queries for better performance</li>
+                    <li>Real-time data updates with automatic refresh</li>
+                    <li>Improved tooltips showing transaction counts and amounts</li>
+                    <li>Responsive design with proper mobile display</li>
+                    <li>Consistent currency formatting across all displays</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update - Audit System Implementation -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-007</span>
+            <div class="date">Date: January 19, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>audit.php</code>, <code>php_action/fetchAuditLog.php</code>, <code>php_action/audit_functions.php</code>, <code>sql/audit_log.sql</code>, <code>includes/header.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Implemented comprehensive audit logging system</li>
+                    <li>Created audit_log database table with proper indexing</li>
+                    <li>Added audit log viewing interface with filtering capabilities</li>
+                    <li>Implemented audit logging functions for various activities</li>
+                    <li>Added date range and activity type filtering</li>
+                    <li>Integrated audit menu in the system navigation</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The audit system has been successfully implemented with the following features:
+                <ul>
+                    <li>Tracks user actions across purchases, sales, quotations, stock changes, and price updates</li>
+                    <li>Provides detailed logging with before/after values for changes</li>
+                    <li>Includes IP address tracking and timestamp recording</li>
+                    <li>Features a user-friendly interface for viewing audit logs</li>
+                    <li>Supports filtering by date range and activity type</li>
+                    <li>Includes export capabilities (CSV, Excel, PDF, Print)</li>
+                    <li>Maintains proper data relationships with user accounts</li>
+                    <li>Implements optimized database queries with proper indexing</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Latest Update - Website Payment Records -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-006</span>
+            <div class="date">Date: January 18, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>paid_on.php</code>, <code>custom/js/paid-on.js</code>, <code>php_action/fetchPayments.php</code>, <code>php_action/getPaymentDetails.php</code>, <code>php_action/updatePaidOn.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Created new Payment Records page to track website payments</li>
+                    <li>Implemented filtering system for payment types, platforms, and dates</li>
+                    <li>Added detailed payment information view functionality</li>
+                    <li>Integrated platform update capability for payments</li>
+                    <li>Added print functionality for payment records</li>
+                    <li>Connected with existing digitalswap table for data consistency</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The Website Payment Records system has been successfully implemented with the following features:
+                <ul>
+                    <li>Comprehensive payment tracking interface with filtering options</li>
+                    <li>Real-time data display using DataTables with server-side processing</li>
+                    <li>Ability to view detailed payment information including transaction dates and comments</li>
+                    <li>Platform modification functionality for payment records</li>
+                    <li>Integration with existing account management system</li>
+                    <li>Secure data handling with proper validation and error management</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update - Guest Account System Improvements -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-005</span>
+            <div class="date">Date: January 18, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>guest/php_action/fetchAnnualReport.php</code>, <code>guest/php_action/fetchAuditReport.php</code>, <code>guest/includes/header.php</code>, <code>guest/php_action/fetchTransactions.php</code>, <code>guest/php_action/switchAccount.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Enhanced guest account system with improved data isolation</li>
+                    <li>Fixed currency display and formatting in transaction reports</li>
+                    <li>Improved account switching functionality with proper validation</li>
+                    <li>Enhanced error handling and session management</li>
+                    <li>Updated calculation logic in annual and audit reports</li>
+                    <li>Added proper data validation for guest account access</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The guest account system has been significantly improved with the following enhancements:
+                <ul>
+                    <li>Proper data isolation between different guest accounts</li>
+                    <li>Consistent currency formatting across all reports</li>
+                    <li>Secure account switching with proper access validation</li>
+                    <li>Enhanced error handling and user feedback</li>
+                    <li>Accurate calculations in annual and audit reports</li>
+                    <li>Improved session management and security checks</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update - Guest Transaction System -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-004</span>
+            <div class="date">Date: January 17, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>guest/php_action/fetchTransactions.php</code>, <code>guest/php_action/fetchAnnualReport.php</code>, <code>guest/php_action/fetchAuditReport.php</code>, <code>guest/transaction_history.php</code>, <code>guest/php_action/switchAccount.php</code>, <code>guest/includes/header.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Fixed DataTables JSON response issues in transaction history</li>
+                    <li>Enhanced account switching functionality for guest users</li>
+                    <li>Improved transaction details popup with complete information</li>
+                    <li>Updated calculation logic in annual and audit reports</li>
+                    <li>Fixed monthly and yearly summary calculations</li>
+                    <li>Added proper error handling and session management</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The guest transaction system has been significantly improved with the following enhancements:
+                <ul>
+                    <li>Transaction history now properly displays all transactions with correct formatting</li>
+                    <li>Account switching works correctly with proper data isolation between accounts</li>
+                    <li>Annual report shows accurate monthly and yearly totals</li>
+                    <li>Audit report displays correct transaction details and summaries</li>
+                    <li>All calculations (deposits, withdrawals, net change) are now accurate</li>
+                    <li>Improved error handling and user feedback throughout the system</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update - Balance Calculation Fix -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-008</span>
+            <div class="date">Date: January 20, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>guest/php_action/fetchTransactions.php</code>, <code>guest/php_action/utils.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Fixed current balance calculation in transaction history</li>
+                    <li>Updated summary statistics query to calculate balance directly from transactions</li>
+                    <li>Improved currency formatting consistency</li>
+                    <li>Removed redundant balance fetch from guest_users table</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The balance calculation system has been improved with the following enhancements:
+                <ul>
+                    <li>Accurate real-time balance calculation based on actual transactions</li>
+                    <li>Consistent currency formatting across all displays</li>
+                    <li>Improved performance by reducing database queries</li>
+                    <li>Better handling of filtered transaction views</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Latest Update -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-001</span>
+            <div class="date">Date: January 16, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>purchases.sql</code>, <code>managePurchases.php</code>, <code>purchase.js</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Added withholding tax functionality (2%)</li>
+                    <li>Added new database columns for withholding tax</li>
+                    <li>Updated purchase form with withholding tax checkbox</li>
+                    <li>Modified calculation logic for totals</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                The withholding tax feature has been successfully implemented. The system now correctly:
+                <ul>
+                    <li>Calculates 2% withholding tax based on subtotal</li>
+                    <li>Updates grand total (Total - Withholding)</li>
+                    <li>Displays withholding amount in print preview</li>
+                    <li>Stores withholding tax information in database</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Second Update -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-002</span>
+            <div class="date">Date: January 16, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>purchases.sql</code>, <code>managePurchases.php</code>, <code>purchase.js</code>, <code>fetchPurchases.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Added payment status tracking</li>
+                    <li>Added new columns: payment_status, paid_amount</li>
+                    <li>Implemented payment status update functionality</li>
+                    <li>Added color-coded payment status labels</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                Payment status tracking has been successfully implemented with the following features:
+                <ul>
+                    <li>Three status options: Unpaid, Partially Paid, Fully Paid</li>
+                    <li>Color-coded status labels for better visibility</li>
+                    <li>Quick status updates from dropdown menu</li>
+                    <li>Proper database storage and retrieval</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Third Update -->
+        <div class="update-entry">
+            <span class="update-id">UPDATE-003</span>
+            <div class="date">Date: January 16, 2024</div>
+            
+            <div class="files">
+                <strong>Modified Files:</strong><br>
+                <code>printPurchase.php</code>, <code>fetchPurchaseForPrint.php</code>
+            </div>
+
+            <div class="changes">
+                <strong>Changes Made:</strong>
+                <ul>
+                    <li>Enhanced print preview layout</li>
+                    <li>Added professional styling to printed documents</li>
+                    <li>Improved spacing and organization</li>
+                    <li>Added company header and footer</li>
+                </ul>
+            </div>
+
+            <div class="review">
+                <strong>Review:</strong><br>
+                Print preview improvements have been successfully implemented:
+                <ul>
+                    <li>Professional document layout with proper spacing</li>
+                    <li>Clear section organization</li>
+                    <li>Improved readability of printed documents</li>
+                    <li>Added proper company branding elements</li>
+                </ul>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+        // Load the header navigation
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

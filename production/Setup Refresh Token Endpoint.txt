@@ -1,0 +1,117 @@
+1. Setup Refresh Token Endpoint
+
+First, create the refresh.php file in the api/v2/auth/ directory. This endpoint will handle token refresh requests.
+api/v2/auth/refresh.php
+
+<?php
+// Include necessary files
+include_once '../../includes/jwt/JWTHandler.php';
+include_once '../../config/jwt/config.php';
+
+// Check if refresh token is provided
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_COOKIE['refresh_token'])) {
+    $refreshToken = $_COOKIE['refresh_token'];
+
+    // Validate the refresh token
+    $jwtHandler = new JWTHandler();
+    $isValidRefreshToken = $jwtHandler->validateRefreshToken($refreshToken);
+
+    if ($isValidRefreshToken) {
+        // Generate a new access token
+        $userData = $jwtHandler->getUserDataFromRefreshToken($refreshToken);
+        $newAccessToken = $jwtHandler->generateAccessToken($userData);
+
+        // Return the new access token as JSON response
+        echo json_encode([
+            'access_token' => $newAccessToken,
+            'expires_in' => 3600 // 1 hour
+        ]);
+    } else {
+        // Invalid refresh token
+        http_response_code(401);
+        echo json_encode(['error' => 'Invalid refresh token']);
+    }
+} else {
+    http_response_code(400);
+    echo json_encode(['error' => 'Refresh token not provided']);
+}
+?>
+
+2. JWTHandler Class - Implement validateRefreshToken & generateAccessToken
+includes/jwt/JWTHandler.php
+
+Make sure the JWTHandler class handles the validation of refresh tokens and generates new access tokens.
+
+<?php
+include_once '../../config/jwt/config.php';
+use \Firebase\JWT\JWT;
+
+class JWTHandler {
+    // Validate the refresh token
+    public function validateRefreshToken($refreshToken) {
+        try {
+            // Decode the refresh token using the JWT secret key
+            $decoded = JWT::decode($refreshToken, JWT_SECRET_KEY, array('HS256'));
+            return true; // Valid refresh token
+        } catch (Exception $e) {
+            return false; // Invalid refresh token
+        }
+    }
+
+    // Generate access token
+    public function generateAccessToken($userData) {
+        $issuedAt = time();
+        $expirationTime = $issuedAt + 3600;  // Access token is valid for 1 hour
+        $payload = array(
+            "user_id" => $userData['user_id'],
+            "role" => $userData['role'],
+            "iat" => $issuedAt,
+            "exp" => $expirationTime
+        );
+        return JWT::encode($payload, JWT_SECRET_KEY);
+    }
+
+    // Extract user data from the refresh token
+    public function getUserDataFromRefreshToken($refreshToken) {
+        try {
+            $decoded = JWT::decode($refreshToken, JWT_SECRET_KEY, array('HS256'));
+            return (array) $decoded;
+        } catch (Exception $e) {
+            return null; // Invalid refresh token
+        }
+    }
+}
+?>
+
+3. Secure Cookie Handling for Refresh Token
+
+In your login process (probably in login.php), set the refresh token as an HTTP-only cookie.
+Example code to set the refresh token cookie:
+
+// After generating refresh token
+setcookie('refresh_token', $refreshToken, time() + 60 * 60 * 24 * 30, '/', '', true, true); // Expires in 30 days
+
+4. CORS and Security Considerations
+
+Ensure your CORS configuration allows requests to the refresh token endpoint and your security settings are in place (e.g., setting up secure cookies).
+CORS Header Example:
+
+header("Access-Control-Allow-Origin: https://yourdomain.com");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+
+5. Test the Refresh Flow
+
+Once the refresh token endpoint is set up, the flow should look like this:
+
+    User logs in using valid credentials.
+    A refresh token is stored as an HTTP-only cookie.
+    When the access token expires, the client (e.g., frontend) sends a request to the /refresh endpoint.
+    The backend verifies the refresh token, and if valid, a new access token is generated and returned.
+    The client uses the new access token for future requests.
+
+📝 To Do After This:
+
+    CSRF Protection: Ensure that you implement CSRF protection for your refresh token endpoint if needed.
+    Rate Limiting: Implement rate limiting to prevent abuse of the refresh endpoint.
+    Testing: Test the refresh flow thoroughly, including edge cases like expired refresh tokens, invalid tokens, and invalid refresh token attempts.

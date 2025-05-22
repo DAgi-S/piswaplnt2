@@ -1,0 +1,301 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Mobile Container */
+.pos-container {
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+/* Search and Categories Section */
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#searchProduct {
+    flex: 1;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+#categoryFilter {
+    width: 45%;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0 15px;
+    font-size: 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+/* Products Grid Section */
+.product-list {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px;
+    background: white;
+    max-height: 48vh;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 5px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    background: white;
+    height: 110px;
+}
+
+.product-image-container {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.product-image {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-name {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.product-code {
+    font-size: 12px;
+    color: #666;
+}
+
+.product-price {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.product-stock {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Cart Section */
+.cart-section {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 12px;
+    background: white;
+    height: 42vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Client Selection */
+.client-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#clientSelect {
+    flex: 1;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0 15px;
+    font-size: 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+.quick-add-client {
+    height: 38px;
+    padding: 0 20px;
+    border: 1px solid #28a745;
+    border-radius: 25px;
+    background: white;
+    color: #28a745;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Cart Table */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 120px;
+}
+
+/* Payment Section */
+.payment-method select {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0 15px;
+    font-size: 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+.totals-section {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    font-size: 14px;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+}
+
+.totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.totals-row input {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 14px;
+    text-align: right;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 0 5px;
+    margin-top: 10px;
+}
+
+.action-button {
+    flex: 1;
+    height: 45px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.sale-button {
+    background: #4CAF50;
+}
+
+.clear-button {
+    background: #f44336;
+}
+
+.home-button {
+    background: #00BCD4;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 360px) {
+    * {
+        font-size: 13px;
+    }
+    
+    .action-button {
+        height: 40px;
+        font-size: 14px;
+    }
+}

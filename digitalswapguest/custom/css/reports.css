@@ -1,0 +1,213 @@
+/* Report Styles */
+:root {
+    --report-primary-color: #2196F3;
+    --report-bg-white: #ffffff;
+    --report-border-radius: 8px;
+    --report-shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --report-shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --report-border-color: #dee2e6;
+}
+
+/* Report Container */
+.report-container {
+    background: var(--report-bg-white);
+    padding: 30px;
+    border-radius: var(--report-border-radius);
+    box-shadow: var(--report-shadow-md);
+    margin-bottom: 30px;
+}
+
+/* Report Header */
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--report-primary-color);
+}
+
+.report-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--report-primary-color);
+}
+
+.account-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.account-info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.account-info strong {
+    color: #555;
+}
+
+/* Filters Section */
+.filters-section {
+    background: var(--report-bg-white);
+    padding: 25px;
+    border-radius: var(--report-border-radius);
+    margin-bottom: 25px;
+    box-shadow: var(--report-shadow-sm);
+}
+
+.filters-section h5 {
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.filters-section .form-control {
+    height: 38px;
+    border-radius: 4px;
+}
+
+/* Month/Year Sections */
+.month-section, .year-section {
+    background: var(--report-bg-white);
+    border-radius: var(--report-border-radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--report-shadow-sm);
+}
+
+.month-section h4, .year-section h4 {
+    color: var(--report-primary-color);
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--report-primary-color);
+    font-weight: 600;
+}
+
+/* Tables */
+.table-responsive {
+    margin-bottom: 0;
+    border-radius: var(--report-border-radius);
+    overflow: hidden;
+}
+
+.currency-table, .table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.table > thead > tr > th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid var(--report-border-color);
+    font-weight: 600;
+    padding: 12px;
+    color: #333;
+}
+
+.table > tbody > tr > td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+.table > tbody > tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.table > tfoot > tr > td {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-top: 2px solid var(--report-border-color);
+}
+
+/* Print Button */
+.print-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: var(--report-shadow-md);
+    transition: transform 0.2s;
+}
+
+.print-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .month-section, .year-section {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+        box-shadow: none;
+        border: 1px solid var(--report-border-color);
+    }
+
+    .print-button {
+        display: none;
+    }
+
+    .report-header {
+        margin-bottom: 30px;
+    }
+
+    .table {
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        border: 1px solid var(--report-border-color);
+    }
+
+    @page {
+        margin: 1.5cm;
+        size: A4;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .report-container {
+        padding: 15px;
+    }
+
+    .account-info {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-section {
+        padding: 15px;
+    }
+
+    .month-section, .year-section {
+        padding: 15px;
+    }
+
+    .table-responsive {
+        margin-bottom: 15px;
+    }
+
+    .print-button {
+        bottom: 15px;
+        right: 15px;
+    }
+} 

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Letter Management System Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Implementation -->
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="doc-container">
+            <div class="doc-content">
+                <!-- Sidebar Navigation -->
+                <div class="doc-sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#overview">Overview</a>
+                        <a class="nav-link" href="#database">Database Structure</a>
+                        <a class="nav-link" href="#letter-generator">Letter Generator</a>
+                        <a class="nav-link" href="#templates">Letter Templates</a>
+                        <a class="nav-link" href="#generation">Letter Generation</a>
+                        <a class="nav-link" href="#validation">Validation</a>
+                        <a class="nav-link" href="#api">API Reference</a>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="doc-main">
+                    <h1>GPS Letter Management System Documentation</h1>
+                    
+                    <section id="overview">
+                        <h2>Overview</h2>
+                        <p>The GPS Letter Management System is a comprehensive solution for generating, managing, and tracking GPS-related letters. It consists of three main components:</p>
+                        <ul>
+                            <li>GPS Letter Generator - Interface for creating new letters</li>
+                            <li>Letter Templates Management - System for managing letter templates</li>
+                            <li>Letter Generation - Backend process for generating letters</li>
+                        </ul>
+                    </section>
+
+                    <section id="database">
+                        <h2>Database Structure</h2>
+                        <h4>Tables</h4>
+                        
+                        <h5>1. letter_templates</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Primary key, auto-increment</td>
+                                </tr>
+                                <tr>
+                                    <td>letter_code</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Unique code for the template</td>
+                                </tr>
+                                <tr>
+                                    <td>letter_for</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Purpose of the letter</td>
+                                </tr>
+                                <tr>
+                                    <td>location</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Location information</td>
+                                </tr>
+                                <tr>
+                                    <td>subject</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Letter subject</td>
+                                </tr>
+                                <tr>
+                                    <td>letter_content</td>
+                                    <td>TEXT</td>
+                                    <td>Template content</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>2. generated_letters</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Primary key, auto-increment</td>
+                                </tr>
+                                <tr>
+                                    <td>template_id</td>
+                                    <td>INT</td>
+                                    <td>Foreign key to letter_templates</td>
+                                </tr>
+                                <tr>
+                                    <td>reference_no</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Unique reference number</td>
+                                </tr>
+                                <tr>
+                                    <td>client_name</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Client name</td>
+                                </tr>
+                                <tr>
+                                    <td>phone</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Client phone number</td>
+                                </tr>
+                                <tr>
+                                    <td>address</td>
+                                    <td>TEXT</td>
+                                    <td>Client address</td>
+                                </tr>
+                                <tr>
+                                    <td>tin_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Client TIN number</td>
+                                </tr>
+                                <tr>
+                                    <td>fs_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>FS number</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td>INT</td>
+                                    <td>Letter status</td>
+                                </tr>
+                                <tr>
+                                    <td>created_at</td>
+                                    <td>DATETIME</td>
+                                    <td>Creation timestamp</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>3. letter_vehicles</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Primary key, auto-increment</td>
+                                </tr>
+                                <tr>
+                                    <td>letter_id</td>
+                                    <td>INT</td>
+                                    <td>Foreign key to generated_letters</td>
+                                </tr>
+                                <tr>
+                                    <td>plate_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Vehicle plate number</td>
+                                </tr>
+                                <tr>
+                                    <td>trailer_plate</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Trailer plate number</td>
+                                </tr>
+                                <tr>
+                                    <td>chassis_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Vehicle chassis number</td>
+                                </tr>
+                                <tr>
+                                    <td>motor_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Vehicle motor number</td>
+                                </tr>
+                                <tr>
+                                    <td>imei_number</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>GPS device IMEI number</td>
+                                </tr>
+                                <tr>
+                                    <td>created_at</td>
+                                    <td>DATETIME</td>
+                                    <td>Creation timestamp</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="letter-generator">
+                        <h2>Letter Generator</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>Template selection</li>
+                            <li>Client information input</li>
+                            <li>Multiple vehicle details entry</li>
+                            <li>Letter preview</li>
+                            <li>Letter generation</li>
+                        </ul>
+
+                        <h4>Form Sections</h4>
+                        <h5>1. Template Selection</h5>
+                        <ul>
+                            <li>Dropdown for selecting letter template</li>
+                            <li>Dynamic loading of templates</li>
+                        </ul>
+
+                        <h5>2. Client Information</h5>
+                        <ul>
+                            <li>Client Name (required)</li>
+                            <li>Phone Number (with +251 prefix)</li>
+                            <li>TIN Number (10 digits)</li>
+                            <li>FS Number</li>
+                            <li>Address</li>
+                        </ul>
+
+                        <h5>3. Vehicle Details</h5>
+                        <ul>
+                            <li>Plate Number (required)</li>
+                            <li>Trailer Plate</li>
+                            <li>Chassis Number (required)</li>
+                            <li>Motor Number</li>
+                            <li>IMEI Number (required)</li>
+                        </ul>
+                    </section>
+
+                    <section id="templates">
+                        <h2>Letter Templates</h2>
+                        <h4>Management Features</h4>
+                        <ul>
+                            <li>Create new templates</li>
+                            <li>View existing templates</li>
+                            <li>Edit template details</li>
+                            <li>Delete templates</li>
+                        </ul>
+
+                        <h4>Template Fields</h4>
+                        <ul>
+                            <li>Letter Code - Unique identifier</li>
+                            <li>Letter For - Purpose description</li>
+                            <li>Location - Geographic context</li>
+                            <li>Subject - Letter subject</li>
+                            <li>Content - Template body</li>
+                        </ul>
+                    </section>
+
+                    <section id="generation">
+                        <h2>Letter Generation</h2>
+                        <h4>Process Flow</h4>
+                        <ol>
+                            <li>Validate input data</li>
+                            <li>Generate reference number</li>
+                            <li>Save letter details to database</li>
+                            <li>Save vehicle information</li>
+                            <li>Generate HTML preview</li>
+                            <li>Enable printing functionality</li>
+                        </ol>
+
+                        <h4>Generated Letter Format</h4>
+                        <ul>
+                            <li>Company header with logo</li>
+                            <li>Reference number and date</li>
+                            <li>Client information</li>
+                            <li>Letter subject and content</li>
+                            <li>Vehicle details table</li>
+                            <li>Signature section</li>
+                        </ul>
+                    </section>
+
+                    <section id="validation">
+                        <h2>Validation</h2>
+                        <h4>Required Fields</h4>
+                        <ul>
+                            <li>Template selection</li>
+                            <li>Client name</li>
+                            <li>Vehicle plate number</li>
+                            <li>Chassis number</li>
+                            <li>IMEI number</li>
+                        </ul>
+
+                        <h4>Format Validation</h4>
+                        <ul>
+                            <li>Phone number: 9 digits after +251</li>
+                            <li>TIN number: 10 digits</li>
+                            <li>Reference number format: GPS/FS/[number]/[year]</li>
+                        </ul>
+                    </section>
+
+                    <section id="api">
+                        <h2>API Reference</h2>
+                        <h4>Endpoints</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/php_action/generateLetter.php</td>
+                                    <td>POST</td>
+                                    <td>Generate new letter</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/createTemplate.php</td>
+                                    <td>POST</td>
+                                    <td>Create letter template</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchTemplates.php</td>
+                                    <td>GET</td>
+                                    <td>Get all templates</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/updateTemplate.php</td>
+                                    <td>POST</td>
+                                    <td>Update template</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/removeTemplate.php</td>
+                                    <td>POST</td>
+                                    <td>Delete template</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

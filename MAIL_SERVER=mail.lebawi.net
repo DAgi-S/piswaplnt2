@@ -1,0 +1,7 @@
+MAIL_SERVER=mail.lebawi.net
+MAIL_PORT=465
+MAIL_USERNAME=swapcapital@lebawi.net
+MAIL_PASSWORD=swapcapital@0924
+MAIL_DEFAULT_SENDER=swapcapital@lebawi.net 
+
+

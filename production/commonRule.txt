@@ -1,0 +1,44 @@
+Common Rule for AI Agent in Material Consumption Fix Implementation
+
+. Data Integrity & Safety
+
+    Maintain accurate inventory: Ensure no negative stock levels occur at any point.
+    Use database transactions: Every inventory update must be wrapped in a START TRANSACTION block with a rollback mechanism to prevent inconsistencies.
+    Audit log tracking: Log every material consumption update for traceability.
+    Prevent race conditions: Use row-level locks where needed to avoid conflicts in concurrent updates.
+
+2. Structure Preservation
+
+    No API modifications: Do not alter existing function signatures or database schema.
+    Respect existing system logic: Keep compatibility with current production workflows.
+    Ensure stored procedure compatibility: If stored procedures are used, they must align with existing logic.
+
+3. Progressive & Real-Time Updates
+
+    Material consumption should update progressively based on production progress.
+    Batch processing for efficiency: Optimize queries to avoid performance issues in large-scale operations.
+    Real-time inventory checks before processing: Always validate available stock before making consumption deductions.
+
+4. Error Handling & Rollback
+
+    Rollback on any error: If an update causes an inconsistency, the system must rollback immediately.
+    Prevent system failures: If stock levels go negative, an error should be raised (SQLSTATE '45000').
+    Graceful failure messages: The system should provide clear error messages to indicate failure reasons.
+
+5. Validation & Compliance
+
+    Verify every consumption calculation: Use validation queries to ensure correct deductions.
+    Check for anomalies: Identify any discrepancies between expected and actual consumption.
+    Wastage percentage must be considered: Ensure material loss is factored into consumption calculations.
+
+6. Security & Performance Considerations
+
+    Index critical columns: Optimize query performance with proper indexing on production_orders, production_order_materials, and raw_materials.
+    Prevent unnecessary locks: Avoid long-running transactions that can slow down other operations.
+    Secure stored procedures: Ensure procedures handle unexpected values correctly.
+
+7. Monitoring & Alerts
+
+    Real-time stock alerts: If inventory falls below a certain threshold, trigger an alert.
+    Consumption anomaly detection: If unexpected high/low usage is detected, flag for review.
+    Keep logs for compliance: Maintain historical tracking of all transactions for future audits.

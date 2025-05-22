@@ -1,0 +1,384 @@
+nav.navbar:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+button.button1:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+div.card {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+
+div.cardHeader {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 40px;
+}
+
+div.cardContainer {
+    padding: 10px;
+}
+
+
+.div-hide {
+	display: none;
+}
+
+.kv-file-zoom {
+	display: none;
+}
+
+div.kv-avatar div.file-input div.file-preview {
+	width: 200px;
+}
+
+/*login form*/
+.vertical {
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+
+#success-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.glyphicon-refresh-animate {
+    animation: spin .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+/* Add these styles for image preview */
+.view-image {
+    color: #337ab7;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.view-image:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
+
+#imagePreviewModal .modal-body {
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+#previewImage {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+/* Optional: Add loading animation */
+#previewImage.loading {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+/* Make the modal larger on bigger screens */
+@media (min-width: 992px) {
+    #imagePreviewModal .modal-lg {
+        width: 900px;
+    }
+}
+
+.success-message {
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.success-message h4 {
+    color: #3c763d;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.success-message i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.success-message p {
+    font-size: 16px;
+    color: #3c763d;
+}
+
+.success-message .redirect-text {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #666;
+}
+
+.popup-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.popup-notification.show {
+    transform: translateX(0);
+}
+
+.popup-notification .notification-title {
+    margin: 0 0 5px 0;
+    color: #3c763d;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popup-notification .notification-message {
+    margin: 0;
+    color: #3c763d;
+    font-size: 14px;
+}
+
+.popup-notification .notification-icon {
+    float: left;
+    margin-right: 15px;
+    font-size: 24px;
+    color: #5cb85c;
+}
+
+.popup-notification .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #3c763d;
+    opacity: 0.5;
+}
+
+.popup-notification .close:hover {
+    opacity: 1;
+}
+
+/* Role Management Styles */
+.role-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.role-item:hover {
+    background-color: #f5f5f5;
+}
+
+.role-item.active {
+    background-color: #e8f0fe;
+    border-left: 3px solid #1a73e8;
+}
+
+.role-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.role-name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+.role-item .btn-group {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    margin-left: 10px;
+}
+
+.role-item:hover .btn-group {
+    opacity: 1;
+}
+
+.role-item .btn {
+    margin-left: 5px;
+}
+
+.role-item .btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Permission Groups Styles */
+.permission-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.permission-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.permission-group-title {
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    text-align: left;
+}
+
+.permission-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    text-align: left;
+}
+
+.permission-item {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.permission-item .custom-control {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.permission-item label {
+    font-weight: normal;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+}
+
+.permission-item .text-muted {
+    display: block;
+    font-size: 12px;
+    margin-top: 2px;
+    text-align: left;
+}
+
+/* Select All Section */
+.select-all-section {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    text-align: left;
+}
+
+/* Module Headers */
+.module-header {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.module-header label {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Checkbox Alignment */
+.custom-control-input {
+    margin-right: 10px;
+}
+
+.custom-control-label {
+    text-align: left;
+    padding-left: 5px;
+}
+
+/* Group Select All */
+.group-select-all {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Permission Description */
+.permission-description {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+    text-align: left;
+}
+
+/* Card Headers */
+.card-header {
+    text-align: left;
+}
+
+.card-header .card-title {
+    margin: 0;
+    text-align: left;
+}
+
+/* Save Button Container */
+.save-permissions-container {
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Modal Alignment */
+.modal-header,
+.modal-body,
+.modal-footer {
+    text-align: left;
+}
+
+.modal-body .form-group label {
+    text-align: left;
+    display: block;
+}
+
+/* Form Controls */
+.form-control {
+    text-align: left;
+}

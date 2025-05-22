@@ -1,0 +1,44 @@
+
+1. Current Database Structure
+        From the database diagram shown, we have 6 main tables:
+        order_item (order details)
+        categories (product categories)
+        orders (main order information)
+        users (user management)
+        brands (product brands)
+        product (product information)
+
+2. Key Requirements Clarification:
+    Do you want to keep both Quotation and Invoice functionality or focus on just one?
+    Which specific features need to be removed/modified?
+    Are there any new features you want to add?
+
+3. Current Core Features (from README.md):
+    - inventory management system with php and mysql
+    - Quotation generation and easy to download invoice in PDF format
+    - Lightweight and easy to use
+    - Order management and product management can be done with ease
+    - Report management
+    - User wise sell report.
+
+4. Access Control:
+    Do we need to modify the current user roles/permissions?
+    Should we keep the current admin login credentials or implement new authentication?
+
+5. Integration Requirements:
+    Are there any third-party systems we need to integrate with?
+    Do we need to modify the current PDF generation format?
+    Any specific API integrations needed?
+
+6. UI/UX Preferences:
+    Should we keep the current Bootstrap-based UI or upgrade to a newer framework?
+    Any specific branding requirements?
+    Any mobile responsiveness requirements?
+
+7. Data Migration:
+    Is there existing data that needs to be migrated?
+    Do we need to maintain backward compatibility?
+
+8. Reporting Requirements:
+    Do we need to modify the current reporting structure shown in:
+    in php_action/getOrderReport.php?

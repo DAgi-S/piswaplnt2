@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Management Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-content">
+            <div class="content-wrapper">
+                <h1>Purchase Management System Documentation</h1>
+
+                <div class="doc-section">
+                    <h2>Table of Contents</h2>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#manage-purchases">Managing Purchases</a></li>
+                        <li><a href="#add-purchase">Adding a Purchase</a></li>
+                        <li><a href="#edit-purchase">Editing a Purchase</a></li>
+                        <li><a href="#remove-purchase">Removing a Purchase</a></li>
+                        <li><a href="#purchase-report">Purchase Report</a></li>
+                        <li><a href="#email-report">Email Purchase Report</a></li>
+                    </ul>
+                </div>
+
+                <div class="doc-section" id="overview">
+                    <h2>Overview</h2>
+                    <p>The Purchase Management System allows users to manage purchase transactions, including creating new purchases, editing existing ones, and generating reports. The system integrates with the supplier and product management systems.</p>
+                </div>
+
+                <div class="doc-section" id="manage-purchases">
+                    <h2>Managing Purchases</h2>
+                    <p>The main purchase management interface displays a table of all purchases with the following information:</p>
+                    <ul>
+                        <li>Purchase Number</li>
+                        <li>Purchase Date</li>
+                        <li>Supplier Information</li>
+                        <li>Sub Total</li>
+                        <li>VAT (15%)</li>
+                        <li>Grand Total</li>
+                        <li>Status</li>
+                        <li>Action buttons (Edit, Remove)</li>
+                    </ul>
+                </div>
+
+                <div class="doc-section" id="add-purchase">
+                    <h2>Adding a Purchase</h2>
+                    <p>To add a new purchase:</p>
+                    <ol>
+                        <li>Click the "Add Purchase" button</li>
+                        <li>Select a supplier from the dropdown</li>
+                        <li>Enter the purchase date</li>
+                        <li>Add products using the "Add Row" button</li>
+                        <li>For each product:
+                            <ul>
+                                <li>Select the product from the dropdown</li>
+                                <li>Enter the quantity</li>
+                                <li>The rate will be automatically filled</li>
+                                <li>The total will be calculated automatically</li>
+                            </ul>
+                        </li>
+                        <li>The sub total, VAT, and grand total are calculated automatically</li>
+                        <li>Click "Save Changes" to create the purchase</li>
+                    </ol>
+                </div>
+
+                <div class="doc-section" id="edit-purchase">
+                    <h2>Editing a Purchase</h2>
+                    <p>To edit an existing purchase:</p>
+                    <ol>
+                        <li>Click the "Action" button for the purchase you want to edit</li>
+                        <li>Select "Edit" from the dropdown</li>
+                        <li>Modify the purchase details as needed</li>
+                        <li>Add or remove product rows as necessary</li>
+                        <li>Click "Save Changes" to update the purchase</li>
+                    </ol>
+                </div>
+
+                <div class="doc-section" id="remove-purchase">
+                    <h2>Removing a Purchase</h2>
+                    <p>To remove a purchase:</p>
+                    <ol>
+                        <li>Click the "Action" button for the purchase you want to remove</li>
+                        <li>Select "Remove" from the dropdown</li>
+                        <li>Confirm the deletion in the popup dialog</li>
+                    </ol>
+                    <div class="note">Note: Removed purchases are not permanently deleted but marked as inactive in the database.</div>
+                </div>
+
+                <div class="doc-section" id="purchase-report">
+                    <h2>Purchase Report</h2>
+                    <p>The Purchase Report feature allows users to generate detailed reports of purchase transactions. To generate a report:</p>
+                    <ol>
+                        <li>Navigate to "Purchase Report" in the menu</li>
+                        <li>Select the date range for the report:
+                            <ul>
+                                <li>Start Date</li>
+                                <li>End Date</li>
+                            </ul>
+                        </li>
+                        <li>Optionally select a specific supplier from the dropdown</li>
+                        <li>Click "Generate Report" to view the report</li>
+                    </ol>
+
+                    <h3>Report Contents</h3>
+                    <p>The generated report includes:</p>
+                    <ul>
+                        <li>Report header with period and supplier information</li>
+                        <li>Detailed purchase information:
+                            <ul>
+                                <li>Purchase date</li>
+                                <li>Purchase number</li>
+                                <li>Supplier details</li>
+                                <li>Items purchased with quantities</li>
+                                <li>Sub total</li>
+                                <li>VAT amount</li>
+                                <li>Total amount</li>
+                            </ul>
+                        </li>
+                        <li>Summary total at the bottom</li>
+                        <li>Report generation details (date/time and user)</li>
+                    </ul>
+                </div>
+
+                <div class="doc-section" id="email-report">
+                    <h2>Email Purchase Report</h2>
+                    <p>Users can email purchase reports directly from the system. To send a report via email:</p>
+                    <ol>
+                        <li>Generate a report as described above</li>
+                        <li>Enter the recipient's email address in the "Email To" field</li>
+                        <li>Click "Send Email Report"</li>
+                    </ol>
+
+                    <h3>Email Features</h3>
+                    <ul>
+                        <li>HTML formatted email with proper styling</li>
+                        <li>Includes all report details in a clean, tabular format</li>
+                        <li>Alternative text version for email clients that don't support HTML</li>
+                        <li>Automatic email validation</li>
+                        <li>Success/error notifications</li>
+                    </ul>
+
+                    <div class="important">
+                        <h4>Important Notes:</h4>
+                        <ul>
+                            <li>Email configuration uses SMTP with SSL/TLS encryption</li>
+                            <li>Reports are sent from swapcapital@lebawi.net</li>
+                            <li>Large reports may take a few moments to generate and send</li>
+                            <li>Check spam folder if the email is not received in the inbox</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

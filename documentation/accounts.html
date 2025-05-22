@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts Management Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .documentation-container {
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <h1>Accounts Management System Documentation</h1>
+
+            <section class="section">
+                <h2>Overview</h2>
+                <p>The Accounts Management System provides comprehensive functionality for managing financial accounts, transactions, and reporting. It supports both USD and ETB currencies, with features for tracking deposits, withdrawals, and generating detailed reports.</p>
+            </section>
+
+            <section class="section">
+                <h2>Key Features</h2>
+                <ul class="feature-list">
+                    <li>Multi-currency support (USD and ETB)</li>
+                    <li>Transaction management (deposits and withdrawals)</li>
+                    <li>Real-time balance tracking</li>
+                    <li>Detailed transaction history</li>
+                    <li>Monthly and annual reporting</li>
+                    <li>Export functionality for reports</li>
+                    <li>Role-based access control</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Account Management</h2>
+                <h3>Creating an Account</h3>
+                <ol>
+                    <li>Navigate to Accounts > Add New Account</li>
+                    <li>Select currency type (USD/ETB)</li>
+                    <li>Enter account details:
+                        <ul>
+                            <li>Account Name</li>
+                            <li>Account Number</li>
+                            <li>Initial Balance</li>
+                            <li>Description (optional)</li>
+                        </ul>
+                    </li>
+                    <li>Click "Create Account" to save</li>
+                </ol>
+
+                <h3>Account Types</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Currency</th>
+                            <th>Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>USD Account</td>
+                            <td>USD</td>
+                            <td>
+                                <ul>
+                                    <li>International transfers</li>
+                                    <li>USD balance tracking</li>
+                                    <li>Exchange rate tracking</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ETB Account</td>
+                            <td>ETB</td>
+                            <td>
+                                <ul>
+                                    <li>Local transactions</li>
+                                    <li>ETB balance tracking</li>
+                                    <li>Local bank integration</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2>Transaction Management</h2>
+                <h3>Recording Transactions</h3>
+                <ol>
+                    <li>Select the account</li>
+                    <li>Choose transaction type (Deposit/Withdrawal)</li>
+                    <li>Enter transaction details:
+                        <ul>
+                            <li>Amount</li>
+                            <li>Date</li>
+                            <li>Description</li>
+                            <li>Reference number (optional)</li>
+                        </ul>
+                    </li>
+                    <li>Upload supporting documents (optional)</li>
+                    <li>Save transaction</li>
+                </ol>
+
+                <h3>Transaction Validation</h3>
+                <ul>
+                    <li>Sufficient balance check for withdrawals</li>
+                    <li>Valid amount format</li>
+                    <li>Required fields validation</li>
+                    <li>Date range validation</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Reporting</h2>
+                <h3>Available Reports</h3>
+                <ul class="feature-list">
+                    <li>Transaction History Report</li>
+                    <li>Monthly Balance Report</li>
+                    <li>Annual Summary Report</li>
+                    <li>Account Statement</li>
+                    <li>Audit Report</li>
+                </ul>
+
+                <h3>Report Generation</h3>
+                <ol>
+                    <li>Select report type</li>
+                    <li>Choose date range</li>
+                    <li>Select accounts to include</li>
+                    <li>Apply any filters (optional)</li>
+                    <li>Generate report</li>
+                    <li>Export or print as needed</li>
+                </ol>
+            </section>
+
+            <section class="section">
+                <h2>Security Features</h2>
+                <ul class="feature-list">
+                    <li>Role-based access control</li>
+                    <li>Transaction audit logging</li>
+                    <li>User activity tracking</li>
+                    <li>Secure data encryption</li>
+                    <li>Two-step verification for sensitive operations</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>API Integration</h2>
+                <h3>Available Endpoints</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/api/accounts/create</code></td>
+                            <td>POST</td>
+                            <td>Create new account</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/accounts/transactions</code></td>
+                            <td>POST</td>
+                            <td>Record transaction</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/accounts/balance</code></td>
+                            <td>GET</td>
+                            <td>Get account balance</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/accounts/statement</code></td>
+                            <td>GET</td>
+                            <td>Generate account statement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

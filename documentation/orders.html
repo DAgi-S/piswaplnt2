@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Module Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+            --doc-spacing: 2rem;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="doc-content-wrapper">
+            <div class="doc-container">
+                <h1>Orders Module Documentation</h1>
+                
+                <h2>Recent Updates</h2>
+                <div class="doc-note">
+                    <strong>Latest Update:</strong> Improved DataTable initialization and payment status handling
+                </div>
+
+                <h3>1. DataTable Initialization Changes</h3>
+                <ul>
+                    <li>Moved DataTable initialization to separate file: <code>custom/js/manageOrder.js</code></li>
+                    <li>Implemented proper instance management to prevent multiple initializations</li>
+                    <li>Added conditional loading of DataTable code only when needed</li>
+                </ul>
+
+                <h3>2. Payment Status Updates</h3>
+                <table>
+                    <tr>
+                        <th>Status Code</th>
+                        <th>Label</th>
+                        <th>Description</th>
+                        <th>Visual Style</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Full Payment</td>
+                        <td>Order has been fully paid</td>
+                        <td>Green label</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Advance Payment</td>
+                        <td>Partial payment received</td>
+                        <td>Blue label</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>No Payment</td>
+                        <td>No payment received</td>
+                        <td>Yellow label</td>
+                    </tr>
+                </table>
+
+                <h3>3. File Structure</h3>
+                <pre class="doc-code-block">
+├── orders.php              # Main orders page
+├── custom/
+│   └── js/
+│       └── manageOrder.js  # DataTable initialization and management
+└── php_action/
+    └── fetchOrder.php      # Backend API for order data
+                </pre>
+
+                <h3>4. Implementation Details</h3>
+                <h4>DataTable Initialization</h4>
+                <pre class="doc-code-block">
+// Initialize DataTable with proper cleanup
+if ($.fn.DataTable.isDataTable('#manageOrderTable')) {
+    $('#manageOrderTable').DataTable().destroy();
+}
+$('#manageOrderTable tbody').empty();</pre>
+
+                <h4>Payment Status Rendering</h4>
+                <pre class="doc-code-block">
+switch(data) {
+    case '1':
+        return "<label class='label label-success'>Full Payment</label>";
+    case '2':
+        return "<label class='label label-info'>Advance Payment</label>";
+    case '3':
+        return "<label class='label label-warning'>No Payment</label>";
+    default:
+        return "<label class='label label-warning'>No Payment</label>";
+}</pre>
+
+                <h3>5. Usage Instructions</h3>
+                <ol>
+                    <li>The orders table is automatically initialized when viewing the manage orders page</li>
+                    <li>Payment status can be updated through the edit form or payment status modal</li>
+                    <li>Table supports sorting, searching, and pagination by default</li>
+                    <li>Actions available for each order:
+                        <ul>
+                            <li>Print - Generate printable invoice</li>
+                            <li>Edit - Modify order details</li>
+                            <li>Remove - Delete the order</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>6. Calculations</h3>
+                <ul>
+                    <li>Sub Total: Sum of all line items</li>
+                    <li>VAT: 15% of sub total</li>
+                    <li>Total Amount: Sub total + VAT</li>
+                    <li>Grand Total: Same as Total Amount</li>
+                </ul>
+
+                <div class="doc-note">
+                    <strong>Note:</strong> All monetary values are automatically formatted to 2 decimal places for consistency.
+                </div>
+
+                <h3>7. Error Handling</h3>
+                <ul>
+                    <li>DataTable initialization errors are prevented through proper instance management</li>
+                    <li>Payment status defaults to "No Payment" if invalid status is received</li>
+                    <li>Table automatically handles empty data sets</li>
+                </ul>
+
+                <h3>8. Future Improvements</h3>
+                <ul>
+                    <li>Add bulk actions for multiple orders</li>
+                    <li>Implement advanced filtering options</li>
+                    <li>Add export functionality for order data</li>
+                    <li>Implement order status tracking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

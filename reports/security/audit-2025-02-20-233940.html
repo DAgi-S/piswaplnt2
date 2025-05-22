@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Audit Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #2c3e50; }
+        .critical { color: #e74c3c; }
+        .warning { color: #f39c12; }
+        .recommendation { color: #27ae60; }
+        .finding { margin: 20px 0; padding: 15px; border-radius: 5px; }
+        .critical-finding { background-color: #fadbd8; }
+        .warning-finding { background-color: #fef9e7; }
+        .recommendation-item { background-color: #eafaf1; }
+    </style>
+</head>
+<body>
+    <h1>Security Audit Report</h1>
+    <p>Generated on: 2025-02-20 23:39:40</p>
+    
+    <h2>Summary</h2>
+    <p>Critical Issues: <span class="critical">5</span></p>
+    <p>Warnings: <span class="warning">1</span></p>
+    
+    <h2>Findings</h2>
+    <div class="finding critical-finding">
+        <h3>JWT Configuration - <span class="critical">Critical</span></h3>
+        <p><strong>Issue:</strong> JWT secret key is not properly configured</p>
+        <p><strong>Recommendation:</strong> Configure JWT_SECRET_KEY with a strong, unique key</p>
+    </div>
+    <div class="finding critical-finding">
+        <h3>Authentication Security - <span class="critical">Critical</span></h3>
+        <p><strong>Issue:</strong> CSRF protection is disabled</p>
+        <p><strong>Recommendation:</strong> Enable CSRF protection by setting JWT_CSRF_ENABLED to true</p>
+    </div>
+    <div class="finding warning-finding">
+        <h3>Authentication Security - <span class="warning">Warning</span></h3>
+        <p><strong>Issue:</strong> Rate limiting threshold is too high</p>
+        <p><strong>Recommendation:</strong> Reduce JWT_RATE_LIMIT_ATTEMPTS to 5-10 attempts</p>
+    </div>
+    <div class="finding critical-finding">
+        <h3>WebSocket Security - <span class="critical">Critical</span></h3>
+        <p><strong>Issue:</strong> WebSocket connections are not secure</p>
+        <p><strong>Recommendation:</strong> Enable WSS by setting WS_SECURE to true</p>
+    </div>
+    <div class="finding critical-finding">
+        <h3>Data Protection - <span class="critical">Critical</span></h3>
+        <p><strong>Issue:</strong> Refresh token cookies are not secure</p>
+        <p><strong>Recommendation:</strong> Enable secure cookies by setting JWT_REFRESH_COOKIE_SECURE to true</p>
+    </div>
+    <div class="finding critical-finding">
+        <h3>Data Protection - <span class="critical">Critical</span></h3>
+        <p><strong>Issue:</strong> Refresh token cookies are not HTTP-only</p>
+        <p><strong>Recommendation:</strong> Enable HTTP-only cookies by setting JWT_REFRESH_COOKIE_HTTPONLY to true</p>
+    </div>
+    <h2>Recommendations</h2>
+    <div class="finding recommendation-item">
+        <h3>Security Headers</h3>
+        <p><strong>Ensure Strict-Transport-Security header is properly configured</strong></p>
+        <p>Add appropriate value for Strict-Transport-Security header in all responses</p>
+    </div>
+    <div class="finding recommendation-item">
+        <h3>Security Headers</h3>
+        <p><strong>Ensure X-Frame-Options header is properly configured</strong></p>
+        <p>Add appropriate value for X-Frame-Options header in all responses</p>
+    </div>
+    <div class="finding recommendation-item">
+        <h3>Security Headers</h3>
+        <p><strong>Ensure X-Content-Type-Options header is properly configured</strong></p>
+        <p>Add appropriate value for X-Content-Type-Options header in all responses</p>
+    </div>
+    <div class="finding recommendation-item">
+        <h3>Security Headers</h3>
+        <p><strong>Ensure X-XSS-Protection header is properly configured</strong></p>
+        <p>Add appropriate value for X-XSS-Protection header in all responses</p>
+    </div>
+    <div class="finding recommendation-item">
+        <h3>Security Headers</h3>
+        <p><strong>Ensure Content-Security-Policy header is properly configured</strong></p>
+        <p>Add appropriate value for Content-Security-Policy header in all responses</p>
+    </div>
+</body>
+</html>

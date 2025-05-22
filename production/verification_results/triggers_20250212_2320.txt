@@ -1,0 +1,7 @@
+TRIGGER_NAME	EVENT_MANIPULATION	ACTION_TIMING	TRIGGER_SCHEMA
+after_digitalswap_delete	DELETE	AFTER	pistocklnt
+after_digitalswap_insert	INSERT	AFTER	pistocklnt
+prevent_negative_stock	UPDATE	BEFORE	pistocklnt
+production_orders_after_update	UPDATE	AFTER	pistocklnt
+production_order_materials_before_insert	INSERT	BEFORE	pistocklnt
+validate_stock_movement	INSERT	BEFORE	pistocklnt

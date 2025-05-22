@@ -1,0 +1,18 @@
+[Unit]
+Description=Production System WebSocket Server (Staging)
+After=network.target redis-server.service mysql.service
+Requires=redis-server.service mysql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/staging.pistocklnt.lebawi.net
+ExecStart=/usr/bin/php php_action/websocket_server.php --env=staging
+Restart=always
+RestartSec=3
+StandardOutput=append:/var/log/websocket-staging.log
+StandardError=append:/var/log/websocket-staging.error.log
+
+[Install]
+WantedBy=multi-user.target 

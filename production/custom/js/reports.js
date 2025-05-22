@@ -1,0 +1,252 @@
+$(document).ready(function() {
+    let currentReport = null;
+    let currentReportData = null;
+
+    // Handle report selection
+    $('.list-group-item').click(function(e) {
+        e.preventDefault();
+        $('.list-group-item').removeClass('active');
+        $(this).addClass('active');
+        
+        const reportType = $(this).data('report');
+        loadReport(reportType);
+    });
+
+    // Load report data
+    function loadReport(reportType) {
+        currentReport = reportType;
+        
+        $.ajax({
+            url: 'php_action/generateReport.php',
+            type: 'POST',
+            data: { 
+                report_type: reportType,
+                format: 'html'
+            },
+            beforeSend: function() {
+                $('#reportData').html('<div class="text-center"><i class="fas fa-spinner fa-spin fa-3x"></i></div>');
+            },
+            success: function(response) {
+                if (response.status) {
+                    currentReportData = response.data;
+                    $('#reportTitle').text(response.title);
+                    $('#printReportTitle').text(response.title);
+                    displayReport(response.data, reportType);
+                } else {
+                    showErrorMessage(response.message);
+                }
+            },
+            error: function() {
+                showErrorMessage('Failed to generate report. Please try again.');
+            }
+        });
+    }
+
+    // Display report data in table format
+    function displayReport(data, reportType) {
+        if (!data || data.length === 0) {
+            $('#reportData').html('<div class="alert alert-info">No data available for this report.</div>');
+            return;
+        }
+
+        if (reportType === 'production_summary') {
+            displayProductionReport(data);
+            return;
+        }
+
+        let html = '<div class="table-responsive"><table class="table table-bordered table-striped">';
+        
+        // Add headers
+        html += '<thead><tr>';
+        Object.keys(data[0]).forEach(key => {
+            html += `<th>${formatHeader(key)}</th>`;
+        });
+        html += '</tr></thead>';
+        
+        // Add data
+        html += '<tbody>';
+        data.forEach(row => {
+            html += '<tr>';
+            Object.values(row).forEach(value => {
+                html += `<td>${formatValue(value)}</td>`;
+            });
+            html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        
+        $('#reportData').html(html);
+    }
+
+    // Display production report with template
+    function displayProductionReport(data) {
+        let html = `
+            <div class="production-template">
+                <div class="report-header">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2>TO DREAM</h2>
+                            <p>Daily Production Report</p>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <p>Date: ${new Date().toLocaleDateString()}</p>
+                            <p>Time: ${new Date().toLocaleTimeString()}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Product Name</th>
+                            <th>Target Qty</th>
+                            <th>Completed Qty</th>
+                            <th>Status</th>
+                            <th>Quality Check</th>
+                            <th>Production Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+        data.forEach(row => {
+            html += `
+                <tr>
+                    <td>${row.order_number}</td>
+                    <td>${row.product_name}</td>
+                    <td>${formatValue(row.target_quantity)}</td>
+                    <td>${formatValue(row.completed_quantity)}</td>
+                    <td>${formatValue(row.status)}</td>
+                    <td>Pass: ${formatValue(row.passed_qty)}<br>Fail: ${formatValue(row.failed_qty)}</td>
+                    <td>${formatValue(row.production_date)}</td>
+                </tr>`;
+        });
+
+        html += `
+                    </tbody>
+                </table>
+
+                <div class="row mt-4">
+                    <div class="col-xs-6">
+                        <p><strong>Total Orders:</strong> ${data.length}</p>
+                        <p><strong>Total Production:</strong> ${data.reduce((sum, row) => sum + Number(row.completed_quantity), 0)}</p>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <p><strong>Generated by:</strong> ${$('#user').text() || 'System User'}</p>
+                        <p><strong>Generated on:</strong> ${new Date().toLocaleString()}</p>
+                    </div>
+                </div>
+            </div>`;
+
+        $('#reportData').html(html);
+    }
+
+    // Format header text
+    function formatHeader(text) {
+        return text
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    // Format cell value
+    function formatValue(value) {
+        if (value === null || value === undefined) {
+            return '-';
+        }
+        if (typeof value === 'number') {
+            // Format numbers with 2 decimal places if they have decimals
+            return Number.isInteger(value) ? value : value.toFixed(2);
+        }
+        if (typeof value === 'boolean') {
+            return value ? 'Yes' : 'No';
+        }
+        return value;
+    }
+
+    // Print report
+    $('#printReport').click(function() {
+        if (!currentReport || !currentReportData) {
+            showErrorMessage('Please generate a report first');
+            return;
+        }
+
+        // Update print header information
+        $('#reportDate').text(new Date().toLocaleString());
+        window.print();
+    });
+
+    // Export to PDF
+    $('#exportPdf').click(function() {
+        if (!currentReport || !currentReportData) {
+            showErrorMessage('Please generate a report first');
+            return;
+        }
+
+        $.ajax({
+            url: 'php_action/generateReport.php',
+            type: 'POST',
+            data: {
+                report_type: currentReport,
+                format: 'pdf'
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(blob) {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentReport}_report.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            },
+            error: function() {
+                showErrorMessage('Failed to generate PDF. Please try again.');
+            }
+        });
+    });
+
+    // Export to Excel
+    $('#exportExcel').click(function() {
+        if (!currentReport || !currentReportData) {
+            showErrorMessage('Please generate a report first');
+            return;
+        }
+
+        $.ajax({
+            url: 'php_action/generateReport.php',
+            type: 'POST',
+            data: {
+                report_type: currentReport,
+                format: 'excel'
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(blob) {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentReport}_report.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            },
+            error: function() {
+                showErrorMessage('Failed to generate Excel file. Please try again.');
+            }
+        });
+    });
+
+    // Show error message
+    function showErrorMessage(message) {
+        $('#reportData').html(`
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i> ${message}
+            </div>
+        `);
+    }
+}); 

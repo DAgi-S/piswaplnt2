@@ -1,0 +1,129 @@
+/* Report Styles */
+.report-container {
+    padding: 20px;
+}
+
+.report-header {
+    margin-bottom: 30px;
+}
+
+.report-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.production-template {
+    padding: 20px;
+}
+
+.production-template .report-header h2 {
+    color: #333;
+    margin: 0;
+    font-size: 28px;
+}
+
+.production-template .table {
+    margin-top: 20px;
+}
+
+.production-template .table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Print Styles */
+@media print {
+    /* Hide non-printable elements */
+    .no-print,
+    .sidebar,
+    .navbar,
+    .page-header,
+    .btn,
+    .list-group {
+        display: none !important;
+    }
+
+    /* Show print-only elements */
+    .print-only {
+        display: block !important;
+    }
+
+    /* Reset body padding and margins */
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Full width container */
+    .container-fluid {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Report header styling */
+    .report-header {
+        border-bottom: 2px solid #333;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* Table styles for printing */
+    .table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    .table th,
+    .table td {
+        background-color: #fff !important;
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+    }
+
+    .table th {
+        font-weight: bold !important;
+    }
+
+    /* Production report specific print styles */
+    .production-template {
+        padding: 0 !important;
+    }
+
+    .production-template .report-header {
+        margin-bottom: 30px !important;
+    }
+
+    .production-template .table {
+        margin-top: 20px !important;
+        page-break-inside: auto !important;
+    }
+
+    .production-template tr {
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
+    }
+
+    .production-template th {
+        background-color: #f5f5f5 !important;
+    }
+
+    /* Footer styles */
+    .report-footer {
+        margin-top: 30px;
+        border-top: 1px solid #ddd;
+        padding-top: 15px;
+    }
+
+    /* Page break control */
+    .page-break {
+        page-break-before: always;
+    }
+
+    /* Ensure background colors and images print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+} 

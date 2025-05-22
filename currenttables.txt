@@ -1,0 +1,100 @@
+DATABASE STRUCTURE SUMMARY
+============================
+
+1. PURCHASE SYSTEM TABLES
+------------------------
+suppliers
+- id (INT, PK, AUTO_INCREMENT)
+- company_name (VARCHAR 255)
+- contact_person (VARCHAR 255)
+- phone (VARCHAR 50)
+- address (TEXT)
+- email (VARCHAR 255)
+- active (INT, Default 1)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+purchases
+- id (INT, PK, AUTO_INCREMENT)
+- purchase_number (VARCHAR 50)
+- supplier_id (INT, FK -> suppliers.id)
+- purchase_date (DATE)
+- sub_total (DECIMAL 25,2)
+- vat (DECIMAL 25,2)
+- grand_total (DECIMAL 25,2)
+- payment_status (VARCHAR 20, Default 'Unpaid')
+- paid_amount (DECIMAL 25,2, Default 0.00)
+- note (TEXT)
+- status (INT, Default 0)
+- active (INT, Default 1)
+- created_by (INT, FK -> users.id)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+- withholding_tax_enabled (TINYINT, Default 0)
+- withholding_tax_amount (DECIMAL 25,2, Default 0.00)
+
+purchase_items
+- id (INT, PK, AUTO_INCREMENT)
+- purchase_id (INT, FK -> purchases.id)
+- product_id (INT, FK -> raw_materials.id)
+- quantity (INT)
+- rate (DECIMAL 25,2)
+- total (DECIMAL 25,2)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+2. SALES SYSTEM TABLES
+------------------------
+clients
+- id (INT, PK, AUTO_INCREMENT)
+- company_name (VARCHAR 255)
+- tin_number (VARCHAR 50)
+- address (TEXT)
+- phone (VARCHAR 50)
+- email (VARCHAR 100)
+- status (TINYINT)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+3. INVENTORY TABLES
+------------------------
+raw_materials
+- id (INT, PK, AUTO_INCREMENT)
+- name (VARCHAR 255)
+- code (VARCHAR 50)
+- description (TEXT)
+- current_stock (DECIMAL 10,2)
+- minimum_stock (DECIMAL 10,2)
+- unit (VARCHAR 20)
+- price (DECIMAL 10,2)
+- status (TINYINT)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+4. USER MANAGEMENT
+------------------------
+users
+- id (INT, PK, AUTO_INCREMENT)
+- username (VARCHAR 255)
+- password (VARCHAR 255)
+- email (VARCHAR 255)
+- role (VARCHAR 50)
+- status (TINYINT)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+RELATIONSHIPS
+============================
+1. purchases.supplier_id -> suppliers.id
+2. purchases.created_by -> users.id
+3. purchase_items.purchase_id -> purchases.id
+4. purchase_items.product_id -> raw_materials.id
+
+NOTES
+============================
+- PK = Primary Key
+- FK = Foreign Key
+- All TIMESTAMP fields default to CURRENT_TIMESTAMP
+- updated_at fields automatically update on record modification
+- Status fields: 0 = Inactive, 1 = Active (unless otherwise specified)
+- Payment status: 'Unpaid', 'Partial', 'Paid'

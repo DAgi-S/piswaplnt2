@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Swap Module Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+            --doc-spacing: 2rem;
+            --content-max-width: 1200px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <div class="content-wrapper">
+                <h1>Digital Swap Module Documentation</h1>
+                
+                <h2>Overview</h2>
+                <p>The Digital Swap module manages digital currency transactions between different accounts and platforms. It supports both deposits and withdrawals, with comprehensive tracking and reporting capabilities.</p>
+
+                <h2>Database Structure</h2>
+                <h3>Tables</h3>
+                <h4>1. digital_swaps</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>INT</td>
+                            <td>Primary key, auto-increment</td>
+                        </tr>
+                        <tr>
+                            <td>transaction_date</td>
+                            <td>DATE</td>
+                            <td>Date of the transaction</td>
+                        </tr>
+                        <tr>
+                            <td>type</td>
+                            <td>VARCHAR(50)</td>
+                            <td>Transaction type (deposit/withdraw)</td>
+                        </tr>
+                        <tr>
+                            <td>account_id</td>
+                            <td>INT</td>
+                            <td>Foreign key to accounts table</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>VARCHAR(255)</td>
+                            <td>Name of the transaction</td>
+                        </tr>
+                        <tr>
+                            <td>platform</td>
+                            <td>VARCHAR(100)</td>
+                            <td>Platform used for the transaction</td>
+                        </tr>
+                        <tr>
+                            <td>amount</td>
+                            <td>DECIMAL(15,2)</td>
+                            <td>Transaction amount</td>
+                        </tr>
+                        <tr>
+                            <td>comment</td>
+                            <td>TEXT</td>
+                            <td>Additional notes about the transaction</td>
+                        </tr>
+                        <tr>
+                            <td>status</td>
+                            <td>TINYINT</td>
+                            <td>Transaction status (1: Active, 0: Inactive)</td>
+                        </tr>
+                        <tr>
+                            <td>created_at</td>
+                            <td>TIMESTAMP</td>
+                            <td>Record creation timestamp</td>
+                        </tr>
+                        <tr>
+                            <td>updated_at</td>
+                            <td>TIMESTAMP</td>
+                            <td>Last update timestamp</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Features</h2>
+                <h3>1. Transaction Management</h3>
+                <ul>
+                    <li>Create new digital swap transactions</li>
+                    <li>Edit existing transactions</li>
+                    <li>Delete transactions</li>
+                    <li>View transaction details</li>
+                </ul>
+
+                <h3>2. Digital Swap Report</h3>
+                <p>The Digital Swap Report provides a comprehensive view of transactions within a specified date range.</p>
+                
+                <h4>Report Features:</h4>
+                <ul>
+                    <li>Date range selection (Start Date and End Date)</li>
+                    <li>Account filtering</li>
+                    <li>Transaction type filtering (All Types/Deposit/Withdraw)</li>
+                    <li>Email report functionality</li>
+                </ul>
+
+                <h4>Report Columns:</h4>
+                <ul>
+                    <li>Transaction Date</li>
+                    <li>Type (Deposit/Withdraw)</li>
+                    <li>Name</li>
+                    <li>Platform</li>
+                    <li>Account</li>
+                    <li>Amount</li>
+                    <li>Comment</li>
+                </ul>
+
+                <h4>Report Totals:</h4>
+                <ul>
+                    <li>Total Deposits</li>
+                    <li>Total Withdrawals</li>
+                    <li>Net Balance</li>
+                </ul>
+
+                <div class="note">
+                    <strong>Important Update (2024):</strong>
+                    <ul>
+                        <li>Reports now use transaction_date instead of created_at for date filtering</li>
+                        <li>Enhanced report generation with responsive table design</li>
+                        <li>Added support for email report delivery</li>
+                        <li>Improved date range filtering accuracy</li>
+                    </ul>
+                </div>
+
+                <h2>API Endpoints</h2>
+                <h3>1. Get Digital Swap Report</h3>
+                <p>Endpoint: <code>php_action/getDigitalSwapReport.php</code></p>
+                <p>Method: POST</p>
+                <p>Parameters:</p>
+                <ul>
+                    <li>startDate (required): Start date for report period (YYYY-MM-DD)</li>
+                    <li>endDate (required): End date for report period (YYYY-MM-DD)</li>
+                    <li>type (optional): Transaction type filter (deposit/withdraw)</li>
+                    <li>accountId (optional): Specific account ID to filter</li>
+                </ul>
+                <p>Response:</p>
+                <div class="code">
+                {
+                    "success": true,
+                    "html": "HTML content of the report",
+                    "styles": "CSS styles for the report"
+                }
+                </div>
+
+                <h3>2. Send Digital Swap Report</h3>
+                <p>Endpoint: <code>php_action/sendDigitalSwapReport.php</code></p>
+                <p>Method: POST</p>
+                <p>Parameters:</p>
+                <ul>
+                    <li>startDate (required): Start date for report period</li>
+                    <li>endDate (required): End date for report period</li>
+                    <li>email (required): Email address to send the report to</li>
+                    <li>type (optional): Transaction type filter</li>
+                    <li>accountId (optional): Account filter</li>
+                </ul>
+                <p>Response:</p>
+                <div class="code">
+                {
+                    "success": true,
+                    "messages": "Report sent successfully",
+                    "debug": [] // Debug information if enabled
+                }
+                </div>
+
+                <h2>Security Considerations</h2>
+                <ul>
+                    <li>All database queries use prepared statements to prevent SQL injection</li>
+                    <li>Input validation is performed on all form submissions</li>
+                    <li>Email functionality uses secure SMTP settings</li>
+                    <li>Access control is implemented through user roles and permissions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

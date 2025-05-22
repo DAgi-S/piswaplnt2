@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Management - PiStockInt</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <style>
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
+        }
+        .summary-card {
+            border-left: 4px solid;
+        }
+        .summary-card.primary { border-left-color: #0d6efd; }
+        .summary-card.success { border-left-color: #198754; }
+        .summary-card.warning { border-left-color: #ffc107; }
+        .summary-card.info { border-left-color: #0dcaf0; }
+        .table-responsive {
+            margin: 1rem 0;
+        }
+        .status-badge {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .btn-icon {
+            padding: 0.25rem 0.5rem;
+            margin: 0 0.125rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-cart-fill text-primary"></i> Purchase Management</h2>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">
+            <i class="bi bi-plus-circle"></i> New Purchase Order
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card primary">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Purchases (This Month)</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">$45,250</h3>
+                        <span class="ms-2 text-success"><i class="bi bi-arrow-up"></i> 12.5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card success">
+                <div class="card-body">
+                    <h6 class="text-muted">Pending Orders</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">23</h3>
+                        <span class="ms-2 text-warning"><i class="bi bi-clock"></i> Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card warning">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Suppliers</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">156</h3>
+                        <span class="ms-2 text-primary"><i class="bi bi-people"></i> Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card summary-card info">
+                <div class="card-body">
+                    <h6 class="text-muted">Pending Payments</h6>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">$12,450</h3>
+                        <span class="ms-2 text-danger"><i class="bi bi-exclamation-circle"></i> Due</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Status Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-info-circle"></i> System Status & Analysis</h5>
+            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#systemStatusContent">
+                <i class="bi bi-chevron-down"></i>
+            </button>
+        </div>
+        <div class="collapse show" id="systemStatusContent">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Database Structure -->
+                    <div class="col-md-6 mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-database"></i> Database Structure Analysis</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>suppliers</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Supplier management with contact info</td>
+                                    </tr>
+                                    <tr>
+                                        <td>purchases</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Purchase orders with tax handling</td>
+                                    </tr>
+                                    <tr>
+                                        <td>purchase_items</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Purchase order line items</td>
+                                    </tr>
+                                    <tr>
+                                        <td>raw_materials</td>
+                                        <td><span class="badge bg-success">Exists</span></td>
+                                        <td>Connected to purchase system</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Functionality Status -->
+                    <div class="col-md-6 mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-gear"></i> Functionality Status</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Supplier Management
+                                <span class="badge bg-success rounded-pill">Implemented</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Purchase Order Processing
+                                <span class="badge bg-success rounded-pill">Implemented</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Raw Material Tracking
+                                <span class="badge bg-success rounded-pill">Implemented</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Payment Processing
+                                <span class="badge bg-warning rounded-pill">Partial</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Required Actions -->
+                    <div class="col-md-12">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-check2-square"></i> Current Database Schema</h6>
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading">Existing Table Structures:</h6>
+                            <pre class="mb-0"><code>
+-- Existing suppliers table
+CREATE TABLE suppliers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    company_name VARCHAR(255),
+    contact_person VARCHAR(255),
+    phone VARCHAR(50),
+    address TEXT,
+    active INT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+-- Existing purchases table
+CREATE TABLE purchases (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    purchase_number VARCHAR(50),
+    supplier_id INT,
+    purchase_date DATE,
+    sub_total DECIMAL(25,2),
+    vat DECIMAL(25,2),
+    grand_total DECIMAL(25,2),
+    note TEXT,
+    payment_status VARCHAR(20),
+    paid_amount DECIMAL(25,2),
+    status INT,
+    active INT,
+    created_by INT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    withholding_tax_enabled TINYINT,
+    withholding_tax_amount DECIMAL(25,2)
+);
+
+-- Existing purchase_items table
+CREATE TABLE purchase_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    purchase_id INT,
+    product_id INT,
+    quantity INT,
+    rate DECIMAL(25,2),
+    total DECIMAL(25,2),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Tabs -->
+    <ul class="nav nav-tabs mb-4" id="purchaseTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="purchases-tab" data-bs-toggle="tab" href="#purchases" role="tab">
+                <i class="bi bi-list-check"></i> Purchase Orders
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="suppliers-tab" data-bs-toggle="tab" href="#suppliers" role="tab">
+                <i class="bi bi-building"></i> Suppliers
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="materials-tab" data-bs-toggle="tab" href="#materials" role="tab">
+                <i class="bi bi-box-seam"></i> Materials
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="system-status-tab" data-bs-toggle="tab" href="#system-status" role="tab">
+                <i class="bi bi-info-circle"></i> System Status
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="purchaseTabContent">
+        <!-- Purchase Orders Tab -->
+        <div class="tab-pane fade show active" id="purchases" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="purchaseOrdersTable">
+                            <thead>
+                                <tr>
+                                    <th>PO Number</th>
+                                    <th>Supplier</th>
+                                    <th>Date</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PO-2024-001</td>
+                                    <td>ABC Suppliers</td>
+                                    <td>2024-02-15</td>
+                                    <td>$2,500.00</td>
+                                    <td><span class="badge bg-warning status-badge">Pending</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-icon btn-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-success"><i class="bi bi-check2"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-danger"><i class="bi bi-x"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- More rows will be added dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suppliers Tab -->
+        <div class="tab-pane fade" id="suppliers" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addSupplierModal">
+                        <i class="bi bi-plus-circle"></i> Add New Supplier
+                    </button>
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="suppliersTable">
+                            <thead>
+                                <tr>
+                                    <th>Supplier ID</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SUP-001</td>
+                                    <td>ABC Suppliers</td>
+                                    <td>John Doe</td>
+                                    <td>john@abcsuppliers.com</td>
+                                    <td><span class="badge bg-success status-badge">Active</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-icon btn-primary"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-sm btn-icon btn-danger"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- More rows will be added dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Materials Tab -->
+        <div class="tab-pane fade" id="materials" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="materialsTable">
+                            <thead>
+                                <tr>
+                                    <th>Material Code</th>
+                                    <th>Name</th>
+                                    <th>Last Purchase Date</th>
+                                    <th>Last Purchase Price</th>
+                                    <th>Current Stock</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MAT-001</td>
+                                    <td>Raw Material A</td>
+                                    <td>2024-02-10</td>
+                                    <td>$150.00</td>
+                                    <td>500 units</td>
+                                    <td><span class="badge bg-success status-badge">In Stock</span></td>
+                                </tr>
+                                <!-- More rows will be added dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status Tab -->
+        <div class="tab-pane fade" id="system-status" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Purchase Module Implementation Status</h5>
+                    
+                    <!-- Database Structure -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-database"></i> Database Structure</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>purchases</td>
+                                        <td><span class="badge bg-success">Implemented</span></td>
+                                        <td>Main purchase orders table with tax handling</td>
+                                    </tr>
+                                    <tr>
+                                        <td>purchase_items</td>
+                                        <td><span class="badge bg-warning">Updated</span></td>
+                                        <td>Changed from product_id to raw_material_id</td>
+                                    </tr>
+                                    <tr>
+                                        <td>suppliers</td>
+                                        <td><span class="badge bg-success">Implemented</span></td>
+                                        <td>Supplier management with contact info</td>
+                                    </tr>
+                                    <tr>
+                                        <td>raw_materials</td>
+                                        <td><span class="badge bg-success">Connected</span></td>
+                                        <td>Linked to purchase system</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Implemented Files -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-file-code"></i> Implemented Files</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-muted">PHP Files</h6>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        createPurchase.php
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        createSupplier.php
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        fetchRawMaterialsForSelect.php
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        fetchSuppliers.php
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted">JavaScript/Frontend Files</h6>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        purchase.js
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        purchase.html
+                                        <span class="badge bg-success">Implemented</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Features -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-check2-square"></i> Implemented Features</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Purchase Order Creation
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Supplier Management
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Raw Material Selection
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Tax Handling (VAT & Withholding)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Stock Updates
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Movement Tracking
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Quick Add Supplier
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i> Dynamic Calculations
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Known Issues -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-exclamation-triangle"></i> Current Issues & Solutions</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Issue</th>
+                                        <th>Status</th>
+                                        <th>Solution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Foreign Key Constraint Error</td>
+                                        <td><span class="badge bg-success">Fixed</span></td>
+                                        <td>Updated purchase_items table structure to use raw_material_id</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Raw Material Selection</td>
+                                        <td><span class="badge bg-success">Fixed</span></td>
+                                        <td>Created dedicated API for raw material selection</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Stock Movement Tracking</td>
+                                        <td><span class="badge bg-success">Implemented</span></td>
+                                        <td>Added movement records in raw_material_movements table</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- API Documentation -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-code-square"></i> API Documentation</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Endpoint</th>
+                                        <th>Method</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>/createPurchase.php</td>
+                                        <td>POST</td>
+                                        <td>Creates new purchase order with items</td>
+                                    </tr>
+                                    <tr>
+                                        <td>/createSupplier.php</td>
+                                        <td>POST</td>
+                                        <td>Adds new supplier record</td>
+                                    </tr>
+                                    <tr>
+                                        <td>/fetchRawMaterialsForSelect.php</td>
+                                        <td>POST</td>
+                                        <td>Retrieves raw materials for dropdown</td>
+                                    </tr>
+                                    <tr>
+                                        <td>/fetchSuppliers.php</td>
+                                        <td>POST</td>
+                                        <td>Retrieves supplier list</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Next Steps -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2"><i class="bi bi-arrow-right-circle"></i> Next Steps</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <i class="bi bi-1-circle"></i> Implement purchase order editing functionality
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-2-circle"></i> Add payment tracking system
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-3-circle"></i> Implement purchase order approval workflow
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-4-circle"></i> Add detailed purchase reports
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Purchase Modal -->
+<div class="modal fade" id="addPurchaseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Purchase Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="purchaseOrderForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Supplier</label>
+                            <select class="form-select" required>
+                                <option value="">Select Supplier</option>
+                                <option value="1">ABC Suppliers</option>
+                                <option value="2">XYZ Corporation</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Purchase Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6>Order Items</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="orderItemsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-select">
+                                                <option value="">Select Material</option>
+                                                <option value="1">Raw Material A</option>
+                                                <option value="2">Raw Material B</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" class="form-control" min="1"></td>
+                                        <td><input type="number" class="form-control" step="0.01" min="0"></td>
+                                        <td>$0.00</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-secondary" id="addItemRow">
+                            <i class="bi bi-plus-circle"></i> Add Item
+                        </button>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Payment Terms</label>
+                            <select class="form-select">
+                                <option value="immediate">Immediate</option>
+                                <option value="net30">Net 30</option>
+                                <option value="net60">Net 60</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Expected Delivery Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create Purchase Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Supplier Modal -->
+<div class="modal fade" id="addSupplierModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Supplier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="supplierForm">
+                    <div class="mb-3">
+                        <label class="form-label">Supplier Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contact Person</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Terms</label>
+                        <select class="form-select">
+                            <option value="immediate">Immediate Payment</option>
+                            <option value="net30">Net 30</option>
+                            <option value="net60">Net 60</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add Supplier</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Required JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Initialize DataTables
+    $('#purchaseOrdersTable').DataTable({
+        order: [[2, 'desc']], // Sort by date by default
+        pageLength: 10
+    });
+    
+    $('#suppliersTable').DataTable({
+        pageLength: 10
+    });
+    
+    $('#materialsTable').DataTable({
+        pageLength: 10
+    });
+
+    // Add new item row in purchase order
+    $('#addItemRow').click(function() {
+        const newRow = $('#orderItemsTable tbody tr:first').clone();
+        newRow.find('input').val('');
+        newRow.find('select').val('');
+        $('#orderItemsTable tbody').append(newRow);
+    });
+
+    // Calculate totals when quantity or price changes
+    $(document).on('change', '#orderItemsTable input', function() {
+        const row = $(this).closest('tr');
+        const quantity = parseFloat(row.find('input[type="number"]:first').val()) || 0;
+        const price = parseFloat(row.find('input[type="number"]:last').val()) || 0;
+        const total = quantity * price;
+        row.find('td:nth-last-child(2)').text('$' + total.toFixed(2));
+    });
+
+    // Remove item row
+    $(document).on('click', '#orderItemsTable .btn-danger', function() {
+        if ($('#orderItemsTable tbody tr').length > 1) {
+            $(this).closest('tr').remove();
+        }
+    });
+});
+</script>
+
+</body>
+</html> 

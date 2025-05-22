@@ -1,0 +1,55 @@
+
+here are the category tables and structures 
+
+categories
+ category_id 	name 	type 	description 	status 	deleted 	created_at 	updated_at 
+
+digital_categories	
+ category_id 	category_name 	description 	created_at 	updated_at 	
+
+payment_categories
+id 	name 	description 	type 	status 	created_at 	updated_at 	
+
+production_categories
+ id 	name 	description 	status(enum('active', 'inactive')) 	created_at 	updated_at 	created_by 	
+
+raw_material_categories
+ id 	name 	description 	status 	created_at 	updated_at 	created_by 
+
+system_config_categories
+ category_id 	category_name 	description 	display_order 	created_at 	updated_at 	
+
+
+
+
+brand tables structures
+
+brands
+ 	brand_id 	name 	description 	status 	deleted 	created_at 	updated_at 	
+
+production_brands
+ id 	name 	description 	status 	created_at 	updated_at 	created_by 	
+	
+
+
+    the table structure of units is 
+units
+	id 	name 	abbreviation 	description 	status 	deleted 	created_at 	updated_at 	
+
+
+tax_rates
+ id 	name 	rate 	type 	status 	deleted 	created_at 	updated_at 	
+
+
+currency_settings
+id 	currency_code 	currency_symbol 	currency_position 	thousand_separator 	decimal_separator 	decimals 	status 	is_default 	created_at 	updated_at 	
+
+
+activity_log
+ 	log_id 	user_id 	action 	module 	reference_id 	created_at 	
+
+audit_log
+ id 	user_id 	activity_type 	description 	old_value 	new_value 	ip_address 	reference_id 	timestamp 	
+
+print_settings
+ id 	template_name 	page_size 	orientation 	margin_top 	margin_right 	margin_bottom 	margin_left 	font_family 	font_size 	header_alignment 	logo_path 	logo_width 	footer_text 	created_at created_by	updated_at 	

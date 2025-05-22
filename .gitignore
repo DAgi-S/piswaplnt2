@@ -1,0 +1,73 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Environment files
+.env
+*.env
+config.php
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Uploads and user content
+uploads/
+user_content/
+
+# Cache
+cache/
+*.cache
+
+# Build output
+dist/
+build/
+out/
+
+# PHP specific
+composer.lock
+*.log
+php_errors.log
+
+# Environment files
+.env.local
+.env.*.local
+
+# Temporary files
+*.swo
+
+# Upload directory
+/uploads/*
+!/uploads/.gitkeep
+
+# Cache and session files
+/cache/*
+/sessions/*
+
+# Configuration files with sensitive data
+database.php 

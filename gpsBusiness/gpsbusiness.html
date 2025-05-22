@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPS Business Management System Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .module {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .features {
+            margin-left: 20px;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPS Business Management System</h1>
+    <p>A comprehensive system for managing GPS business operations including payments, sales, expenses, profit tracking, and payment follow-ups.</p>
+
+    <h2>System Architecture</h2>
+    <div class="module">
+        <h3>Directory Structure</h3>
+        <pre>
+gpsBusiness/
+├── includes/
+│   ├── header.php
+│   └── footer.php
+├── php_action/
+│   ├── db_connect.php
+│   ├── core.php
+│   └── [action files for each module]
+├── js/
+│   ├── gps_payments.js
+│   ├── gps_sales.js
+│   ├── gps_expenses.js
+│   ├── gps_profit.js
+│   └── gps_payment_followup.js
+└── [main module files]</pre>
+    </div>
+
+    <h2>Modules</h2>
+
+    <div class="module">
+        <h3>1. GPS Payments Module</h3>
+        <p>Manages GPS device payments and purchases.</p>
+        <ul class="features">
+            <li>Track payment dates, amounts, and currencies (ETB/USD)</li>
+            <li>Record payment details including paid by, paid for, and platform</li>
+            <li>Handle payment rates and total calculations</li>
+            <li>Support for payment image attachments</li>
+            <li>Credit tracking functionality</li>
+        </ul>
+    </div>
+
+    <div class="module">
+        <h3>2. GPS Sales Module</h3>
+        <p>Handles GPS device sales transactions.</p>
+        <ul class="features">
+            <li>Record customer information</li>
+            <li>Track sales in multiple currencies</li>
+            <li>Calculate total prices with exchange rates</li>
+            <li>Platform-specific sales tracking</li>
+            <li>Sales history and reporting</li>
+        </ul>
+    </div>
+
+    <div class="module">
+        <h3>3. GPS Expenses Module</h3>
+        <p>Manages operational expenses related to GPS business.</p>
+        <ul class="features">
+            <li>Categorize expenses by type</li>
+            <li>Track expense dates and amounts</li>
+            <li>Add detailed expense descriptions</li>
+            <li>Expense history and reporting</li>
+        </ul>
+    </div>
+
+    <div class="module">
+        <h3>4. GPS Profit Module</h3>
+        <p>Tracks and calculates business profitability.</p>
+        <ul class="features">
+            <li>Automatic profit calculations</li>
+            <li>Track total purchases, sales, and credits</li>
+            <li>Include expenses in profit calculations</li>
+            <li>Historical profit tracking</li>
+            <li>Profit analysis and reporting</li>
+        </ul>
+    </div>
+
+    <div class="module">
+        <h3>5. Payment Follow-up Module</h3>
+        <p>Manages payment tracking and follow-ups.</p>
+        <ul class="features">
+            <li>Track payment status and history</li>
+            <li>Record transfer details and banking information</li>
+            <li>Support for payment proof images</li>
+            <li>Multiple currency support</li>
+            <li>Follow-up documentation</li>
+        </ul>
+    </div>
+
+    <h2>Technical Features</h2>
+    <div class="module">
+        <ul>
+            <li>Secure session management and user authentication</li>
+            <li>Centralized database connection handling</li>
+            <li>Prepared statements for SQL injection prevention</li>
+            <li>File upload handling for payment images</li>
+            <li>Responsive DataTables integration</li>
+            <li>AJAX-based form submissions</li>
+            <li>Real-time calculations and updates</li>
+            <li>Modular and maintainable code structure</li>
+        </ul>
+    </div>
+
+    <h2>Database Structure</h2>
+    <div class="module">
+        <p>The system uses the following main tables:</p>
+        <ul>
+            <li><code>gps_payments</code> - Stores payment transactions</li>
+            <li><code>gps_sales</code> - Records sales information</li>
+            <li><code>gps_expenses</code> - Tracks business expenses</li>
+            <li><code>gps_profit</code> - Maintains profit records</li>
+            <li><code>gps_payment_followup</code> - Manages payment follow-ups</li>
+        </ul>
+    </div>
+
+    <h2>Security Features</h2>
+    <div class="module">
+        <ul>
+            <li>Session-based authentication</li>
+            <li>SQL injection prevention through prepared statements</li>
+            <li>XSS protection through input sanitization</li>
+            <li>Secure file upload handling</li>
+            <li>Role-based access control</li>
+        </ul>
+    </div>
+
+    <h2>Future Enhancements</h2>
+    <div class="module">
+        <ul>
+            <li>Advanced reporting and analytics</li>
+            <li>Export functionality for reports</li>
+            <li>Email notifications for payment follow-ups</li>
+            <li>Integration with accounting software</li>
+            <li>Mobile application development</li>
+        </ul>
+    </div>
+</body>
+</html> 

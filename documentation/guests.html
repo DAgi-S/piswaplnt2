@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Management System Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guest Management System Documentation</h1>
+
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#database-structure">Database Structure</a></li>
+        <li><a href="#file-structure">File Structure</a></li>
+        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+
+    <h2 id="database-structure">Database Structure</h2>
+    <h3>guest_users Table</h3>
+    <table>
+        <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>int</td>
+            <td>Primary key</td>
+        </tr>
+        <tr>
+            <td>username</td>
+            <td>varchar</td>
+            <td>Guest's login username</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>varchar</td>
+            <td>Hashed password</td>
+        </tr>
+        <tr>
+            <td>guest_id</td>
+            <td>varchar</td>
+            <td>Unique identifier for the guest (e.g., GUEST001)</td>
+        </tr>
+        <tr>
+            <td>full_name</td>
+            <td>varchar</td>
+            <td>Guest's full name</td>
+        </tr>
+        <tr>
+            <td>account_name</td>
+            <td>varchar</td>
+            <td>Name of the linked account</td>
+        </tr>
+        <tr>
+            <td>currency</td>
+            <td>varchar</td>
+            <td>Account currency</td>
+        </tr>
+        <tr>
+            <td>balance</td>
+            <td>decimal</td>
+            <td>Account balance</td>
+        </tr>
+        <tr>
+            <td>linked_account_id</td>
+            <td>int</td>
+            <td>Foreign key to accounts table</td>
+        </tr>
+        <tr>
+            <td>access_level</td>
+            <td>json</td>
+            <td>Array of permissions</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>tinyint</td>
+            <td>1 = Active, 0 = Inactive</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>datetime</td>
+            <td>Account creation timestamp</td>
+        </tr>
+        <tr>
+            <td>last_login</td>
+            <td>datetime</td>
+            <td>Last login timestamp</td>
+        </tr>
+        <tr>
+            <td>expiry_date</td>
+            <td>date</td>
+            <td>Account expiration date</td>
+        </tr>
+    </table>
+
+    <h3>accounts Table</h3>
+    <table>
+        <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>int</td>
+            <td>Primary key</td>
+        </tr>
+        <tr>
+            <td>account_owner</td>
+            <td>varchar</td>
+            <td>Owner of the account</td>
+        </tr>
+        <tr>
+            <td>account_platform</td>
+            <td>varchar</td>
+            <td>Platform name (e.g., PayPal)</td>
+        </tr>
+        <tr>
+            <td>Currency</td>
+            <td>varchar</td>
+            <td>Account currency</td>
+        </tr>
+        <tr>
+            <td>number_of_transactions</td>
+            <td>int</td>
+            <td>Total transactions count</td>
+        </tr>
+        <tr>
+            <td>satstus</td>
+            <td>tinyint</td>
+            <td>1 = Active, 0 = Inactive</td>
+        </tr>
+    </table>
+
+    <h2 id="file-structure">File Structure</h2>
+    <pre>
+/guest/
+├── manage_guests.php          # Main guest management interface
+├── php_action/
+│   ├── fetchGuests.php       # Fetches guest list for DataTable
+│   ├── createGuest.php       # Handles guest creation
+│   ├── editGuest.php         # Handles guest editing
+│   └── removeGuest.php       # Handles guest deletion
+└── custom/
+    └── js/
+        └── guest.js          # JavaScript for guest management
+</pre>
+
+    <h2 id="functionality">Functionality</h2>
+    <h3>Fetching Guests</h3>
+    <p>The system uses DataTables to display guest information. The key query in fetchGuests.php:</p>
+    <pre>
+SELECT 
+    g.*,
+    a.account_owner,
+    a.account_platform,
+    a.Currency as account_currency
+FROM guest_users g
+LEFT JOIN accounts a ON g.linked_account_id = a.id
+ORDER BY g.id DESC</pre>
+
+    <h3>DataTable Initialization</h3>
+    <p>The DataTable is initialized in guest.js with these settings:</p>
+    <pre>
+$('#guestTable').DataTable({
+    'ajax': {
+        'url': 'php_action/fetchGuests.php',
+        'type': 'GET'
+    },
+    'order': [[0, 'desc']],
+    'columnDefs': [
+        {
+            'targets': [3, 4, 9],
+            'orderable': false,
+            'searchable': false
+        }
+    ]
+});</pre>
+
+    <h2 id="troubleshooting">Troubleshooting</h2>
+    <div class="note">
+        <h4>Common Issues and Solutions:</h4>
+        <ol>
+            <li><strong>Data Not Displaying:</strong>
+                <ul>
+                    <li>Check database connection in core.php</li>
+                    <li>Verify SQL query matches table structure</li>
+                    <li>Check browser console for JavaScript errors</li>
+                    <li>Ensure DataTables library is properly loaded</li>
+                </ul>
+            </li>
+            <li><strong>Permission Issues:</strong>
+                <ul>
+                    <li>Verify user has 'manage_guests' permission</li>
+                    <li>Check access_level JSON format in database</li>
+                </ul>
+            </li>
+            <li><strong>Account Linking:</strong>
+                <ul>
+                    <li>Ensure accounts table has correct status field (satstus)</li>
+                    <li>Verify linked_account_id references valid account</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <h3>Important Notes</h3>
+    <ul>
+        <li>Always validate guest_id format (e.g., GUEST001)</li>
+        <li>Ensure proper error handling in all AJAX requests</li>
+        <li>Keep access_level JSON format consistent</li>
+        <li>Regular maintenance of expired guest accounts</li>
+    </ul>
+
+</body>
+</html> 

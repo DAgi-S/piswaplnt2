@@ -1,0 +1,11 @@
+id	order_number	status	materials	mismatches
+10	PO-20250129-15944	completed	1	1
+12	PO-20250129-57374	cancelled	2	2
+14	PO-20250205-38761	completed	1	1
+15	PO-20250206-78721	completed	1	1
+19	PO-20250207-98808	completed	1	1
+20	PO-20250209-92722	cancelled	2	2
+22	PO-20250209-23537	completed	1	1
+23	PO-20250209-83026	completed	2	2
+33	PO-20250210-87401	cancelled	2	2
+37	PO-20250210-65909	completed	2	2

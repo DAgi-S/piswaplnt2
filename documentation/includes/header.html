@@ -1,0 +1,106 @@
+<!-- Documentation Navigation -->
+<style>
+    .doc-nav {
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .doc-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .doc-nav a {
+        color: var(--primary-color);
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        transition: background-color 0.3s;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    
+    .doc-nav a:hover {
+        background-color: var(--secondary-color);
+    }
+    
+    .doc-nav a.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .doc-nav-section {
+        border-right: 1px solid var(--border-color);
+        padding-right: 15px;
+        margin-right: 15px;
+    }
+
+    .doc-nav-section:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+    }
+
+    @media (max-width: 768px) {
+        .doc-nav ul {
+            flex-direction: column;
+        }
+        .doc-nav-section {
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            margin: 0;
+        }
+        .doc-nav-section:last-child {
+            border-bottom: none;
+        }
+    }
+</style>
+
+<nav class="doc-nav">
+    <ul>
+        <div class="doc-nav-section">
+            <li><a href="updates.html" id="nav-updates">System Updates</a></li>
+            <li><a href="role_management.html" id="nav-roles">Role Management</a></li>
+            <li><a href="reports.html" id="nav-reports">Reports</a></li>
+        </div>
+        <div class="doc-nav-section">
+            <li><a href="accounts.html" id="nav-accounts">Accounts</a></li>
+            <li><a href="products.html" id="nav-products">Products</a></li>
+            <li><a href="suppliers.html" id="nav-suppliers">Suppliers</a></li>
+        </div>
+        <div class="doc-nav-section">
+            <li><a href="purchase.html" id="nav-purchase">Purchase</a></li>
+            <li><a href="orders.html" id="nav-orders">Orders</a></li>
+            <li><a href="quotation.html" id="nav-quotation">Quotation</a></li>
+        </div>
+        <div class="doc-nav-section">
+            <li><a href="settings.html" id="nav-settings">Settings</a></li>
+            <li><a href="digitalswap.html" id="nav-digitalswap">Digital Swap</a></li>
+            <li><a href="gps_letter.html" id="nav-gps">GPS Letter</a></li>
+        </div>
+        <div class="doc-nav-section">
+            <li><a href="../index.php" id="nav-back">Back to System</a></li>
+        </div>
+    </ul>
+</nav>
+
+<script>
+    // Highlight current page in navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.doc-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script> 

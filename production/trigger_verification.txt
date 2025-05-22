@@ -1,0 +1,7 @@
+TRIGGER_NAME	EVENT_MANIPULATION	ACTION_TIMING
+after_digitalswap_delete	DELETE	AFTER
+after_digitalswap_insert	INSERT	AFTER
+prevent_negative_stock	UPDATE	BEFORE
+production_orders_after_update	UPDATE	AFTER
+production_order_materials_before_insert	INSERT	BEFORE
+validate_stock_movement	INSERT	BEFORE

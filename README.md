@@ -115,27 +115,6 @@ PiStock is a comprehensive Manufacturing ERP (Enterprise Resource Planning) syst
 
 
 
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/DAgi-S/pistockv2.git
-git push -u origin main
-
-
-
-…or push an existing repository from the command line
-git remote add origin https://github.com/DAgi-S/pistockv2.git
-git branch -M main
-git push -u origin main
-
-
-
-
-https://github.com/DAgi-S/pistockv2.git
-
-
-
 
 
 # Quotation Management System
@@ -161,9 +140,9 @@ store_url in db_connect.php
 
 Login Credentials
 Id : admin
-password : admin
+password : password
 ```
-# PiStockv2 - Inventory Management System
+# PiStocklnt - Inventory Management System
 ## Recent Updates (Date: Current Date)
 ### Work Done Today
 . Attempted to fix DataTables integration in product management

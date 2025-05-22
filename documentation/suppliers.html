@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers Management System Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <div class="documentation-wrapper">
+                <!-- Sidebar Navigation -->
+                <div class="documentation-sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#overview">Overview</a>
+                        <a class="nav-link" href="#database">Database Structure</a>
+                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#create">Create Supplier</a>
+                        <a class="nav-link" href="#read">View Suppliers</a>
+                        <a class="nav-link" href="#update">Update Supplier</a>
+                        <a class="nav-link" href="#delete">Delete Supplier</a>
+                        <a class="nav-link" href="#purchases">Purchase History</a>
+                        <a class="nav-link" href="#validation">Validation</a>
+                        <a class="nav-link" href="#api">API Reference</a>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="documentation-content">
+                    <h1>Suppliers Management System Documentation</h1>
+                    
+                    <section id="overview">
+                        <h2>Overview</h2>
+                        <p>The Suppliers Management System is a comprehensive solution for managing supplier information and relationships. It provides functionality for creating, viewing, updating, and deleting supplier records, with integrated purchase history tracking.</p>
+                    </section>
+
+                    <section id="database">
+                        <h2>Database Structure</h2>
+                        <h4>Tables</h4>
+                        <h5>1. suppliers</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Primary key, auto-increment</td>
+                                </tr>
+                                <tr>
+                                    <td>company_name</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Company name</td>
+                                </tr>
+                                <tr>
+                                    <td>contact_person</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Contact person name</td>
+                                </tr>
+                                <tr>
+                                    <td>phone</td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>Contact phone number</td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>VARCHAR(255)</td>
+                                    <td>Contact email address</td>
+                                </tr>
+                                <tr>
+                                    <td>address</td>
+                                    <td>TEXT</td>
+                                    <td>Company address</td>
+                                </tr>
+                                <tr>
+                                    <td>active</td>
+                                    <td>INT</td>
+                                    <td>Status (1=Active, 0=Inactive)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="features">
+                        <h2>Features</h2>
+                        <ul>
+                            <li>Create, read, update, and delete suppliers</li>
+                            <li>Contact information management</li>
+                            <li>Purchase history tracking</li>
+                            <li>Status management</li>
+                            <li>Input validation</li>
+                            <li>Integration with purchase system</li>
+                        </ul>
+                    </section>
+
+                    <section id="create">
+                        <h2>Create Supplier</h2>
+                        <h4>Process Flow</h4>
+                        <ol>
+                            <li>Enter company name</li>
+                            <li>Add contact person details</li>
+                            <li>Enter contact information</li>
+                            <li>Add company address</li>
+                            <li>Set status</li>
+                            <li>Save supplier</li>
+                        </ol>
+                    </section>
+
+                    <section id="read">
+                        <h2>View Suppliers</h2>
+                        <p>The system displays suppliers in a DataTable with the following information:</p>
+                        <ul>
+                            <li>Company Name</li>
+                            <li>Contact Person</li>
+                            <li>Phone</li>
+                            <li>Email</li>
+                            <li>Status</li>
+                            <li>Actions (Edit/Delete)</li>
+                        </ul>
+                    </section>
+
+                    <section id="update">
+                        <h2>Update Supplier</h2>
+                        <h4>Process Flow</h4>
+                        <ol>
+                            <li>Load existing supplier details</li>
+                            <li>Modify company information</li>
+                            <li>Update contact details</li>
+                            <li>Update status if needed</li>
+                            <li>Save changes</li>
+                        </ol>
+                    </section>
+
+                    <section id="delete">
+                        <h2>Delete Supplier</h2>
+                        <h4>Process Flow</h4>
+                        <ol>
+                            <li>Display confirmation dialog</li>
+                            <li>Check for related purchases</li>
+                            <li>Soft delete (mark as inactive)</li>
+                            <li>Update status</li>
+                        </ol>
+                    </section>
+
+                    <section id="purchases">
+                        <h2>Purchase History</h2>
+                        <h4>Features</h4>
+                        <ul>
+                            <li>View all purchases by supplier</li>
+                            <li>Track purchase amounts</li>
+                            <li>View purchase dates</li>
+                            <li>Track payment history</li>
+                        </ul>
+                    </section>
+
+                    <section id="validation">
+                        <h2>Validation</h2>
+                        <h4>Required Fields</h4>
+                        <ul>
+                            <li>Company Name</li>
+                            <li>Contact Person</li>
+                            <li>Phone</li>
+                            <li>Email</li>
+                        </ul>
+                        <h4>Business Rules</h4>
+                        <ul>
+                            <li>Company name must be unique</li>
+                            <li>Email must be valid format</li>
+                            <li>Phone must be valid format</li>
+                            <li>Status must be valid</li>
+                        </ul>
+                    </section>
+
+                    <section id="api">
+                        <h2>API Reference</h2>
+                        <h4>Endpoints</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/php_action/createSupplier.php</td>
+                                    <td>POST</td>
+                                    <td>Create new supplier</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchSuppliers.php</td>
+                                    <td>GET</td>
+                                    <td>Get all suppliers</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/fetchSelectedSupplier.php</td>
+                                    <td>POST</td>
+                                    <td>Get specific supplier</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/updateSupplier.php</td>
+                                    <td>POST</td>
+                                    <td>Update supplier</td>
+                                </tr>
+                                <tr>
+                                    <td>/php_action/removeSupplier.php</td>
+                                    <td>POST</td>
+                                    <td>Delete supplier</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

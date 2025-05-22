@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+    
+    <div class="content">
+        <div class="documentation-wrapper">
+            <h1>Role Management System Documentation</h1>
+            
+            <div class="section">
+                <h2>Overview</h2>
+                <p>The Role Management System allows administrators to create, edit, and manage user roles and their associated permissions. This system provides a flexible way to control user access to different features of the application.</p>
+            </div>
+
+            <div class="section">
+                <h2>Features</h2>
+                <ul>
+                    <li>Create new roles with custom permissions</li>
+                    <li>Edit existing roles and their permissions</li>
+                    <li>Delete roles (except the administrator role)</li>
+                    <li>Assign multiple permissions to roles</li>
+                    <li>"Select All" functionality for permissions</li>
+                    <li>Real-time permission updates</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Permission Categories</h2>
+                <h3>Dashboard Permissions</h3>
+                <ul>
+                    <li><code>view_dashboard</code> - Access to view the dashboard</li>
+                    <li><code>view_analytics</code> - Access to view analytics data</li>
+                </ul>
+
+                <h3>Product Management</h3>
+                <ul>
+                    <li><code>view_product</code> - View product listings</li>
+                    <li><code>create_product</code> - Create new products</li>
+                    <li><code>edit_product</code> - Edit existing products</li>
+                    <li><code>delete_product</code> - Delete products</li>
+                    <li><code>manage_brands</code> - Manage product brands</li>
+                    <li><code>manage_categories</code> - Manage product categories</li>
+                </ul>
+
+                <h3>Invoice Management</h3>
+                <ul>
+                    <li><code>view_invoice</code> - View invoices</li>
+                    <li><code>create_invoice</code> - Create new invoices</li>
+                    <li><code>edit_invoice</code> - Edit existing invoices</li>
+                    <li><code>delete_invoice</code> - Delete invoices</li>
+                    <li><code>manage_quotations</code> - Manage quotations</li>
+                    <li><code>manage_suppliers</code> - Manage suppliers</li>
+                    <li><code>manage_purchases</code> - Manage purchases</li>
+                </ul>
+
+                <h3>GPS Letter</h3>
+                <ul>
+                    <li><code>view_letter</code> - View letters</li>
+                    <li><code>create_letter</code> - Create new letters</li>
+                    <li><code>edit_letter</code> - Edit existing letters</li>
+                    <li><code>delete_letter</code> - Delete letters</li>
+                    <li><code>manage_templates</code> - Manage letter templates</li>
+                </ul>
+
+                <h3>Digital Swap</h3>
+                <ul>
+                    <li><code>manage_swaps</code> - Manage digital swaps</li>
+                    <li><code>view_swap_analytics</code> - View swap analytics</li>
+                    <li><code>view_swap_reports</code> - View swap reports</li>
+                    <li><code>edit_swap</code> - Edit digital swaps</li>
+                    <li><code>delete_swap</code> - Delete digital swaps</li>
+                </ul>
+
+                <h3>Account Management</h3>
+                <ul>
+                    <li><code>view_accounts</code> - View accounts</li>
+                    <li><code>manage_accounts</code> - Manage accounts</li>
+                    <li><code>view_transactions</code> - View transactions</li>
+                    <li><code>manage_transactions</code> - Manage transactions</li>
+                    <li><code>view_audit_report</code> - View audit reports</li>
+                    <li><code>view_annual_report</code> - View annual reports</li>
+                </ul>
+
+                <h3>User Management</h3>
+                <ul>
+                    <li><code>view_user</code> - View users</li>
+                    <li><code>create_user</code> - Create new users</li>
+                    <li><code>edit_user</code> - Edit existing users</li>
+                    <li><code>delete_user</code> - Delete users</li>
+                    <li><code>manage_roles</code> - Manage user roles</li>
+                </ul>
+
+                <h3>Settings</h3>
+                <ul>
+                    <li><code>manage_settings</code> - Manage general settings</li>
+                    <li><code>manage_email_settings</code> - Manage email settings</li>
+                    <li><code>manage_backup</code> - Manage system backup</li>
+                    <li><code>import_data</code> - Import data</li>
+                    <li><code>export_data</code> - Export data</li>
+                    <li><code>view_reports</code> - View system reports</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Using the Role Management System</h2>
+                
+                <h3>Creating a New Role</h3>
+                <ol>
+                    <li>Click the "Add New Role" button</li>
+                    <li>Enter the role name (required)</li>
+                    <li>Add a description (optional)</li>
+                    <li>Click "Save" to create the role</li>
+                </ol>
+
+                <h3>Editing Role Permissions</h3>
+                <ol>
+                    <li>Select a role from the list on the left</li>
+                    <li>Use checkboxes to select/deselect permissions</li>
+                    <li>Use "Select All Permissions" to toggle all permissions</li>
+                    <li>Click "Save Permissions" to update</li>
+                </ol>
+
+                <h3>Deleting a Role</h3>
+                <ol>
+                    <li>Click the delete icon next to the role</li>
+                    <li>Confirm the deletion in the popup dialog</li>
+                    <li>Note: The administrator role cannot be deleted</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>Security Considerations</h2>
+                <ul>
+                    <li>The administrator role (ID: 1) cannot be deleted or modified</li>
+                    <li>Only users with the 'manage_roles' permission can access this feature</li>
+                    <li>All permission changes are logged for security audit</li>
+                    <li>Role names must be unique in the system</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

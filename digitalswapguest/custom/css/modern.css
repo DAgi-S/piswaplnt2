@@ -1,0 +1,360 @@
+/* Modern Dashboard Styles */
+
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --info-color: #2196f3;
+    --text-primary: #2b2d42;
+    --text-secondary: #8d99ae;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --border-radius: 10px;
+}
+
+/* General Layout */
+body {
+    background-color: var(--bg-light);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding-bottom: 60px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation */
+.navbar-default {
+    background-color: var(--bg-white);
+    border: none;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 30px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+}
+
+.nav > li > a {
+    padding: 15px 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.nav > li > a > i {
+    margin-right: 8px;
+}
+
+/* Stats Cards */
+.stats-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stats-card .icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    opacity: 0.2;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .icon {
+    transform: scale(1.2);
+    opacity: 0.3;
+}
+
+.stats-card .label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.stats-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: var(--text-primary);
+}
+
+.stats-card small {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Account Info Box */
+.account-info-box {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+}
+
+.account-info-box h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.account-info-box p {
+    color: var(--text-secondary);
+    margin: 8px 0;
+    font-size: 0.875rem;
+}
+
+.account-info-box i {
+    width: 24px;
+    color: var(--primary-color);
+}
+
+/* Panels */
+.panel {
+    background: var(--bg-white);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.panel:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.panel-heading {
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: transparent;
+}
+
+.panel-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-title i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.panel-body {
+    padding: 25px;
+}
+
+/* Tables */
+.table-responsive {
+    border: none;
+    margin: 0;
+}
+
+.table {
+    margin: 0;
+}
+
+.table > thead > tr > th {
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 15px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table > tbody > tr > td {
+    padding: 15px;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.table > tbody > tr:hover {
+    background-color: rgba(67, 97, 238, 0.05);
+}
+
+/* Labels and Badges */
+.label {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+.label-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+}
+
+.label-warning {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: var(--warning-color);
+}
+
+.label-info {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--info-color);
+}
+
+/* Buttons */
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: transparent;
+    font-weight: 500;
+    padding: 6px 15px;
+    font-size: 0.875rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 350px;
+    padding: 20px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--bg-white);
+    padding: 15px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.footer p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stats-card,
+.panel,
+.account-info-box {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .stats-card {
+        padding: 20px;
+    }
+    
+    .stats-card .value {
+        font-size: 1.5rem;
+    }
+    
+    .account-info-box {
+        padding: 20px;
+    }
+    
+    .panel-heading {
+        padding: 15px 20px;
+    }
+    
+    .panel-body {
+        padding: 20px;
+    }
+    
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+        padding: 12px;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+}
+
+/* Account Switching Dropdown */
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-item.active {
+    background-color: var(--bg-light);
+    border-left-color: var(--primary-color);
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-light);
+}
+
+.dropdown-item small {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.dropdown-item i {
+    color: var(--primary-color);
+}
+
+#accountDropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#accountDropdown i {
+    font-size: 1rem;
+} 

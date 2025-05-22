@@ -1,0 +1,73 @@
+sales_orders
+ id 	order_number 	client_id 	order_date 	delivery_date 	subtotal 	tax_amount 	discount_amount 	total_amount 	paid_amount 	balance 	payment_status 	order_status 	notes 	created_by 	created_at 	updated_at 	
+
+sales_order_items
+  id 	sales_order_id 	product_id 	quantity 	unit_price 	tax_rate 	tax_amount 	discount_percent 	discount_amount 	subtotal 	total 	notes 	created_at 	updated_at 	
+
+sales_payments
+  id 	sales_order_id 	payment_date 	amount 	payment_method 	reference_number 	notes 	created_by 	created_at 	updated_at 	
+
+sales_status_history
+  id 	sales_order_id 	status 	notes 	created_by 	created_at 	
+
+production_products
+ id 	product_code 	name 	category_id 	brand_id 	unit 	current_stock 	min_stock_level 	production_cost 	selling_price 	description 	status 	created_at 	updated_at 	created_by 	
+
+products
+  product_id 	product_code 	name 	description 	cost 	selling_price 	brand_id 	unit 	current_stock 	min_stock_level 	production_cost 	category_id 	status 	created_at 	product_image 	
+
+
+clients
+ id 	company_name 	tin_number 	address 	phone 	email 	updated_at 	status 	created_at 	
+ 
+categories
+  category_id 	name 	type 	description 	status 	deleted 	created_at 	updated_at 	
+
+brands 
+brand_id 	name 	description 	status 	deleted 	created_at 	updated_at 	
+
+company_settings
+	id 	setting_key 	setting_value 	created_at 	updated_at 	
+
+   Showing rows 0 -  7 (8 total, Query took 0.0001 seconds.)
+SELECT * FROM `company_settings` WHERE 1;
+id	setting_key	setting_value	created_at	updated_at	
+1	company_name	Lebawi Net Trading PLC	2024-12-19 21:05:05	2024-12-23 20:39:24	
+2	company_tin	0073021029	2024-12-19 21:05:05	2024-12-23 20:39:24	
+3	company_phone	+251901000251	2024-12-19 21:05:05	2024-12-23 20:39:24	
+4	company_email	salem@lebawi.net	2024-12-19 21:05:05	2024-12-23 20:39:24	
+5	company_website	https://www.lebawi.nets	2024-12-19 21:05:05	2025-02-08 23:51:21	
+6	company_address	Addis Ababa, Ethiopia	2024-12-19 21:05:05	2024-12-23 20:39:24	
+7	company_logo	logo_1739047884.png	2024-12-19 21:05:05	2025-02-08 23:51:24	
+8	footer_image	assets/images/company/footer_1734975495.png	2024-12-19 21:05:05	2024-12-23 20:38:15	
+
+
+accounts
+ id 	account_owner 	account_platform 	Currency 	number_of_transactions 	created_at 	updated_at 	satstus 	
+
+SELECT * FROM `accounts` WHERE 1;
+id	account_owner	account_platform	Currency	number_of_transactions	created_at	updated_at	satstus		
+23	Production	ETB Account	ETB	0	2025-02-18 22:05:59	2025-02-18 22:05:59	1	
+
+
+users
+ user_id 	username 	email 	full_name 	phone 	profile_image 	language 	timezone 	notify_updates 	notify_alerts 	notify_reports 	last_login 	password 	role_id 	status 	created_at 	updated_at 	dashboard_preferences 	
+
+tax_rates
+ id 	name 	rate 	type 	status 	deleted 	created_at 	updated_at 	
+
+units
+ id 	name 	abbreviation 	description 	status 	deleted 	created_at 	updated_at 	
+
+warehouses
+ id 	name 	code 	type 	location 	description 	status 	created_at 	updated_at 	created_by 	
+
+warehouse_stock_movements
+ id 	warehouse_id 	item_type 	item_id 	movement_type 	quantity 	reference_type (production_order, purchase, transfer, etc. )	reference_id 	notes 	created_at 	created_by 	
+
+
+warehouse_stock
+ id 	warehouse_id 	item_type 	item_id 	quantity 	created_at 	updated_at 	
+
+stock_movements
+  movement_id 	product_id 	reference_type 	reference_id 	quantity 	movement_type 	notes 	status 	created_at 	created_by 	

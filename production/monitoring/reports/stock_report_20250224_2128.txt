@@ -1,0 +1,8 @@
+material_code	name	current_stock	reserved_quantity	available_stock	min_stock_level	stock_status	availability_status
+das	Kebede Hiwi	11307.00	0.00	11307.00	11.00	OK	SUFFICIENT
+NC	NC Plastic	1000.00	0.00	1000.00	10.00	OK	SUFFICIENT
+NCCover	Nescafe lid	500.00	0.00	500.00	100.00	OK	SUFFICIENT
+RM001	Steel Sheets	7069.00	0.00	7069.00	200.00	OK	SUFFICIENT
+RM002	Paint	7289.95	0.00	7289.95	100.00	OK	SUFFICIENT
+RM003	Screws	272224.56	0.00	272224.56	1000.00	OK	SUFFICIENT
+Sticker	Sticker	500.00	0.00	500.00	100.00	OK	SUFFICIENT

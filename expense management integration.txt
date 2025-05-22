@@ -1,0 +1,75 @@
+# Task: Integrate Expense Management Feature to Existing System
+
+## 🎯 Objective:
+Integrate a new module called "Expense Management" into our existing PHP + MySQL system **without altering** existing tables, data, or structure. All new files must live under a **new folder called `expense/`**.
+
+---
+
+## 🛠️ System Constraints and Guidelines
+
+1. ✅ Do NOT modify any existing database tables or application logic.
+2. ✅ Check if any expense-related tables already exist (e.g., tables with names like `expense`, `expenses`, `expense_entries`, etc).
+3. ✅ If not found, create new expense-related tables using the most logical structure (with `expense_categories`, `expenses`, etc).
+4. ✅ Respect our permission system: integrate `user_roles`, `permissions`, `roles_permissions` where needed (add new permission keys only, no deletions).
+5. ✅ Implement full CRUD (Create, Read, Update, Delete) for expense entries.
+6. ✅ Add proper routing, controller logic, models, and views inside `expense/` folder.
+7. ✅ Make sure **no admin privileges are required**, as we’ve had MySQL hosting issues with restricted access.
+8. ✅ Keep SQL structure safe for shared-hosting environments (no use of `DEFINER`, `PROCEDURE`, etc).
+9. ✅ Keep code DRY, reusable, and aligned with the current project’s coding style.
+
+---
+
+## ✅ Step-by-Step Task Flow
+
+### 1. 📂 Create a `README_db_structure.md` file
+- Scan the current database.
+- For each table, list:
+  - Table name
+  - Key columns and relationships
+  - Purpose (e.g., used in production orders, sales, inventory, etc).
+- Use easy search tags, like `#inventory`, `#sales`, `#production`, etc.
+
+### 2. 🧾 Create a `expense/CHANGELOG.md` file
+- Every time you make a change to the system (e.g., new table, new route), log it here with:
+  - Date
+  - Action
+  - Summary
+  - Affected files
+
+### 3. 🧠 Create a `expense/TASK_QUEUE.md`
+- List upcoming improvement or automation tasks related to the Expense module.
+- Each entry should include:
+  - Task title
+  - Summary
+  - Priority (High, Medium, Low)
+  - Dependencies (if any)
+
+### 4. 📘 Create a `expense/RULES.md`
+- List the working rules for this module integration.
+- These rules must be read and respected by **any Cursor AI agent** involved.
+- Tag this file in all conversation states or planning docs related to `expense`.
+
+---
+
+## 📁 Folder Structure
+/expense/ ├── controllers/ ├── models/ ├── views/ ├── CHANGELOG.md ├── TASK_QUEUE.md ├── RULES.md
+
+
+---
+
+## ⚠️ Hosting Notes (Must Avoid)
+We have **limited privileges on the hosting server**. So:
+- ❌ No `DEFINER` procedures
+- ❌ No `SIGNAL`, `DECLARE`, or stored procedures
+- ✅ Use only pure `INSERT`, `UPDATE`, `SELECT` MySQL queries inside PHP
+- ✅ Do not drop or alter existing tables or constraints
+
+---
+
+## ✅ Final Notes
+- Make everything modular and isolated.
+- Register expense-related permissions (e.g., `create_expense`, `edit_expense`, `view_expense`, `delete_expense`) and integrate with our permission system.
+- Always check for session permission using the global `can('permission_key')` function before allowing access.
+
+When you're done with the first phase (folder creation + MD files), pause and wait for confirmation before generating actual PHP code.
+

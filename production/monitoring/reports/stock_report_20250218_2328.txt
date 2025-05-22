@@ -1,0 +1,4 @@
+material_code	name	current_stock	reserved_quantity	available_stock	min_stock_level	stock_status	availability_status
+RM001	Steel Sheets	1803.00	0.00	1803.00	200.00	OK	SUFFICIENT
+RM002	Paint	2186.79	0.00	2186.79	100.00	OK	SUFFICIENT
+RM003	Screws	3114.80	113.20	3001.60	1000.00	OK	SUFFICIENT

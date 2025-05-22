@@ -1,0 +1,4 @@
+id	material_code	current_stock	reserved_quantity	reservations
+13	RM001	0.00	0.00	0
+14	RM002	169.00	0.00	0
+15	RM003	4347.00	0.00	0

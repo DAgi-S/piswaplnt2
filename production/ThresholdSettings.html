@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threshold Settings Documentation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+        .section { margin-bottom: 30px; }
+        .alert { margin-top: 20px; }
+        .parameter { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Threshold Settings Documentation</h1>
+        <hr>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>Threshold Settings allow you to configure how the system monitors and alerts about low stock levels. These settings help in maintaining optimal inventory levels and preventing stockouts.</p>
+        </div>
+
+        <div class="section">
+            <h2>Parameters</h2>
+
+            <div class="parameter">
+                <h3>1. Threshold Buffer (%)</h3>
+                <p>This setting determines the buffer percentage above the minimum stock level at which the system starts generating alerts.</p>
+                <ul>
+                    <li>Default value: 20%</li>
+                    <li>Example: If minimum stock is 100 units and buffer is 20%, alerts will trigger at 120 units</li>
+                    <li>Range: 0-100%</li>
+                </ul>
+            </div>
+
+            <div class="parameter">
+                <h3>2. Auto-calculate Thresholds</h3>
+                <p>When enabled, the system automatically calculates recommended threshold levels based on:</p>
+                <ul>
+                    <li>Historical usage patterns</li>
+                    <li>Lead time for restocking</li>
+                    <li>Seasonal variations</li>
+                </ul>
+            </div>
+
+            <div class="parameter">
+                <h3>3. Email Notifications</h3>
+                <p>Configure email alerts for low stock situations:</p>
+                <ul>
+                    <li>Receive notifications when items reach threshold levels</li>
+                    <li>Customize recipients for different types of alerts</li>
+                    <li>Option to disable email notifications</li>
+                </ul>
+            </div>
+
+            <div class="parameter">
+                <h3>4. Alert Frequency</h3>
+                <p>Choose how often you receive notifications:</p>
+                <ul>
+                    <li>Immediate: Get alerts as soon as thresholds are reached</li>
+                    <li>Daily: Receive a daily summary of low stock items</li>
+                    <li>Weekly: Get a weekly report of inventory status</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Stock Level Categories</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="alert alert-danger">
+                        <h4>Out of Stock</h4>
+                        <p>Current stock = 0</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-warning">
+                        <h4>Critical Stock</h4>
+                        <p>Current stock ≤ 50% of minimum stock</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-info">
+                        <h4>Low Stock</h4>
+                        <p>Current stock ≤ minimum stock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li>Regularly review and adjust threshold levels based on business needs</li>
+                <li>Consider seasonal variations when setting buffer percentages</li>
+                <li>Use auto-calculate feature for high-volume items</li>
+                <li>Set appropriate alert frequencies to avoid notification fatigue</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-info">
+            <h4>Note:</h4>
+            <p>Changes to threshold settings take effect immediately and will update the status indicators in the low stock table.</p>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html> 

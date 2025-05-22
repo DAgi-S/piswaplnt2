@@ -1,0 +1,476 @@
+/* Annual Report Styles */
+.report-header {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.company-info {
+    margin-bottom: 20px;
+}
+
+.company-name {
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.company-info p {
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 14px;
+}
+
+.company-info strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.company-logo {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.company-logo img {
+    max-height: 100px;
+    width: auto;
+}
+
+.mt-4 {
+    margin-top: 25px;
+}
+
+.report-period {
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.section h3 {
+    color: #2c3e50;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Metric Cards Grid */
+.metrics-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.metrics-grid .col-md-4 {
+    padding: 10px;
+}
+
+.metric-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.metric-card i {
+    font-size: 28px;
+    color: #3498db;
+    margin-bottom: 12px;
+}
+
+.metric-card h4 {
+    color: #34495e;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.metric-amount {
+    font-size: 16px;
+    color: #27ae60;
+    margin-top: 5px;
+}
+
+.text-muted {
+    color: #7f8c8d;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Print Styles for Metric Cards */
+@media print {
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        page-break-inside: avoid;
+    }
+
+    .metric-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #dee2e6;
+        padding: 15px;
+        margin: 0;
+    }
+
+    .metric-card i {
+        font-size: 20px;
+    }
+
+    .metric-card h4 {
+        font-size: 12px;
+    }
+
+    .metric-value {
+        font-size: 18px;
+    }
+
+    .metric-amount {
+        font-size: 14px;
+    }
+
+    .text-muted {
+        font-size: 10px;
+    }
+}
+
+/* Responsive Styles for Metric Cards */
+@media (max-width: 768px) {
+    .metrics-grid .col-md-4 {
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .metrics-grid .col-md-4 {
+        width: 100%;
+    }
+}
+
+.chart-container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    min-height: 250px;
+}
+
+.chart-container h4 {
+    color: #2c3e50;
+    font-size: 11px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Table Styles */
+.table-responsive {
+    margin-top: 10px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    font-size: 10px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding: 8px;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 10px;
+}
+
+.table td {
+    padding: 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: #fff !important;
+        font-size: 11pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    .panel {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .panel-heading {
+        border-bottom: 2px solid #000 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .report-header {
+        margin-bottom: 30px !important;
+    }
+
+    .metrics-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px !important;
+        page-break-inside: avoid !important;
+    }
+
+    .metric-card {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        padding: 15px !important;
+        height: auto !important;
+        background: #fff !important;
+    }
+
+    .metric-card i {
+        font-size: 24pt !important;
+        margin-bottom: 10px !important;
+    }
+
+    .metric-card h4 {
+        font-size: 12pt !important;
+        margin-bottom: 8px !important;
+        color: #000 !important;
+    }
+
+    .metric-value {
+        font-size: 16pt !important;
+        color: #000 !important;
+    }
+
+    .metric-amount {
+        font-size: 12pt !important;
+        color: #000 !important;
+    }
+
+    .text-muted {
+        font-size: 10pt !important;
+        color: #666 !important;
+    }
+
+    .section {
+        page-break-inside: avoid !important;
+        margin-bottom: 30px !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .section h3 {
+        font-size: 14pt !important;
+        color: #000 !important;
+        border-bottom: 1px solid #000 !important;
+        padding-bottom: 5px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .chart-container {
+        page-break-inside: avoid !important;
+        border: 1px solid #000 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .report-footer {
+        margin-top: 30px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid #000 !important;
+    }
+
+    .report-footer p {
+        font-size: 10pt !important;
+        color: #000 !important;
+    }
+
+    /* Ensure proper page breaks */
+    .section {
+        page-break-before: auto;
+    }
+
+    .executive-summary {
+        page-break-after: always;
+    }
+
+    /* Improve table readability in print */
+    .table {
+        border-collapse: collapse !important;
+    }
+
+    .table th,
+    .table td {
+        background-color: #fff !important;
+        border: 1px solid #000 !important;
+        padding: 8px !important;
+        font-size: 10pt !important;
+    }
+
+    /* Company info print styles */
+    .company-info {
+        margin-bottom: 20px !important;
+    }
+
+    .company-name {
+        font-size: 18pt !important;
+        color: #000 !important;
+    }
+
+    .company-logo img {
+        max-height: 80px !important;
+    }
+}
+
+/* Animation Styles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom Colors for Charts */
+:root {
+    --chart-color-1: #3498db;
+    --chart-color-2: #2ecc71;
+    --chart-color-3: #e74c3c;
+    --chart-color-4: #f1c40f;
+    --chart-color-5: #9b59b6;
+    --chart-color-6: #1abc9c;
+    --chart-color-7: #e67e22;
+    --chart-color-8: #34495e;
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.status-good {
+    background-color: #2ecc71;
+}
+
+.status-warning {
+    background-color: #f1c40f;
+}
+
+.status-critical {
+    background-color: #e74c3c;
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 4px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Report Footer */
+.report-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+    font-size: 10px;
+    color: #6c757d;
+}
+
+.report-footer p {
+    margin-bottom: 5px;
+}
+
+/* Chart Legend */
+.chart-legend {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.chart-legend ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chart-legend li {
+    display: inline-block;
+    margin-right: 15px;
+    line-height: 1.8;
+}
+
+.chart-legend span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 2px;
+    vertical-align: middle;
+} 

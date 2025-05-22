@@ -1,0 +1,15 @@
+Field	Type	Null	Key	Default	Extra
+id	int(11)	NO	PRI	NULL	auto_increment
+material_code	varchar(50)	NO	UNI	NULL	
+name	varchar(100)	NO		NULL	
+category_id	int(11)	YES	MUL	NULL	
+unit	varchar(20)	NO		NULL	
+current_stock	decimal(10,2)	YES		0.00	
+reserved_quantity	decimal(10,2)	YES		0.00	
+min_stock_level	decimal(10,2)	YES		0.00	
+cost_per_unit	decimal(10,2)	YES		0.00	
+description	text	YES		NULL	
+status	enum('active','inactive')	YES	MUL	active	
+created_at	timestamp	NO		current_timestamp()	
+updated_at	timestamp	NO		current_timestamp()	on update current_timestamp()
+created_by	int(11)	YES	MUL	NULL	

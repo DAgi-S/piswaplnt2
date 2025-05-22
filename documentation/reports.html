@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <h1>Reports System Documentation</h1>
+            
+            <section class="doc-section">
+                <h2>Audit Report</h2>
+                <p>The Audit Report provides a detailed monthly view of transactions across multiple accounts, allowing for comprehensive financial tracking and auditing.</p>
+
+                <h3>Features</h3>
+                <ul class="feature-list">
+                    <li>Multiple account selection (USD and ETB accounts)</li>
+                    <li>Year selection for filtering data</li>
+                    <li>Monthly breakdown of transactions</li>
+                    <li>Separate sections for USD and ETB transactions</li>
+                    <li>Monthly totals for deposits and withdrawals</li>
+                    <li>Running balance calculations</li>
+                    <li>Print-friendly layout</li>
+                </ul>
+
+                <h3>Using the Audit Report</h3>
+                <ol>
+                    <li>Navigate to Accounts > Audit Report</li>
+                    <li>Select the desired accounts:
+                        <ul>
+                            <li>Choose USD accounts</li>
+                            <li>Choose ETB accounts</li>
+                        </ul>
+                    </li>
+                    <li>Select the year for the report</li>
+                    <li>Click "Generate Report" to view the data</li>
+                </ol>
+
+                <h3>Report Sections</h3>
+                <ul>
+                    <li>Monthly Transaction Details:
+                        <ul>
+                            <li>Date and time of transaction</li>
+                            <li>Transaction type (Deposit/Withdrawal)</li>
+                            <li>Amount</li>
+                            <li>Running balance</li>
+                            <li>Comments/Notes</li>
+                        </ul>
+                    </li>
+                    <li>Monthly Summaries:
+                        <ul>
+                            <li>Total deposits</li>
+                            <li>Total withdrawals</li>
+                            <li>Net change</li>
+                            <li>Closing balance</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="doc-section">
+                <h2>Annual Report</h2>
+                <p>The Annual Report provides a year-over-year comparison of financial activities, helping track long-term financial trends and performance.</p>
+
+                <h3>Features</h3>
+                <ul class="feature-list">
+                    <li>Multiple account selection</li>
+                    <li>Year range selection</li>
+                    <li>Yearly summaries</li>
+                    <li>Currency-wise breakdowns</li>
+                    <li>Comparative analysis</li>
+                    <li>Print-optimized layout</li>
+                </ul>
+
+                <h3>Using the Annual Report</h3>
+                <ol>
+                    <li>Navigate to Accounts > Annual Report</li>
+                    <li>Select accounts to include:
+                        <ul>
+                            <li>USD accounts</li>
+                            <li>ETB accounts</li>
+                        </ul>
+                    </li>
+                    <li>Choose the year range:
+                        <ul>
+                            <li>From Year</li>
+                            <li>To Year</li>
+                        </ul>
+                    </li>
+                    <li>Click "Generate Report" to view the data</li>
+                </ol>
+
+                <h3>Report Sections</h3>
+                <ul>
+                    <li>Yearly Summaries:
+                        <ul>
+                            <li>Total annual deposits</li>
+                            <li>Total annual withdrawals</li>
+                            <li>Net annual change</li>
+                            <li>Year-end balance</li>
+                        </ul>
+                    </li>
+                    <li>Comparative Analysis:
+                        <ul>
+                            <li>Year-over-year growth</li>
+                            <li>Transaction volume trends</li>
+                            <li>Balance progression</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="doc-section">
+                <h2>Common Features</h2>
+                <h3>Print Optimization</h3>
+                <ul>
+                    <li>Compact layout for better paper usage</li>
+                    <li>Clear section breaks</li>
+                    <li>Readable font sizes</li>
+                    <li>Proper table formatting</li>
+                </ul>
+
+                <h3>Data Accuracy</h3>
+                <ul>
+                    <li>Real-time calculations</li>
+                    <li>Double-entry verification</li>
+                    <li>Balance validation</li>
+                    <li>Error checking for data consistency</li>
+                </ul>
+
+                <h3>Security</h3>
+                <ul>
+                    <li>Role-based access control</li>
+                    <li>Audit trail of report generation</li>
+                    <li>Data encryption in transit</li>
+                    <li>Secure data handling</li>
+                </ul>
+            </section>
+
+            <section class="doc-section">
+                <h2>Technical Notes</h2>
+                <ul>
+                    <li>Reports are generated using server-side processing for better performance</li>
+                    <li>Data is cached appropriately to reduce database load</li>
+                    <li>Responsive design works across different screen sizes</li>
+                    <li>Export functionality available for data analysis</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

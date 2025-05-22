@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Management System Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-nav"></div>
+
+    <div class="content">
+        <div class="documentation-container">
+            <div class="sidebar">
+                <nav class="nav-menu">
+                    <a href="#overview">Overview</a>
+                    <a href="#database">Database Structure</a>
+                    <a href="#features">Features</a>
+                    <a href="#create">Create Quotation</a>
+                    <a href="#read">View Quotations</a>
+                    <a href="#update">Update Quotation</a>
+                    <a href="#delete">Delete Quotation</a>
+                    <a href="#email">Email Functionality</a>
+                    <a href="#validation">Validation</a>
+                    <a href="#api">API Reference</a>
+                </nav>
+            </div>
+
+            <div class="main-content">
+                <h1>Quotation Management System Documentation</h1>
+                
+                <section id="overview">
+                    <h2>Overview</h2>
+                    <p>The Quotation Management System is a comprehensive solution for creating, managing, and sending quotations to clients. It provides functionality for creating, viewing, updating, and deleting quotations, with integrated email capabilities for sending quotations directly to clients.</p>
+                </section>
+
+                <section id="database">
+                    <h2>Database Structure</h2>
+                    <h4>Tables</h4>
+                    <h5>1. quotations</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>INT</td>
+                                <td>Primary key, auto-increment</td>
+                            </tr>
+                            <tr>
+                                <td>quotation_number</td>
+                                <td>VARCHAR(50)</td>
+                                <td>Unique quotation number (e.g., Q000001)</td>
+                            </tr>
+                            <tr>
+                                <td>client_id</td>
+                                <td>INT</td>
+                                <td>Foreign key to clients table</td>
+                            </tr>
+                            <tr>
+                                <td>quotation_date</td>
+                                <td>DATE</td>
+                                <td>Date of quotation</td>
+                            </tr>
+                            <tr>
+                                <td>valid_until</td>
+                                <td>DATE</td>
+                                <td>Quotation validity date</td>
+                            </tr>
+                            <tr>
+                                <td>sub_total</td>
+                                <td>DECIMAL(25,2)</td>
+                                <td>Total before VAT</td>
+                            </tr>
+                            <tr>
+                                <td>vat</td>
+                                <td>DECIMAL(25,2)</td>
+                                <td>VAT amount (15%)</td>
+                            </tr>
+                            <tr>
+                                <td>grand_total</td>
+                                <td>DECIMAL(25,2)</td>
+                                <td>Total including VAT</td>
+                            </tr>
+                            <tr>
+                                <td>status</td>
+                                <td>INT</td>
+                                <td>Quotation status (1=Active, 2=Accepted, 3=Declined)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>2. quotation_items</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>INT</td>
+                                <td>Primary key, auto-increment</td>
+                            </tr>
+                            <tr>
+                                <td>quotation_id</td>
+                                <td>INT</td>
+                                <td>Foreign key to quotations table</td>
+                            </tr>
+                            <tr>
+                                <td>product_id</td>
+                                <td>INT</td>
+                                <td>Foreign key to products table</td>
+                            </tr>
+                            <tr>
+                                <td>quantity</td>
+                                <td>INT</td>
+                                <td>Quantity quoted</td>
+                            </tr>
+                            <tr>
+                                <td>rate</td>
+                                <td>DECIMAL(25,2)</td>
+                                <td>Price per unit</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>DECIMAL(25,2)</td>
+                                <td>Total amount (quantity * rate)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="features">
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Create, read, update, and delete quotations</li>
+                        <li>Email quotations to clients</li>
+                        <li>VAT calculation (15%)</li>
+                        <li>Multiple products per quotation</li>
+                        <li>Client management</li>
+                        <li>Quotation validity period</li>
+                        <li>Status tracking</li>
+                        <li>Input validation</li>
+                    </ul>
+                </section>
+
+                <section id="create">
+                    <h2>Create Quotation</h2>
+                    <h4>Process Flow</h4>
+                    <ol>
+                        <li>Select client (or create new)</li>
+                        <li>Set quotation date and validity period</li>
+                        <li>Add products with quantities and rates</li>
+                        <li>System calculates totals automatically</li>
+                        <li>Add optional terms and conditions</li>
+                        <li>Save quotation</li>
+                        <li>Option to email quotation immediately</li>
+                    </ol>
+                </section>
+
+                <section id="read">
+                    <h2>View Quotations</h2>
+                    <p>The system displays quotations in a DataTable with the following information:</p>
+                    <ul>
+                        <li>Quotation number</li>
+                        <li>Date</li>
+                        <li>Client</li>
+                        <li>Valid until</li>
+                        <li>Sub Total</li>
+                        <li>VAT</li>
+                        <li>Grand Total</li>
+                        <li>Status</li>
+                        <li>Actions (Edit/Delete/Email)</li>
+                    </ul>
+                </section>
+
+                <section id="update">
+                    <h2>Update Quotation</h2>
+                    <h4>Process Flow</h4>
+                    <ol>
+                        <li>Load existing quotation details</li>
+                        <li>Modify client, dates, products, or quantities</li>
+                        <li>System recalculates totals</li>
+                        <li>Update status if needed</li>
+                        <li>Save changes</li>
+                        <li>Option to resend updated quotation</li>
+                    </ol>
+                </section>
+
+                <section id="delete">
+                    <h2>Delete Quotation</h2>
+                    <h4>Process Flow</h4>
+                    <ol>
+                        <li>Confirm deletion</li>
+                        <li>Soft delete quotation (mark as inactive)</li>
+                        <li>Remove quotation items</li>
+                        <li>Maintain record for reporting</li>
+                    </ol>
+                </section>
+
+                <section id="email">
+                    <h2>Email Functionality</h2>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Send quotations directly to clients</li>
+                        <li>Professional email template</li>
+                        <li>Includes company details</li>
+                        <li>Lists all quotation items</li>
+                        <li>Shows totals and VAT</li>
+                        <li>Includes terms and conditions</li>
+                    </ul>
+                    <h4>Email Configuration</h4>
+                    <ul>
+                        <li>SMTP settings in emailConfig.php</li>
+                        <li>Supports Gmail SMTP</li>
+                        <li>Requires secure authentication</li>
+                        <li>HTML email format</li>
+                    </ul>
+                </section>
+
+                <section id="validation">
+                    <h2>Validation</h2>
+                    <h4>Required Fields</h4>
+                    <ul>
+                        <li>Client</li>
+                        <li>Quotation Date</li>
+                        <li>Valid Until Date</li>
+                        <li>At least one product</li>
+                        <li>Product quantity and rate</li>
+                        <li>Client email for sending quotations</li>
+                    </ul>
+                    <h4>Business Rules</h4>
+                    <ul>
+                        <li>Valid Until date must be after Quotation Date</li>
+                        <li>Quantity must be positive</li>
+                        <li>Rate must be positive</li>
+                        <li>VAT is calculated at 15%</li>
+                        <li>Email address must be valid</li>
+                    </ul>
+                </section>
+
+                <section id="api">
+                    <h2>API Reference</h2>
+                    <h4>Endpoints</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Endpoint</th>
+                                <th>Method</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>/php_action/createQuotation.php</td>
+                                <td>POST</td>
+                                <td>Create new quotation</td>
+                            </tr>
+                            <tr>
+                                <td>/php_action/fetchQuotations.php</td>
+                                <td>GET</td>
+                                <td>Get all quotations</td>
+                            </tr>
+                            <tr>
+                                <td>/php_action/fetchSelectedQuotation.php</td>
+                                <td>POST</td>
+                                <td>Get specific quotation</td>
+                            </tr>
+                            <tr>
+                                <td>/php_action/editQuotation.php</td>
+                                <td>POST</td>
+                                <td>Update quotation</td>
+                            </tr>
+                            <tr>
+                                <td>/php_action/removeQuotation.php</td>
+                                <td>POST</td>
+                                <td>Delete quotation</td>
+                            </tr>
+                            <tr>
+                                <td>/php_action/sendQuotationEmail.php</td>
+                                <td>POST</td>
+                                <td>Send quotation email</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+</body>
+</html> 

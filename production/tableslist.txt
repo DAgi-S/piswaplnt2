@@ -1,0 +1,67 @@
+DATABASE: pistocklnt
+
+PRODUCTION CORE TABLES:
+production_orders (id*, order_number, product_id^, target_quantity, completed_quantity, start_date, expected_completion_date, actual_completion_date, status[draft/confirmed/inprogress/completed/cancelled], notes, created_at, updated_at, created_by^)
+    ^ product_id -> production_products.id
+    ^ created_by -> users.user_id
+
+production_products (id*, product_code, name, category_id^, brand_id^, unit, current_stock, min_stock_level, production_cost, selling_price, description, status[active/inactive], created_at, updated_at, created_by^)
+    ^ category_id -> production_categories.id
+    ^ brand_id -> production_brands.id
+    ^ created_by -> users.user_id
+
+product_bom (id*, product_id^, material_id^, quantity_required, wastage_percent, status[active/inactive], created_at, updated_at, created_by^)
+    ^ product_id -> production_products.id
+    ^ material_id -> raw_materials.id
+    ^ created_by -> users.user_id
+
+production_order_materials (id*, production_order_id^, material_id^, required_quantity, consumed_quantity, last_consumed_quantity, status[pending/partially_consumed/fully_consumed], created_at, updated_at)
+    ^ production_order_id -> production_orders.id
+    ^ material_id -> raw_materials.id
+
+production_progress (id*, production_order_id^, quantity, progress_date, notes, created_at, created_by^)
+    ^ production_order_id -> production_orders.id
+    ^ created_by -> users.user_id
+
+INVENTORY TABLES:
+raw_materials (id*, material_code, name, category_id^, unit, current_stock, min_stock_level, cost_per_unit, description, status[active/inactive], created_at, updated_at, created_by^)
+    ^ category_id -> raw_material_categories.id
+    ^ created_by -> users.user_id
+
+material_reservations (id*, material_id^, production_order_id^, reserved_quantity, status[active/consumed/released], created_at, updated_at)
+    ^ material_id -> raw_materials.id
+    ^ production_order_id -> production_orders.id
+
+material_consumption_audit (id*, production_order_id^, material_id^, previous_quantity, new_quantity, wastage_quantity, update_type[initial/progress/completion], created_at, created_by^)
+    ^ production_order_id -> production_orders.id
+    ^ material_id -> raw_materials.id
+    ^ created_by -> users.user_id
+
+inventory_movement_log (id*, item_type[raw_material/finished_good], item_id^, source_type[production], source_id, quantity, movement_type[production_out], reference_type, reference_id, status[completed], created_at, created_by^)
+    ^ item_id -> raw_materials.id
+    ^ created_by -> users.user_id
+
+QUALITY CONTROL:
+quality_control (id*, production_order_id^, inspection_date, quantity_checked, quantity_passed, quantity_failed, defect_type, notes, status[passed/failed/partially_passed], created_at, created_by^)
+    ^ production_order_id -> production_orders.id
+    ^ created_by -> users.user_id
+
+SUPPORTING TABLES:
+raw_material_categories (id*, name, description, status[active/inactive], created_at, updated_at)
+production_categories (id*, name, description, status[active/inactive], created_at, updated_at)
+production_brands (id*, name, description, status[active/inactive], created_at, updated_at)
+
+Legend:
+* Primary Key
+^ Foreign Key
+-> Indicates relationship (points to referenced table)
+[] Enum/Set values
+
+Notes:
+- All tables include created_at, updated_at timestamps for tracking
+- Foreign keys have appropriate indexes for performance
+- Decimal fields use (10,2) precision for quantities and costs
+- Status fields enforce specific value constraints
+- All timestamps stored in UTC
+- Soft delete implemented where applicable
+- Transaction safety enforced at database level 

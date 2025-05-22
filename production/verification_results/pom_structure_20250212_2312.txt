@@ -1,0 +1,10 @@
+Field	Type	Null	Key	Default	Extra
+id	int(11)	NO	PRI	NULL	auto_increment
+production_order_id	int(11)	NO	MUL	NULL	
+material_id	int(11)	NO	MUL	NULL	
+required_quantity	decimal(10,2)	NO		NULL	
+consumed_quantity	decimal(10,2)	YES		0.00	
+reserved_quantity	decimal(10,2)	YES		0.00	
+reservation_status	enum('pending','reserved','released','consumed')	YES		pending	
+created_at	timestamp	NO		current_timestamp()	
+updated_at	timestamp	NO		current_timestamp()	on update current_timestamp()

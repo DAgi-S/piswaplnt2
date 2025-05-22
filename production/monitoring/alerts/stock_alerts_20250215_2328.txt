@@ -1,0 +1,2 @@
+material_code	name	current_stock	reserved_quantity	available_stock	min_stock_level	stock_status	availability_status
+RM001	Steel Sheets	1180.00	1090.00	90.00	200.00	OK	LOW_STOCK
