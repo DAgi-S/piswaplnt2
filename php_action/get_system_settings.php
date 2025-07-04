@@ -79,7 +79,7 @@ try {
             case 'Database':
                 $settings = [
                     'db_host' => ['value' => 'localhost', 'type' => 'string', 'display_name' => 'Database Host', 'description' => 'Database server address', 'validation' => 'required', 'default' => 'localhost'],
-                    'db_name' => ['value' => 'pistocklntmarch', 'type' => 'string', 'display_name' => 'Database Name', 'description' => 'Database name', 'validation' => 'required', 'default' => 'pistocklntmarch'],
+                    'db_name' => ['value' => 'pistocklnt1march', 'type' => 'string', 'display_name' => 'Database Name', 'description' => 'Database name', 'validation' => 'required', 'default' => 'pistocklnt1march'],
                     'db_user' => ['value' => '', 'type' => 'string', 'display_name' => 'Username', 'description' => 'Database username', 'validation' => 'required', 'default' => ''],
                     'db_password' => ['value' => '', 'type' => 'password', 'display_name' => 'Password', 'description' => 'Database password', 'validation' => '', 'default' => '']
                 ];

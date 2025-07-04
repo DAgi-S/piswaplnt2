@@ -11,21 +11,40 @@ ini_set('error_log', 'php_errors.log');
 // Check if request is for API
 $is_api_request = strpos($_SERVER['REQUEST_URI'], '/api/') !== false;
 
-// Create connection with error handling
+// Create PDO connection for new features
+try {
+    $pdo = new PDO(
+        "mysql:host=$localhost;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]
+    );
+    
+    // Set timezone
+    $pdo->query("SET time_zone = '+00:00'");
+} catch (PDOException $e) {
+    error_log("PDO connection error: " . $e->getMessage());
+    if ($is_api_request) {
+        header('Content-Type: application/json');
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database connection failed']);
+        exit();
+    }
+}
+
+// Create mysqli connection for legacy code
 try {
     $connect = new mysqli($localhost, $username, $password, $dbname);
     
     // Check connection
     if ($connect->connect_error) {
         error_log("Database connection failed: " . $connect->connect_error);
-        if ($is_api_request) {
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Database connection failed']);
-            exit();
-        } else {
-            throw new Exception("Database connection failed: " . $connect->connect_error);
-        }
+        // Custom user-friendly message
+        die("<div style='margin: 50px; padding: 20px; border: 1px solid #dc3545; border-radius: 5px; background-color: #f8d7da; color: #721c24;'><h3 style='margin-top: 0;'>Database Connection Error</h3><p>Unable to connect to the database. Please check your credentials or contact your administrator.</p></div>");
     }
 
     // Set charset

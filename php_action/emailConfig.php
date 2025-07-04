@@ -98,7 +98,7 @@ function sendQuotationEmail($to, $subject, $message, $pdfContent, $filename, $cc
     }
 }
 
-function sendNotificationEmail($subject, $message) {    
+function sendNotificationEmail($subject, $message, $to = null) {    
     $mail = new PHPMailer(true);
     
     try {
@@ -113,8 +113,8 @@ function sendNotificationEmail($subject, $message) {
         $mail->Port = SMTP_PORT;
         
         // Recipients
-        $mail->setFrom(SMTP_FROM_EMAIL, 'Pi Stock System');
-        $mail->addAddress(NOTIFICATION_EMAIL);
+        $mail->setFrom(SMTP_FROM_EMAIL, 'Piswap System');
+        $mail->addAddress($to ? $to : NOTIFICATION_EMAIL);
         
         // Content
         $mail->isHTML(true);

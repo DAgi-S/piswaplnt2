@@ -27,7 +27,7 @@ try {
             'validation' => 'required'
         ],
         'db_name' => [
-            'value' => 'pistocklntmarch',
+            'value' => 'pistocklnt1march',
             'type' => 'string',
             'display_name' => 'Database Name',
             'description' => 'Database name',

@@ -56,8 +56,8 @@ try {
     $seenPermissions = []; // Track seen permissions to prevent duplicates
     
     while($row = $result->fetch_assoc()) {
-        // Only add permission if we haven't seen it before
-        if (!isset($seenPermissions[$row['permission_name']])) {
+        // Only add permission if we haven't seen it before (by permission_id)
+        if (!isset($seenPermissions[$row['permission_id']])) {
             $permissions[] = [
                 'permission_id' => $row['permission_id'],
                 'permission_name' => $row['permission_name'],
@@ -65,12 +65,14 @@ try {
                 'module' => $row['module'],
                 'assigned' => (bool)$row['assigned']
             ];
-            $seenPermissions[$row['permission_name']] = true;
+            $seenPermissions[$row['permission_id']] = true;
         }
     }
     
     $response['success'] = true;
     $response['data'] = $permissions;
+    
+    error_log('Permission count: ' . count($permissions));
     
 } catch(Exception $e) {
     $response['messages'] = "Error: " . $e->getMessage();

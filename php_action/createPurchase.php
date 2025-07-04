@@ -91,27 +91,33 @@ if($_POST) {
             $itemStmt = $connect->prepare($itemSql);
 
             // Prepare statements for stock updates
-            $updateProductSql = "UPDATE production_products SET 
+            $updateProductSql = "UPDATE products SET 
                 current_stock = current_stock + ? 
-                WHERE id = ?";
+                WHERE product_id = ?";
             $updateProductStmt = $connect->prepare($updateProductSql);
 
             // Check if warehouse stock entry exists
             $checkWarehouseSql = "SELECT id FROM warehouse_stock 
-                WHERE warehouse_id = ? AND item_type = 'finished_good' AND item_id = ?";
+                WHERE warehouse_id = ? AND item_type = 'product' AND item_id = ?";
             $checkWarehouseStmt = $connect->prepare($checkWarehouseSql);
 
             // Insert new warehouse stock entry
             $insertWarehouseSql = "INSERT INTO warehouse_stock 
-                (warehouse_id, item_type, item_id, quantity) 
-                VALUES (?, 'finished_good', ?, ?)";
+                (warehouse_id, item_type, item_id, quantity, status) 
+                VALUES (?, 'product', ?, ?, 'active')";
             $insertWarehouseStmt = $connect->prepare($insertWarehouseSql);
 
             // Update existing warehouse stock
             $updateWarehouseSql = "UPDATE warehouse_stock 
                 SET quantity = quantity + ? 
-                WHERE warehouse_id = ? AND item_type = 'finished_good' AND item_id = ?";
+                WHERE warehouse_id = ? AND item_type = 'product' AND item_id = ?";
             $updateWarehouseStmt = $connect->prepare($updateWarehouseSql);
+
+            // Insert stock movement record
+            $movementSql = "INSERT INTO warehouse_stock_movements 
+                (warehouse_id, item_type, item_id, movement_type, quantity, reference_type, reference_id) 
+                VALUES (?, 'product', ?, 'in', ?, 'purchase', ?)";
+            $movementStmt = $connect->prepare($movementSql);
 
             // Insert purchase items and collect product details for notification
             $productDetails = array();
@@ -159,13 +165,8 @@ if($_POST) {
                     }
                 }
 
-                // Insert stock movement record
-                $movementSql = "INSERT INTO warehouse_stock_movements 
-                    (warehouse_id, item_type, item_id, movement_type, quantity, reference_type, reference_id) 
-                    VALUES (?, 'finished_good', ?, 'in', ?, 'purchase', ?)";
-                $movementStmt = $connect->prepare($movementSql);
+                // Record stock movement
                 $movementStmt->bind_param("iidi", $warehouse_id, $productId, $quantity, $purchase_id);
-                
                 if(!$movementStmt->execute()) {
                     throw new Exception("Error recording stock movement: " . $movementStmt->error);
                 }

@@ -229,4 +229,11 @@ class ConfigurationEncryption {
             'openssl_version' => OPENSSL_VERSION_TEXT
         ];
     }
+
+    /**
+     * Get the path to the encryption key file
+     */
+    public function getKeyFilePath() {
+        return $this->keyFile;
+    }
 } 

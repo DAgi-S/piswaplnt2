@@ -93,6 +93,39 @@ try {
                 'username' => $row['username'],
                 'role' => $row['role_name']
             );
+
+            // --- Low Stock Notification Logic ---
+            $lowStockSql = "SELECT id, material_code, name, current_stock, unit FROM raw_materials WHERE current_stock <= 500 AND status = 'active'";
+            $lowStockResult = $connect->query($lowStockSql);
+            $lowStockItems = [];
+            if ($lowStockResult && $lowStockResult->num_rows > 0) {
+                require_once __DIR__ . '/../production/notifications/notification_model.php';
+                $notificationModel = new NotificationModel($connect);
+                while ($item = $lowStockResult->fetch_assoc()) {
+                    $title = 'Low Stock Alert: ' . $item['material_code'];
+                    $message = 'Raw material ' . $item['name'] . ' (Code: ' . $item['material_code'] . ') is low: ' . $item['current_stock'] . ' ' . $item['unit'] . ' left.';
+                    $link = 'raw_materials.php';
+                    $priority = 'high';
+                    $icon = 'fa-exclamation-triangle';
+                    $type = 'low_stock';
+                    // Check if a notification for this item already exists today (unique by material_code)
+                    $checkSql = "SELECT notification_id FROM notifications WHERE type = 'low_stock' AND title = ? AND DATE(created_at) = CURDATE()";
+                    $checkStmt = $connect->prepare($checkSql);
+                    $checkStmt->bind_param("s", $title);
+                    $checkStmt->execute();
+                    $checkStmt->store_result();
+                    if ($checkStmt->num_rows == 0) {
+                        $stmt = $connect->prepare("INSERT INTO notifications (user_id, type, title, message, priority, icon, link) VALUES (NULL, ?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param("ssssss", $type, $title, $message, $priority, $icon, $link);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+                    $checkStmt->close();
+                    $lowStockItems[] = $item;
+                }
+            }
+            $response['low_stock'] = $lowStockItems;
+            // --- End Low Stock Notification Logic ---
         } else {
             // Log failed login attempt
             if(isset($row['user_id'])) {

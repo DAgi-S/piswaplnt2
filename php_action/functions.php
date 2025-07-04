@@ -4,43 +4,6 @@
  */
 
 /**
- * Checks if a user has a specific permission
- * 
- * @param int $user_id The ID of the user to check
- * @param string $permission_name The name of the permission to check
- * @param mysqli $conn Database connection object
- * @return bool True if user has permission, false otherwise
- */
-function has_permission($user_id, $permission_name, $conn) {
-    $sql = "SELECT 1 
-            FROM users u
-            JOIN roles r ON u.role_id = r.role_id
-            JOIN role_permissions rp ON r.role_id = rp.role_id
-            JOIN permissions p ON rp.permission_id = p.permission_id
-            WHERE u.user_id = ? 
-            AND p.permission_name = ?
-            LIMIT 1";
-
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        error_log("Prepare failed: " . $conn->error);
-        return false;
-    }
-    
-    $stmt->bind_param('is', $user_id, $permission_name);
-    if (!$stmt->execute()) {
-        error_log("Execute failed: " . $stmt->error);
-        return false;
-    }
-    
-    $stmt->store_result();
-    $has_permission = $stmt->num_rows > 0;
-    $stmt->close();
-    
-    return $has_permission;
-}
-
-/**
  * Check if the current user has a specific permission
  * @param string $permission_name The name of the permission to check
  * @return bool True if user has permission, false otherwise

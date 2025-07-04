@@ -1,0 +1,8 @@
+ENCRYPTION KEYS BACKUP RECOVERY INFORMATION
+=======================================
+Backup File: keys_backup_2025-06-09_03-43-55.enc
+Backup Password: SR#FTE,jTlHBE5%#Jc0R0ikRooEBcKa.
+Timestamp: 2025-06-09_03-43-55
+Checksum: b01d66331b2191ca03a9489131786fe5eb7d1205b42b2326e9659d31d9df5ec0
+
+Store this information securely!

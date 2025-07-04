@@ -33,7 +33,7 @@ try {
     }
 
     // Check if user exists
-    $stmt = $connect->prepare("SELECT id FROM users WHERE id = ?");
+    $stmt = $connect->prepare("SELECT user_id FROM users WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     if($stmt->get_result()->num_rows === 0) {
@@ -41,7 +41,7 @@ try {
     }
     
     // Delete user
-    $stmt = $connect->prepare("DELETE FROM users WHERE id = ?");
+    $stmt = $connect->prepare("DELETE FROM users WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     
     if(!$stmt->execute()) {

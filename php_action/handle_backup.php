@@ -38,6 +38,10 @@ if (session_status() === PHP_SESSION_NONE) {
 // Required files
 require_once 'db_connect.php';
 require_once 'core.php';
+require_once 'classes/backup/BackupCompression.php';
+require_once 'classes/backup/BackupVerification.php';
+require_once 'classes/backup/BackupMailer.php';
+require_once 'classes/backup/BackupEncryption.php';
 
 // Basic security check
 if (!isset($_SESSION['userId'])) {
@@ -45,6 +49,14 @@ if (!isset($_SESSION['userId'])) {
     echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
     exit();
 }
+
+// Load backup configuration
+require_once dirname(__FILE__, 2) . '/config/backup.php';
+
+// Add these variables near the top:
+$backupAllDatabases = true; // Set to true to backup all databases
+$backupUploads = true; // Set to true to backup uploads directory
+$uploadsDir = dirname(__FILE__, 2) . '/uploads'; // Adjust if your uploads dir is elsewhere
 
 function findMysqldump() {
     $possiblePaths = [
@@ -122,6 +134,7 @@ function sendBackupNotification($backupDetails) {
                 <li><strong>File Path:</strong> {$backupDetails['file_path']}</li>
                 <li><strong>Size:</strong> {$backupDetails['size']} bytes</li>
                 <li><strong>Status:</strong> {$backupDetails['status']}</li>
+                <li><strong>Compression Ratio:</strong> {$backupDetails['compression_ratio']}%</li>
             </ul>
         ";
 
@@ -163,49 +176,30 @@ try {
         throw new Exception("Backup directory is not writable: " . $backupDir);
     }
 
-    // Create backup filename
-    $timestamp = date('Y-m-d_H-i-s');
-    $backupFile = $backupDir . 'backup_' . $timestamp . '.sql';
-
     // Get database settings
     $dbHost = 'localhost';  // Using hardcoded values for XAMPP
-    $dbName = 'pistocklntmarch';
+    $dbName = 'pistocklnt1march';
     $dbUser = 'root';
     $dbPass = '';
 
     // Find mysqldump executable
-    $mysqldump = null;
-    $possiblePaths = [
-        'C:/xampp/mysql/bin/mysqldump.exe',   // XAMPP Windows
-        'C:/xampp/mysql/bin/mysqldump',       // XAMPP Windows alternative
-        'mysqldump'                           // System PATH
-    ];
-
-    foreach ($possiblePaths as $path) {
-        if (strpos($path, 'C:') === 0) {
-            if (file_exists($path)) {
-                $mysqldump = $path;
-                break;
-            }
-        } else {
-            // Try to find in system PATH
-            $output = [];
-            $returnVar = -1;
-            exec('where ' . $path . ' 2>NUL', $output, $returnVar);
-            if ($returnVar === 0 && !empty($output[0])) {
-                $mysqldump = $output[0];
-                break;
-            }
-        }
-    }
-
+    $mysqldump = findMysqldump();
     if ($mysqldump === null) {
         throw new Exception('mysqldump executable not found. Please ensure MySQL is properly installed.');
     }
 
     error_log("Using mysqldump path: " . $mysqldump);
     error_log("Backup directory: " . $backupDir);
-    error_log("Backup file: " . $backupFile);
+
+    // Create backup filename
+    $timestamp = date('Y-m-d_H-i-s');
+    if ($backupAllDatabases) {
+        $backupFile = $backupDir . 'database/backup_all_' . $timestamp . '.sql';
+        $dbNameArg = '--all-databases';
+    } else {
+        $backupFile = $backupDir . 'database/backup_' . $timestamp . '.sql';
+        $dbNameArg = escapeshellarg($dbName);
+    }
 
     // Build the command
     $command = sprintf(
@@ -213,7 +207,7 @@ try {
         $mysqldump,
         escapeshellarg($dbHost),
         escapeshellarg($dbUser),
-        escapeshellarg($dbName),
+        $dbNameArg,
         str_replace('/', '\\', $backupFile)
     );
 
@@ -248,40 +242,84 @@ try {
 
     error_log("Backup created successfully. File size: " . $fileSize . " bytes");
 
+    // Compress the backup file if compression is enabled
+    $compressionResult = ['success' => true, 'compression_ratio' => 0];
+    if ($BACKUP_COMPRESSION['enabled']) {
+        $compression = new BackupCompression($BACKUP_COMPRESSION['level']);
+        $compressionResult = $compression->compress($backupFile);
+        
+        if ($compressionResult['success']) {
+            // Remove original file after successful compression
+            unlink($backupFile);
+            $backupFile = $compressionResult['destination_file'];
+            $fileSize = filesize($backupFile);
+        } else {
+            error_log("Compression failed: " . $compressionResult['error']);
+            // Continue with uncompressed file
+        }
+    }
+
+    // Verify the backup
+    $verification = new BackupVerification($connect);
+    $verificationResult = $verification->verify($backupFile, 'database');
+
+    if (!$verificationResult['success']) {
+        throw new Exception("Backup verification failed: " . $verificationResult['error']);
+    }
+
     // Log successful backup
     $insertLog = "INSERT INTO system_backup_logs 
-                (backup_date, backup_type, file_path, status, size_in_bytes, created_at) 
-                VALUES (NOW(), 'manual', ?, 'success', ?, NOW())";
+                (backup_date, backup_type, file_path, status, size_in_bytes, compression_ratio, created_at) 
+                VALUES (NOW(), 'manual', ?, 'success', ?, ?, NOW())";
     $stmt = $connect->prepare($insertLog);
-    $stmt->bind_param("si", $backupFile, $fileSize);
+    $compressionRatio = $compressionResult['success'] ? $compressionResult['compression_ratio'] : 0;
+    $stmt->bind_param("sid", $backupFile, $fileSize, $compressionRatio);
     $stmt->execute();
 
-    // Send email notification
-    $backupDetails = [
-        'backup_date' => date('Y-m-d H:i:s'),
-        'file_path' => $backupFile,
-        'size' => $fileSize,
-        'status' => 'success'
-    ];
-    
-    $emailSent = sendBackupNotification($backupDetails);
+    // Email notification
+    $mailer = new BackupMailer($connect);
+    $subject = $verificationResult['success'] ? 'Backup Successful' : 'Backup Failed';
+    $body = '<h3>Backup Notification</h3>';
+    $body .= '<p>Status: <b>' . ($verificationResult['success'] ? 'Success' : 'Failure') . '</b></p>';
+    $body .= '<p>File: ' . htmlspecialchars($backupFile) . '</p>';
+    $body .= '<p>Size: ' . number_format($fileSize/1024, 2) . ' KB</p>';
+    $body .= '<p>Compression Ratio: ' . htmlspecialchars($compressionRatio) . '%</p>';
+    $mailer->send($subject, $body);
+
+    // After backup is created
+    $encryption = new BackupEncryption($connect);
+    if ($encryption->isEnabled() && isset($backupFile)) {
+        $encryption->encryptFile($backupFile);
+    }
+
+    // After database backup, add uploads backup if enabled
+    if ($backupUploads && file_exists($uploadsDir)) {
+        $uploadsZip = $backupDir . 'uploads/uploads_backup_' . $timestamp . '.zip';
+        if (!file_exists($backupDir . 'uploads')) {
+            mkdir($backupDir . 'uploads', 0755, true);
+        }
+        $zipCommand = sprintf('powershell.exe Compress-Archive -Path "%s/*" -DestinationPath "%s"',
+            str_replace('/', '\\', $uploadsDir),
+            str_replace('/', '\\', $uploadsZip)
+        );
+        error_log("Executing uploads backup command: $zipCommand");
+        shell_exec($zipCommand);
+        error_log("Uploads backup created: $uploadsZip");
+    }
 
     echo json_encode([
         'success' => true,
-        'message' => 'Backup created successfully' . ($emailSent ? ' and notification sent' : ''),
-        'details' => $backupDetails
+        'message' => 'Backup created and verified successfully',
+        'file' => $backupFile,
+        'size' => $fileSize,
+        'compression_ratio' => $compressionRatio,
+        'verification' => $verificationResult['results']
     ]);
 
 } catch (Exception $e) {
-    error_log("Error in handle_backup.php: " . $e->getMessage());
-    http_response_code(500);
+    error_log("Backup error: " . $e->getMessage());
     echo json_encode([
         'success' => false,
-        'message' => $e->getMessage(),
-        'error_details' => [
-            'error' => error_get_last(),
-            'output' => isset($output) ? implode("\n", $output) : null,
-            'command_output' => isset($output) ? $output : null
-        ]
+        'message' => $e->getMessage()
     ]);
 } 

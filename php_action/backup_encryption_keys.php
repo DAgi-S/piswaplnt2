@@ -4,7 +4,7 @@ require_once 'classes/ConfigurationEncryption.php';
 require_once 'classes/ConfigurationManager.php';
 
 // Check permissions
-if (!isset($_SESSION['userId']) || !isset($_SESSION['role_id'])) {
+if (!isset($_SESSION['userId']) || !isset($_SESSION['roleId'])) {
     die(json_encode([
         'success' => false,
         'message' => 'Access denied. Please log in.'
@@ -35,9 +35,14 @@ class EncryptionKeyBackup {
             $backupFile = $this->backupPath . '/keys_backup_' . $timestamp . '.enc';
 
             // Get current encryption keys
+            $keyFilePath = $this->encryption->getKeyFilePath();
+            $encryptionKey = '';
+            if ($keyFilePath && file_exists($keyFilePath)) {
+                $encryptionKey = file_get_contents($keyFilePath);
+            }
+
             $keys = [
-                'primary_key' => $this->encryption->getPrimaryKey(),
-                'secondary_keys' => $this->encryption->getSecondaryKeys(),
+                'encryption_key' => base64_encode($encryptionKey),
                 'timestamp' => time(),
                 'version' => '1.0'
             ];
@@ -96,7 +101,7 @@ class EncryptionKeyBackup {
         }
     }
 
-    public function restore($backupFile, $backupPassword) {
+    public function restore($backupFile, $backupPassword, $dryRun = false) {
         try {
             $fullPath = $this->backupPath . '/' . basename($backupFile);
             
@@ -128,9 +133,22 @@ class EncryptionKeyBackup {
                 throw new Exception('Unsupported backup version');
             }
 
+            if ($dryRun) {
+                return [
+                    'success' => true,
+                    'message' => 'Dry run successful. Keys would be restored.',
+                    'keys' => $keys
+                ];
+            }
+
             // Restore keys
-            $this->encryption->setPrimaryKey($keys['primary_key']);
-            $this->encryption->setSecondaryKeys($keys['secondary_keys']);
+            $keyFilePath = $this->encryption->getKeyFilePath();
+            if (!$dryRun && isset($keys['encryption_key'])) {
+                file_put_contents($keyFilePath, base64_decode($keys['encryption_key']));
+            }
+
+            // Log restore operation
+            $this->logRestoreOperation($backupFile, $keys);
 
             return [
                 'success' => true,
@@ -181,6 +199,12 @@ class EncryptionKeyBackup {
             }
         }
     }
+
+    private function logRestoreOperation($backupFile, $keys) {
+        $logEntry = date('Y-m-d H:i:s') . " - Restored from backup: " . basename($backupFile) . "\n";
+        $logFile = $this->backupPath . '/restore_log.txt';
+        file_put_contents($logFile, $logEntry, FILE_APPEND);
+    }
 }
 
 // Handle request
@@ -196,13 +220,14 @@ switch ($action) {
     case 'restore':
         $backupFile = $_POST['backup_file'] ?? '';
         $backupPassword = $_POST['backup_password'] ?? '';
+        $dryRun = $_POST['dry_run'] ?? false;
         if (empty($backupFile) || empty($backupPassword)) {
             $result = [
                 'success' => false,
                 'message' => 'Backup file and password are required'
             ];
         } else {
-            $result = $backup->restore($backupFile, $backupPassword);
+            $result = $backup->restore($backupFile, $backupPassword, $dryRun);
         }
         break;
         

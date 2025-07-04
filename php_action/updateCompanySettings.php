@@ -49,7 +49,29 @@ try {
     
     // Similar handling for footer image
     if(isset($_FILES['footer_image']) && $_FILES['footer_image']['error'] != 4) {
-        // ... (similar validation and handling as company logo)
+        if($_FILES['footer_image']['error'] == 0) {
+            // Validate file size (5MB limit)
+            if($_FILES['footer_image']['size'] > 5000000) {
+                $uploadErrors[] = "Footer image file is too large (max 5MB)";
+            } else {
+                $fileName = 'footer_' . time() . '.' . pathinfo($_FILES['footer_image']['name'], PATHINFO_EXTENSION);
+                if(!move_uploaded_file($_FILES['footer_image']['tmp_name'], $uploadDir . $fileName)) {
+                    $uploadErrors[] = "Failed to upload footer image";
+                } else {
+                    $footerPath = 'assets/images/company/' . $fileName;
+                    $stmt = $connect->prepare("UPDATE company_settings SET setting_value = ?, updated_at = NOW() WHERE setting_key = 'footer_image'");
+                    $stmt->bind_param("s", $footerPath);
+                    $stmt->execute();
+                    if($stmt->affected_rows == 0) {
+                        $stmt = $connect->prepare("INSERT INTO company_settings (setting_key, setting_value, created_at, updated_at) VALUES ('footer_image', ?, NOW(), NOW())");
+                        $stmt->bind_param("s", $footerPath);
+                        $stmt->execute();
+                    }
+                }
+            }
+        } else {
+            $uploadErrors[] = "Error uploading footer image: " . error_get_last()['message'];
+        }
     }
 
     // Validate required fields
