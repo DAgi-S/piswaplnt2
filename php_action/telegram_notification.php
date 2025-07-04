@@ -129,23 +129,18 @@ function sendTemplateNotification($templateKey, $data = []) {
 function sendTelegramNotification($message) {
     try {
         $botSettings = getTelegramBotSettings();
-        
         if(!$botSettings) {
-            // Fallback to hardcoded values if no settings in DB
-            $botToken = '7276849358:AAEpEL3QO5JRHbAMs4rMTzA9S-JQOp6V0t8';
-            $chatId = '317393086';
-        } else {
-            $botToken = $botSettings['bot_token'];
-            $chatId = $botSettings['chat_id'];
+            error_log('sendTelegramNotification: No active bot settings found in DB.');
+            return false;
         }
-        
+        $botToken = $botSettings['bot_token'];
+        $chatId = $botSettings['chat_id'];
         $url = "https://api.telegram.org/bot{$botToken}/sendMessage";
         $data = [
             'chat_id' => $chatId,
             'text' => $message,
             'parse_mode' => 'HTML'
         ];
-
         $options = [
             'http' => [
                 'method' => 'POST',
@@ -154,21 +149,17 @@ function sendTelegramNotification($message) {
                 'ignore_errors' => true
             ]
         ];
-
         $context = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
-        
         if ($result === false) {
             error_log("Failed to send Telegram notification: " . error_get_last()['message']);
             return false;
         }
-        
         $response = json_decode($result, true);
         if (!isset($response['ok']) || $response['ok'] !== true) {
             error_log("Telegram API error: " . $result);
             return false;
         }
-        
         return true;
     } catch (Exception $e) {
         error_log("Exception while sending Telegram notification: " . $e->getMessage());
