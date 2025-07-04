@@ -52,9 +52,9 @@ $affected_files = '';
 $details = $fullOutput;
 $action_data = json_encode(['details' => $fullOutput]);
 
-$stmt = $connect->prepare('INSERT INTO changelog (user_id, agent_name, action, module, sql_changes, affected_files, details, action_data, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())');
+$stmt = $connect->prepare('INSERT INTO changelog (user_id, agent_name, action, module, sql_changes, affected_files, action_data, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())');
 if ($stmt) {
-    $stmt->bind_param('issssssss', $user_id, $agent_name, $action, $module, $sql_changes, $affected_files, $details, $action_data);
+    $stmt->bind_param('issssss', $user_id, $agent_name, $action, $module, $sql_changes, $affected_files, $action_data);
     $stmt->execute();
 }
 
