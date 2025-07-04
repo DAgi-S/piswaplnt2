@@ -5,6 +5,8 @@ require_once __DIR__ . '/db_connect.php';
 
 // --- CONFIG ---
 $ALLOWED_USERS = [1]; // TODO: Replace with actual user ID(s) allowed to push
+$GIT_REMOTE = 'v2'; // Set to 'origin' or 'v2' as needed
+$GIT_BRANCH = 'v2-main'; // Set to your target branch
 $logFile = __DIR__ . '/../modules/accounting/php_errors.log';
 
 function logError($msg) {
@@ -34,10 +36,10 @@ $cmd2 = 'git commit -m ' . escapeshellarg($commitMsg) . ' 2>&1';
 exec($cmd2, $output2, $exit2);
 $allOutput[] = "git commit -m '$commitMsg'\n" . implode("\n", $output2);
 
-// Step 3: git push
-$cmd3 = 'git push 2>&1';
+// Step 3: git push to configured remote/branch
+$cmd3 = 'git push ' . escapeshellarg($GIT_REMOTE) . ' ' . escapeshellarg($GIT_BRANCH) . ' 2>&1';
 exec($cmd3, $output3, $exit3);
-$allOutput[] = "git push\n" . implode("\n", $output3);
+$allOutput[] = "git push $GIT_REMOTE $GIT_BRANCH\n" . implode("\n", $output3);
 
 $fullOutput = implode("\n\n", $allOutput);
 
